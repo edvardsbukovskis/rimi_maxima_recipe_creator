@@ -49,7 +49,7 @@ const categorizeIngredient = (query: string): { type: Category; mustNot?: string
                 'mērce', 'sauce', 'uzkod', 'čipsi', 'dzērien', 'pica', 'cepum',
                 'desa', 'riekst', 'desiņ', 'cigar', 'jersika', 'roka', 'nūdel', 'kausēt', 'smērējam',
                 'garšviela', 'piedeva', 'maiz', 'bulciņ', 'nūdel', 'ķirb', 'popkorns', 'tauku maisījum', 'augu tauk', 'margarīn',
-                'pupiņ', 'cepšanai', 'baget', 'pasta', 'kruasān', 'majonēz', 'smēriņ', 'cīsiņ'
+                'pupiņ', 'cepšanai', 'baget', 'pasta', 'kruasān', 'majonēz', 'smēriņ', 'cīsiņ', 'bumbas', 'sniega'
             ]
         };
     }
@@ -77,7 +77,8 @@ const categorizeIngredient = (query: string): { type: Category; mustNot?: string
         const mustNot = [
             'konserv', 'gabal', 'mērce', 'pasta', 'plūmju', 'ķiršu', 'smalcin', 'sulā',
             'adžika', 'lečo', 'kečup', 'čips', 'uzkod', 'maiz', 'bulciņ', 'nūdel', 'baget', 'marināde',
-            'majonēz', 'grauzdiņ', 'steik', 'zupa', 'sula', 'biezen', 'pankūk', 'buljons', 'desiņ', 'cīsiņ', 'pipar', 'pelmeņ'
+            'majonēz', 'grauzdiņ', 'steik', 'zupa', 'sula', 'biezen', 'pankūk', 'buljons', 'desiņ', 'cīsiņ', 'pipar', 'pelmeņ',
+            'daiviņ', 'strēmelīt'
         ];
         if (q.includes('ķiplok') && !q.includes('sāl')) mustNot.push('sāls');
         return { type: 'veg', mustNot };
@@ -196,9 +197,9 @@ export const findTopMatches = (products: Product[], query: string, category: { t
         if (normName.startsWith(primaryWord)) score += 15;
         if (normName.includes(normalizedQuery)) score += 25;
 
-        // PENALTY for "flavored" items (e.g. "ar ķiploku garšu")
-        if (normName.includes(' ar ') && normName.includes(' garsu')) {
-            score -= 100;
+        // PENALTY for "flavored" items (e.g. "ar ķiploku garšu", "ar cieto sieru")
+        if (normName.includes(' ar ') && (normName.includes(' garsu') || normName.includes(' sieru') || normName.includes(' sviestu') || normName.includes(' kiplok'))) {
+            score -= 150; // Increased penalty
         }
 
         // PENALTY for composite items where the name has many words but query is simple
