@@ -48,7 +48,7 @@ const categorizeIngredient = (query: string): { type: Category; mustNot?: string
             mustNot: [
                 'mērce', 'sauce', 'uzkod', 'čipsi', 'dzērien', 'pica', 'cepum',
                 'desa', 'riekst', 'desiņ', 'cigar', 'jersika', 'roka', 'nūdel', 'kausēt', 'smērējam',
-                'garšviela', 'piedeva', 'maiz', 'bulciņ', 'nūdel', 'ķirbi', 'popkorns', 'tauku maisījum', 'augu tauk'
+                'garšviela', 'piedeva', 'maiz', 'bulciņ', 'nūdel', 'ķirb', 'popkorns', 'tauku maisījum', 'augu tauk', 'margarīn'
             ]
         };
     }
