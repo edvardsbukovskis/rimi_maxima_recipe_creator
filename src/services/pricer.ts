@@ -48,7 +48,8 @@ const categorizeIngredient = (query: string): { type: Category; mustNot?: string
             mustNot: [
                 'mērce', 'sauce', 'uzkod', 'čipsi', 'dzērien', 'pica', 'cepum',
                 'desa', 'riekst', 'desiņ', 'cigar', 'jersika', 'roka', 'nūdel', 'kausēt', 'smērējam',
-                'garšviela', 'piedeva', 'maiz', 'bulciņ', 'nūdel', 'ķirb', 'popkorns', 'tauku maisījum', 'augu tauk', 'margarīn'
+                'garšviela', 'piedeva', 'maiz', 'bulciņ', 'nūdel', 'ķirb', 'popkorns', 'tauku maisījum', 'augu tauk', 'margarīn',
+                'pupiņ', 'cepšanai', 'baget'
             ]
         };
     }
@@ -203,6 +204,7 @@ export const findTopMatches = (products: Product[], query: string, category: { t
 
         if (normalizedQuery.includes('burger') && (normName.includes('burger') || normName.includes('hamburger'))) score += 30;
         if (normalizedQuery.includes('malt') && normName.includes('malt')) score += 30;
+        if (normalizedQuery.includes('sviest') && normName.includes('82')) score += 50; // Priority for high-quality standard butter
 
         // Parmesan synonyms (cietais siers, grana padano)
         if (normalizedQuery.includes('parmez') || normalizedQuery.includes('parmesan')) {
