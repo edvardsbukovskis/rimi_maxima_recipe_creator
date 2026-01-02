@@ -37,7 +37,8 @@ export const barboraService = {
                 if (content && content.includes('window.b_productList')) {
                     console.log('[Barbora] Found script containing window.b_productList');
                     try {
-                        const match = content.match(/window\.b\_productList\s*=\s*(\[[\s\S]*?\])\s*;/);
+                        // Greedy match to handle nested arrays
+                        const match = content.match(/window\.b\_productList\s*=\s*(\[[\s\S]*\])\s*;/);
                         if (match) {
                             console.log(`[Barbora] Match found, length: ${match[1].length}`);
                             const rawProducts = JSON.parse(match[1]);
@@ -53,8 +54,8 @@ export const barboraService = {
                         } else {
                             console.log('[Barbora] Regex match failed for window.b_productList');
                         }
-                    } catch (e) {
-                        console.error('[Barbora] JSON parse error', e);
+                    } catch (e: any) {
+                        console.error('[Barbora] JSON parse error', e.message);
                     }
                 }
             });
