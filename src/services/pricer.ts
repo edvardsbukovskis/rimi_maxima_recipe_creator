@@ -41,14 +41,14 @@ const categorizeIngredient = (query: string): { type: Category; mustNot?: string
         };
     }
 
-    // DAIRY - MILK, CREAM, CHEESE
+    // DAIRY - MILK, CREAM, CHEESE, BUTTER
     if (q.includes('siers') || q.includes('piens') || q.includes('krējums') || q.includes('parmez') || q.includes('parmesan') || q.includes('sviests')) {
         return {
             type: 'dairy',
             mustNot: [
                 'mērce', 'sauce', 'uzkod', 'čipsi', 'dzērien', 'pica', 'cepum',
                 'desa', 'riekst', 'desiņ', 'cigar', 'jersika', 'roka', 'nūdel', 'kausēt', 'smērējam',
-                'garšviela', 'piedeva', 'maiz', 'bulciņ', 'nūdel'
+                'garšviela', 'piedeva', 'maiz', 'bulciņ', 'nūdel', 'ķirbi', 'popkorns'
             ]
         };
     }
@@ -73,13 +73,12 @@ const categorizeIngredient = (query: string): { type: Category; mustNot?: string
 
     // VEGETABLES
     if (q.includes('tomāt') || q.includes('sīpol') || q.includes('ķiplok') || q.includes('salāt') || q.includes('kartupel')) {
-        return {
-            type: 'veg',
-            mustNot: [
-                'konserv', 'gabal', 'mērce', 'pasta', 'plūmju', 'ķiršu', 'smalcin', 'sulā',
-                'adžika', 'lečo', 'kečup', 'čips', 'uzkod', 'maiz', 'bulciņ', 'nūdel'
-            ]
-        };
+        const mustNot = [
+            'konserv', 'gabal', 'mērce', 'pasta', 'plūmju', 'ķiršu', 'smalcin', 'sulā',
+            'adžika', 'lečo', 'kečup', 'čips', 'uzkod', 'maiz', 'bulciņ', 'nūdel', 'baget'
+        ];
+        if (q.includes('ķiplok') && !q.includes('sāl')) mustNot.push('sāls');
+        return { type: 'veg', mustNot };
     }
 
     // SAUCES & CONDIMENTS
@@ -219,7 +218,7 @@ export const findTopMatches = (products: Product[], query: string, category: { t
             }
         }
 
-        const globalNoise = ['cimdi', 'lateksa', 'gumijas', 'nitrila', 'maiss', 'trauks', 'papīrs', 'konserv', 'sterilizēt', 'maisiņš', 'folija', 'drāna', 'sūklis'];
+        const globalNoise = ['cimdi', 'lateksa', 'gumijas', 'nitrila', 'maiss', 'trauks', 'papīrs', 'konserv', 'sterilizēt', 'maisiņš', 'folija', 'drāna', 'sūklis', 'sautēt', 'gabaliņi mērcē'];
         for (const excl of globalNoise) {
             const normExcl = normalizeLatvian(excl);
             if (normName.includes(normExcl)) score -= 300;
