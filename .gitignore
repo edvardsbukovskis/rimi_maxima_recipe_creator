@@ -43,6 +43,7 @@ next-env.d.ts
 # debug files & logs
 *_debug.html
 *_log.txt
+*_raw.html
 *.png
 !public/*.png
 *.log
