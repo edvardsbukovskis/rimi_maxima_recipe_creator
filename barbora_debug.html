@@ -1,0 +1,1489 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag("consent", "default", {
+        ad_personalization: "denied",
+        ad_storage: "denied",
+        ad_user_data: "denied",
+        analytics_storage: "denied",
+        functionality_storage: "denied",
+        personalization_storage: "denied",
+        security_storage: "granted",
+        wait_for_update: 500,
+    });
+    gtag("set", "ads_data_redaction", true);
+    gtag("set", "url_passthrough", true);
+</script>
+    
+<script>
+    (() => {
+        window.cshtml = window.cshtml || {}
+        window.cshtml.jsResources = window.cshtml.jsResources || {}
+        window.cshtml.resourceWaits = window.cshtml.resourceWaits || {}
+
+        const jsResources = window.cshtml.jsResources
+        const resourceWaits = window.cshtml.resourceWaits
+
+        window.cshtml.setJsResource = (resourceId, jsResource) => {
+            jsResources[resourceId] = jsResource
+
+            if (resourceWaits[resourceId]) {
+                resourceWaits[resourceId].forEach(wait => wait.resolve(jsResource))
+                delete resourceWaits[resourceId]
+            }
+        }
+
+        const makeDeferred = () => {
+            let result = {}
+
+            result.promise = new Promise((resolve, reject) => {
+                result.resolve = resolve
+                result.reject = reject
+            })
+
+            return result
+        }
+
+        window.cshtml.getJsResource = (resourceId) => {
+            if (jsResources[resourceId]) {
+                return Promise.resolve(jsResources[resourceId])
+            } else {
+                resourceWaits[resourceId] = resourceWaits[resourceId] || []
+                const deferred = makeDeferred()
+                resourceWaits[resourceId].push(deferred)
+                return deferred.promise
+            }
+        }
+    })();
+    
+</script>
+    
+    <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid='bcfff896-2942-4596-a0b7-dd365683ba5a' data-blockingmode="manual" type="text/javascript" async></script>
+
+    
+<script type="text/javascript"
+        src="https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js"></script>
+
+<script type="text/javascript">
+    AppleID.auth.init({
+        clientId : 'lv.barbora.signin',
+        scope : 'name email',
+        redirectURI : 'https://barbora.lv',
+        state : 'origin:web',
+        usePopup : true
+    });
+</script>
+
+    <meta charset="utf-8" />
+    <meta name="apple-itunes-app" content="app-id=1339130111">
+    <meta name="description"
+        content="BARBORA pārtikas interneta veikals. Meklēšanas rezultāti &quot;piens&quot;" />
+    <meta name="og:description"
+        content="BARBORA pārtikas interneta veikals. Meklēšanas rezultāti &quot;piens&quot;" />
+    <meta name="og:type" content="website" />
+    <meta name="og:title" content="piens | BARBORA" />
+    <meta name="og:sitename" content="Barbora" />
+
+    
+        <link rel="canonical" href="https://barbora.lv/meklet" />
+
+
+
+
+
+        <meta name="facebook-domain-verification" content="-" />
+
+    
+
+
+
+
+
+    <link rel="image_src" href="/Assets/Images/logo-square.png" />
+
+    <meta name="og:image" content="/Assets/Images/logo-square.png" />
+
+    <link rel="shortcut icon" href="/Assets/Images/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&subset=latin,latin-ext" rel="stylesheet"
+        type="text/css">
+
+    
+
+    <link rel="stylesheet" type="text/css"
+        href="/Assets/Styles/main.css?v=1.42.5" />
+
+    <title>piens | BARBORA</title>
+
+    <script type="text/javascript">
+        window.currentPage = "allPages";
+
+        // Solution for 'can't find variable: _AutofillCallbackHandler' error on Instagram/Facebook browsers with iOS
+        window._AutofillCallbackHandler = window._AutofillCallbackHandler || function(){}
+    </script>
+
+        <script type="text/javascript"
+            src="/shared/translationsasscript?languageShortname=LV"></script>
+
+    
+    
+
+
+
+    <script type="text/javascript">
+        // these are needed in order not to have to hardcode urls in JavaScript
+        // and to be able to change route names and not to break links
+
+        window.b_urls = {
+            home: "/",
+            cart: "/grozs",
+            search: "/meklet",
+            searchSuggestions: "/meklet-ieteikumus",
+            product: "/produkti",
+            userInfoNew: "/jaunie-mani-dati",
+            eShopApiBaseUrl: window.location.origin + "/api/eshop/v1/",
+            popUpCampaignImageUrlTemplate: window.location.origin + "/api/images/GetPopUpCampaignImage?id=",
+            recommendations: "/ieteikumi",
+            cookieConsent: "javascript: CookieConsent.renew()",
+            login: "/ienakt",
+            register: "/registreties",
+            remindPassword: "/atgadinat-paroli",
+            goodPriceShopInShopUrl: "veikali/cenu-cempioni",
+            drugstore: "veikali/NO_TRANSLATION_FOUND_b7f1d14e-88de-4be9-af1e-dd64900382fc",
+            categoriesServiceUrl: "https://production-elb.barbora.lt/api/cache/v1/country/LV",
+            shopInShop: "veikali/",
+            inventoryGroup: "/prekiu-grupe",
+            specialOffers: "/akcijas",
+            myItems: "/mani-dati/favourites",
+            loyaltyOffers: "/paldies-cena",
+            promotionLandingPage: "",
+            nextPaymentPage: '/checkout',
+            paymentsServiceGenericUrl: "https://production-elb.barbora.lv/api" + "/v1/payments",
+        };
+
+        window.b_data = {
+            clientHostId: "30",
+            versionNumber: "v1.42.5",
+            clientVersion: "1.42.5",
+            CMSToken: "Bearer UNSOBiSDfbCQZVAsn0Qvyhw8OpjkkjRy",
+            companyNameFull: "SIA „Patrika“",
+            companyName: "Barbora",
+            enviromentLocation: "LV",
+            enviroment: "PRD",
+            loyaltyCardInfoLink: "https://www.maxima.lv/paldies/paldies-konts",
+            customerSupportEmail: "info@barbora.lv",
+            customerSupportPhone: "+371 29712886",
+            androidAppDownloadLink: "https://play.google.com/store/apps/details?id=lv.barbora",
+            iOsAppDownloadLink: "https://itunes.apple.com/us/app/appname/id1339130111?ls=1&amp;mt=8",
+            socialLinks: [{"name":"fb-badge","link":"https://www.facebook.com/BarboraLatvia"},{"name":"inst-badge","link":"https://www.instagram.com/barbora.lv"},{"name":"linkedin-badge","link":"https://www.linkedin.com/company/barbora-latvia"},{"name":"yt-badge","link":""}] || [],
+            customerDataRouteName: "jaunie-mani-dati",
+            TranslationsPlaceholderMatchingRegex: "{([0-9])+:(.+?)}",
+            authCookieName: ".BRBAUTH",
+            mainDonationsCategoryId: "c67f19a2-be77-4e6e-a785-aa2b00994905",
+            donationsUrlFragment: "ziedot preci",
+            deliveryMethodType: {"Address":1,"PickupPoint":3,"DriveIn":4},
+            couponTypes: {"FlatDiscount":1,"FreeDelivery":2,"PercentageDiscount":3,"GiftCoupon":4},
+            enviromentLocations: {"Lithuania":"LT","Latvia":"LV","Estonia":"EE"},
+            regionShortId: "LV_MAIN_WEB",
+            isCentralEshopClientUrl: true,
+            showCustomerCouponsModal: "False".toLowerCase() == "true",
+            shouldShowRefactoredCoupons: "False".toLowerCase() == "true",
+            currencySymbol: "€",
+            isInfoPageStandalone: "False".toLowerCase() === "true",
+            selectedLanguageData: {
+                id: "a1113543-fb34-45c8-ad94-7a1d823cef57".toLowerCase(),
+                name: "Latviešu",
+                shortName: "LV",
+                translationFilePath: "/Assets/Translations/lv.json?v=v1.42.5",
+                locale: "lv"
+            },
+            availableLanguages: (function(){
+                var langs = [{"Id":"a1113543-fb34-45c8-ad94-7a1d823cef57","Name":"Latviešu","CultureName":"lv-LV","IsDefault":true,"PositionNumber":1,"ShortName":"LV","AvailableForAdmin":true,"AvailableForWeb":true},{"Id":"1595dc26-9ecc-4c7d-b26e-badffc19c6b5","Name":"English","CultureName":"en","IsDefault":false,"PositionNumber":2,"ShortName":"EN","AvailableForAdmin":true,"AvailableForWeb":true},{"Id":"909b6b59-bf29-497c-80e4-1c844f1849c7","Name":"Русский","CultureName":"ru","IsDefault":false,"PositionNumber":3,"ShortName":"RU","AvailableForAdmin":true,"AvailableForWeb":true}];
+                try {
+                    if (false) {
+                        // Append staging-only KEY language to the list for UI selection
+                        langs = [].concat(langs || []);
+                        // Use a synthetic Id and fields expected by the UI
+                        langs.push({ Id: '00000000-0000-0000-0000-00000000KEY', Name: 'KEY', ShortName: 'KEY', IsDefault: false, PositionNumber: 9999, CultureName: 'key', AvailableForAdmin: false, AvailableForWeb: true });
+                    }
+                } catch (e) {}
+                return langs;
+            })(),
+            featureFlagRegistrationConfirmation: "true",
+            emailRegex: "^[a-zA-Z0-9_.+-]+@(?!\\.)(?!.*?\\.\\.)(?!.*\\.$)[a-zA-Z0-9-]+\\.(?!\\.)(?!.*?\\.\\.)(?!.*\\.$)[a-zA-Z0-9-.]+$",
+            phoneNumberRegex: "^(\\+(43|32|357|420|45|372|358|33|49|30|36|353|39|371|370|352|356|31|48|351|421|386|34|46|44|47|41|380))(\\d{7,15})$",
+            isAnalyticSearchEnabled: "True".toLowerCase() === "true",
+            isConstructorSearchEnabled: "False".toLowerCase() === "true",
+            featureFlagAciuCard: "true",
+            featureFlagHideDonationsBlock: "false",
+            featureFlagHideDepositPriceIfZero: "false",
+            featureFlagJitsu: "true",
+            shouldShowEkoMenuItem: "True".toLowerCase() === "true",
+            shouldShowDrugStoreMenuItem: "False".toLowerCase() === "true",
+            isSocialLoginRegistrationEnabled: "True".toLowerCase() === "true",
+            isPopularCategoriesEnabled: "False".toLowerCase() === "true",
+            isShowAlcohol: "true",
+            isNewLoyaltyPromoActive: "true" === "True",
+            jitsuWebKey: "js.31djxulhz1grvselnyy3km.bl10btjyw3bjdxu1qsdyr",
+            jitsuTrackingHostUrl: "https://production-elb.barbora.lt/",
+            liveChatEnabled: "True".toLowerCase() === "true",
+            is1EurOfferMenuItemEnabled: "True".toLowerCase() === "true",
+            isEmailSubscriptionBarEnabled: "True".toLowerCase() === "true",
+            availablePaymentSources: "[{&quot;image&quot;:&quot;https://cdn.barbora.lt/payments/gray-seb.png&quot;,&quot;id&quot;:&quot;1&quot;},{&quot;image&quot;:&quot;https://cdn.barbora.lt/payments/gray-luminor.png&quot;,&quot;id&quot;:&quot;2&quot;},{&quot;image&quot;:&quot;https://cdn.barbora.lt/payments/gray-citadele.png&quot;,&quot;id&quot;:&quot;3&quot;},{&quot;image&quot;:&quot;https://cdn.barbora.lt/payments/gray-swed.png&quot;,&quot;id&quot;:&quot;4&quot;},{&quot;image&quot;:&quot;https://cdn.barbora.lt/payments/gray-card-on-delivery-LT.png&quot;,&quot;id&quot;:&quot;5&quot;,&quot;translation&quot;:&quot;Common.RegisterANewCard&quot;},{&quot;image&quot;:&quot;https://cdn.barbora.lt/payments/gray-mastercard.png&quot;,&quot;id&quot;:&quot;6&quot;},{&quot;image&quot;:&quot;https://cdn.barbora.lt/payments/gray-visa.png&quot;,&quot;id&quot;:&quot;7&quot;}]",
+            areBannerMobileImagesEnabled: "True".toLowerCase() === "true",
+            isAllOfferProductsButtonEnabled: "True".toLowerCase() === "true",
+            isNextHeaderAndNavigationEnabled: "False".toLowerCase() === "true",
+            apiVersion: "1.42.5",
+            isDaysOfTasteMenuItemHidden: "False".toLowerCase() === "true",
+            isInformationBannerEnabled: "True".toLowerCase() === "true",
+            isConsentSplittingEnabled: "True".toLowerCase() === "true",
+            isHammerPriceEnabled: "True".toLowerCase() === "true",
+            isQuickMealsMenuItemForLVEnabled: "True".toLowerCase() === "true",
+            isNextRegistrationEnabled: "True".toLowerCase() === "true",
+            constructorSearchTestSegments: "control_2"
+        };
+
+        window.b_user_info = null;
+
+        window.b_js_routes = [{"RouteName":"customerDataChangePhone","Url":"NO_TRANSLATION_FOUND_c31d2379-124a-4b2b-8b35-6abb9a27a4ce","ControllerName":null,"ActionName":null,"SequenceInRouting":0,"Active":true,"IsReactRoute":false},{"RouteName":"customerDataPagesList","Url":"/","ControllerName":null,"ActionName":null,"SequenceInRouting":40,"Active":true,"IsReactRoute":false},{"RouteName":"customerDataAddressList","Url":"/precu-piegades-adrese","ControllerName":null,"ActionName":null,"SequenceInRouting":41,"Active":true,"IsReactRoute":false},{"RouteName":"customerDataAddressEdit","Url":"/precu-piegades-adrese/:id","ControllerName":null,"ActionName":null,"SequenceInRouting":42,"Active":true,"IsReactRoute":false},{"RouteName":"customerDataAddressAdd","Url":"/precu-piegades-adrese/pievienot-adresi","ControllerName":null,"ActionName":null,"SequenceInRouting":43,"Active":true,"IsReactRoute":false},{"RouteName":"customerDataOrderHistory","Url":"/pirkumu-vesture","ControllerName":null,"ActionName":null,"SequenceInRouting":44,"Active":true,"IsReactRoute":false},{"RouteName":"customerDataAciuCard","Url":"/mana-paldies-karte","ControllerName":null,"ActionName":null,"SequenceInRouting":45,"Active":true,"IsReactRoute":false},{"RouteName":"customerDataUserSettings","Url":"/lietotaja-iestatijumi","ControllerName":null,"ActionName":null,"SequenceInRouting":46,"Active":true,"IsReactRoute":false},{"RouteName":"customerDataChangePassword","Url":"/lietotaja-iestatijumi/mainit-paroli","ControllerName":null,"ActionName":null,"SequenceInRouting":48,"Active":true,"IsReactRoute":false},{"RouteName":"customerDataOrderHistoryDetails","Url":"/pirkumu-vesture/:id","ControllerName":null,"ActionName":null,"SequenceInRouting":49,"Active":true,"IsReactRoute":false},{"RouteName":"customerDataSavedBaskets","Url":"/sagatave","ControllerName":null,"ActionName":null,"SequenceInRouting":50,"Active":true,"IsReactRoute":false},{"RouteName":"customerDataPaymentCards","Url":"/maksajumu-kartes","ControllerName":null,"ActionName":null,"SequenceInRouting":51,"Active":true,"IsReactRoute":false},{"RouteName":"customerDataSavedBasketsItem","Url":"/sagatave/:id","ControllerName":null,"ActionName":null,"SequenceInRouting":52,"Active":true,"IsReactRoute":false},{"RouteName":"customerDataCoupons","Url":"/kuponi","ControllerName":null,"ActionName":null,"SequenceInRouting":58,"Active":true,"IsReactRoute":false}];
+
+        window.b_js_urls = {};
+        window.b_js_routes.forEach(function (route) {
+            window.b_js_urls[route.RouteName] = window.b_urls.userInfoNew + route.Url;
+        });
+
+        window.b_react_routes = [];
+
+        window.b_primary_routes = [{"RouteName":"OffersByCategoryThirdLevel","Url":"akcijas/{rootCategoryUrl}/{childCategoryUrl}/{grandChildCategoryUrl}","ControllerName":"OffersByCategory","ActionName":"Index","SequenceInRouting":26,"Active":true,"IsReactRoute":false},{"RouteName":"TagedProductsByCategoryThirdLevel","Url":"eko/{rootCategoryUrl}/{childCategoryUrl}/{grandChildCategoryUrl}","ControllerName":"TagedProductsByCategory","ActionName":"Index","SequenceInRouting":30,"Active":true,"IsReactRoute":false},{"RouteName":"Favourites","Url":"manas-preces","ControllerName":"User","ActionName":"Favourites","SequenceInRouting":31,"Active":true,"IsReactRoute":false},{"RouteName":"NewsProductsByCategoryThirdLevel","Url":"jaunumi/{rootCategoryUrl}/{childCategoryUrl}/{grandChildCategoryUrl}","ControllerName":"NewsProductsByCategory","ActionName":"Index","SequenceInRouting":54,"Active":true,"IsReactRoute":false},{"RouteName":"ShopInShop","Url":"veikali/{shopName}/{categoryName}","ControllerName":"ShopInShop","ActionName":"Index","SequenceInRouting":55,"Active":true,"IsReactRoute":false},{"RouteName":"AllLoyaltyOffersByCategoryThirdLevel","Url":"paldies-cena/{rootCategoryUrl}/{childCategoryUrl}/{grandChildCategoryUrl}","ControllerName":"AllLoyaltyOffersByCategory","ActionName":"Index","SequenceInRouting":80,"Active":true,"IsReactRoute":false},{"RouteName":"OwnBrandProductsByCategoryThirdLevel","Url":"well-done/{rootCategoryUrl}/{childCategoryUrl}/{grandChildCategoryUrl}","ControllerName":"OwnBrandProductsByCategory","ActionName":"Index","SequenceInRouting":83,"Active":true,"IsReactRoute":false}];
+
+        window.b_info_pages = [{"Id":1,"Title":"Pirkums un piegāde","InfoPages":[{"Id":"4bb5875d-fa0f-4da8-b6d7-86ec8ed1857f","Title":"Preču piegāde un atgriešana","Url":"precu-piegade-un-atgriesana","AltUrl":null,"InfoPageCategoryId":1},{"Id":"00390156-97b6-4df9-bd67-e3df2e2f211a","Title":"Apkalpošanas zonas","Url":"piegades-zonas","AltUrl":null,"InfoPageCategoryId":1},{"Id":"ce0009e1-ba4f-4815-b2dc-7287f4b54c0e","Title":"Maksājumi","Url":"maksajums","AltUrl":null,"InfoPageCategoryId":1},{"Id":"c9b39b69-136d-449a-8199-b033b4b2f323","Title":"PALDIES kartes noteikumi","Url":"paldies-kartes-un-uznemumu-kartes-noteikumi","AltUrl":null,"InfoPageCategoryId":1},{"Id":"6eb2d217-2b35-43d3-ab0b-9b4d855dd7b6","Title":"Akciju noteikumi","Url":"akciju-noteikumi","AltUrl":null,"InfoPageCategoryId":1},{"Id":"d9402471-4679-4d00-b2f8-6c9dbdba98cd","Title":"Kuponu noteikumi","Url":"barbora-kuponu-noteikumi","AltUrl":null,"InfoPageCategoryId":1},{"Id":"ba0aeed7-4393-4e50-87fe-e5d0f1efa3ab","Title":"Dāvanu kampaņas","Url":"davanu-kampanas","AltUrl":null,"InfoPageCategoryId":1}]},{"Id":2,"Title":"Palīdzība","InfoPages":[{"Id":"1e9df8b4-70f3-438c-b2ea-ae8eb01b93cf","Title":"Biežāk uzdotie jautājumi","Url":"jautajumi-un-atbildes","AltUrl":null,"InfoPageCategoryId":2},{"Id":"e0e7a022-d2e0-4510-9e49-3c7e6ebd71f8","Title":"Kas ir alternatīvas preces?","Url":"alternativas-preces","AltUrl":null,"InfoPageCategoryId":2},{"Id":"e598b66c-1855-4df1-9a0c-21867d067913","Title":"Manas preces","Url":"manas-preces","AltUrl":null,"InfoPageCategoryId":2},{"Id":"e9ba8932-22e9-4e97-91de-060d503cecb6","Title":"Atgriešanas nosacījumi","Url":"precu-atgriesana","AltUrl":null,"InfoPageCategoryId":2},{"Id":"25d98742-6ae6-4fb4-ad56-8f736d760a41","Title":"Mobilā lietotne","Url":"mobila-aplikacija","AltUrl":null,"InfoPageCategoryId":2},{"Id":"601cabad-87c0-4f78-b01d-82f55614f29b","Title":"Svarīga informācija","Url":"svariga-informacija","AltUrl":null,"InfoPageCategoryId":2}]},{"Id":3,"Title":"Par mums","InfoPages":[{"Id":"f3ef0d75-b2f1-4681-98df-506b8d4cd4c2","Title":"Karjera","Url":"karjera","AltUrl":"https://karjera.barbora.lv/","InfoPageCategoryId":3},{"Id":"2c09e2de-8e1b-4e6e-88f4-118af5f9a415","Title":"Sociālā atbildība","Url":"sociala-atbildiba","AltUrl":null,"InfoPageCategoryId":3},{"Id":"d18764ba-094a-4c9f-95ce-9a800f142f5c","Title":"Preču  iepakošana","Url":"precu-iepakosana","AltUrl":null,"InfoPageCategoryId":3},{"Id":"212bcc89-e77b-4ead-b7ef-7feb526eaf93","Title":"Produktu izkārtojums","Url":"produktu-izkartojums","AltUrl":null,"InfoPageCategoryId":3}]},{"Id":4,"Title":"Noteikumi","InfoPages":[{"Id":"c3f88428-2e51-4530-8f0a-0256ba2f3d5d","Title":"Lietošanas noteikumi","Url":"interneta-veikala-lietosanas-noteikumi","AltUrl":null,"InfoPageCategoryId":4},{"Id":"7a0a3486-bca4-40e9-8db2-5bfe8d62952b","Title":"Privātuma politika","Url":"privatuma-politika","AltUrl":null,"InfoPageCategoryId":4},{"Id":"5c6c285a-ff0a-4b9c-adff-6b619e1434c5","Title":"Piekļūstamība","Url":"pieklustamiba","AltUrl":null,"InfoPageCategoryId":4},{"Id":"c2a63198-00ef-4cce-8efa-3d8cca2a97dc","Title":"WCAG 2.2 atbilstības deklarācija","Url":"wcag-2-2-atbilstibas-deklaracija","AltUrl":null,"InfoPageCategoryId":4},{"Id":"0950f271-dd9c-45e1-a6ad-83b8ebe62bd5","Title":"EN 301 549 atbilstības deklarācija","Url":"en-301-549-atbilstibas-deklaracija","AltUrl":null,"InfoPageCategoryId":4}]}] || [];
+        if (window.b_info_pages.length > 0) {
+            window.b_info_pages.map(function (cols) {
+                return cols.InfoPages.map(function (page) {
+                    var urlString = "/info/urltoreplace";
+                    return Object.assign(page, { FullUrl: urlString.replace("urltoreplace", page.Url) })
+                });
+            });
+        }
+    </script>
+
+
+        <script>
+            window.cnstrc = window.cnstrc || {};
+            window.cnstrc.userSegments = "R600";
+        </script>
+
+        <script>
+            window.cnstrc = window.cnstrc || {};
+            window.cnstrc.testCell = "control_2";
+        </script>
+
+    
+<script data-cookieconsent="statistics" type="text/plain">
+        // google analytics
+        (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga("create", "UA-45214439-5", "auto", { allowLinker: true });
+
+        ga("require", "ec");
+
+
+        var customerId = '';
+        if (customerId !== null && customerId !== undefined && customerId !== "") {
+            ga('set', 'userId', customerId);
+        }
+        ga('send', 'pageview');
+</script>
+
+    
+
+<script data-cookieconsent="marketing" type="text/plain">
+	//Facebook Pixel init
+    !function (f, b, e, v, n, t, s) {
+    if (f.fbq) return; n = f.fbq = function () {
+    n.callMethod ?
+    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+    }; if (!f._fbq) f._fbq = n;
+    n.push = n; n.loaded = !0; n.version = '2.0'; n.queue = []; t = b.createElement(e); t.async = !0;
+    t.src = v; s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s)
+    }(window,
+    document, 'script', '//connect.facebook.net/en_US/fbevents.js');
+
+    fbq('init', '187804598685425');
+    fbq('track', "PageView");
+</script>
+
+<script >
+
+    function Deferred() {
+		var self = this;
+		this.promise = new Promise(function(resolve, reject) {
+		  self.reject = reject
+		  self.resolve = resolve
+		})
+    }
+    window.fbLoaded = (new Deferred());
+
+    //Facebook SDK init
+    window.fbAsyncInit = function () {
+        FB.init({
+            appId: '520596929350736',
+            xfbml: true,
+            version: "v8.0",
+        });
+        fbLoaded.resolve()
+    };
+
+    (function (d, s, id) {
+        var js,
+            fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {
+            return;
+        }
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    })(document, "script", "facebook-jssdk");
+</script>
+
+    <script type="text/javascript">
+        var userActions = {
+            click: "click",
+            elementClick: "elementClick",
+            detail: "detail",
+            addToCart: "addToCart",
+            removeFromCart: "removeFromCart",
+            checkoutStepRecommendations: "checkout-step-recommendations",
+            checkoutStepViewBasket: "checkout-step-view-basket",
+            checkoutStepShipping: "checkout-step-shipping",
+            checkoutStepPayment: "checkout-step-payment",
+            checkoutStepReceipt: "checkout-step-receipt",
+            purchase: "purchase",
+            completeRegistration: "CompleteRegistration",
+            impression: "impression",
+            internalPromotionClick: "internalPromotionClick",
+            promotionView: "promotionView",
+            promotionClick: "promotionClick",
+            checkoutStep: "checkoutStep",
+            login: "login",
+            register: "register",
+            couponProgramActivation: "couponProgramActivation"
+        };
+
+        var gaEventCategories = {
+            product: "product",
+            cart: "cart",
+            checkout: "checkout",
+            customer: "customer",
+            promotions: "promotions"
+        };
+
+        var reportToFacebook = function (action, data) {
+            if (typeof fbq === 'undefined') {
+                console.info("fbq is undefined");
+                return;
+            }
+            if (data === undefined) {
+                fbq('track', action);
+            }
+            else {
+                fbq('track', action, data);
+            }
+        };
+
+        var getInfoForFacebookFromProductList = function (products) {
+            return {
+                "content_ids": products.map(function (inv) { return inv.id; }),
+                "content_type": "product",
+                "contents": products.map(function (inv) {
+                    var sUnit = inv.units ? inv.units.find(function (obj) { return obj.unit === 'kg' }) : undefined;
+                    if (sUnit === undefined) {
+                        sUnit = inv.unit;
+                    }
+                    return {
+                        "id": inv.id,
+                        "quantity": inv.quantity_unit_independent ? inv.quantity_unit_independent : inv.quantity,
+                        "item_price": sUnit ? sUnit.price : inv.price
+                    }
+                })
+            };
+        }
+
+        var getInfoForFacebookFromProduct = function (product, value, currency) {
+            return {
+                "content_ids": product.id,
+                "content_type": "product",
+                "value": value,
+                "currency": currency
+            }
+        }
+
+        var getInfoForGoogleAnalyticsFromProductInfo = function (product, isImpression) {
+            if (isImpression !== true) {
+                isImpression = false;
+            }
+
+        
+
+        var productData = {};
+            var missingFields = [];
+            if (product.id !== null && product.id !== undefined) {
+                productData.id = product.id;
+            } else {
+                missingFields.push("id");
+            }
+
+            if (product.title !== null && product.title !== undefined) {
+                productData.name = product.title;
+            } else {
+                missingFields.push("title");
+            }
+
+            if (product.brand_name !== null && product.brand_name !== undefined) {
+                productData.brand = product.brand_name;
+            }
+
+            if (product.category_name_full_path !== null && product.category_name_full_path !== undefined) {
+                productData.category = product.category_name_full_path;
+            } else {
+                missingFields.push("category_name_full_path");
+            }
+
+            if (
+                (
+                    product.unit !== null &&
+                    product.unit !== undefined &&
+                    product.unit.price !== null &&
+                    product.unit.price !== undefined
+                ) ||
+                (
+                    product.price !== null &&
+                    product.price !== undefined
+                )
+            ) {
+                try {
+                    productData.price = product.unit.price;
+                } catch (e) {
+                    productData.price = product.price;
+                }
+            } else {
+                missingFields.push("price");
+            }
+
+            if (product.product_position_in_list !== null && product.product_position_in_list !== undefined) {
+                productData.position = product.product_position_in_list;
+            }
+
+            if (isImpression === false) {
+                if (product.quantity_unit_independent !== null && product.quantity_unit_independent !== undefined) {
+                    productData.quantity = product.quantity_unit_independent < 1 ? 1 : product.quantity_unit_independent;
+                } else if (product.quantity !== null && product.quantity !== undefined) {
+                    productData.quantity = product.quantity < 1 ? 1 : product.quantity;
+                }
+            }
+
+            if (isImpression === true) {
+                if (product.list !== null && product.list !== undefined) {
+                    productData.list = `${product.list} - ${product.sectionName}`;
+                } else {
+                    missingFields.push("list");
+                }
+            }
+
+            if (missingFields.length > 0) {
+                console.warn("missing fields: " + missingFields.join(", "));
+            }
+            return productData;
+        };
+
+        var gaIntercept = function () {
+            if (typeof ga === 'undefined') {
+                console.info('ga is undefined');
+                return;
+            }
+            var argumentsExcludingFirst = Array.prototype.slice.call(arguments, 1);
+
+            ga.apply(this, argumentsExcludingFirst);
+        };
+
+        var reportUserActionToThirdParty = function (action, data) {
+            var defaultCurrency = "EUR";
+            var dataForFb = null;
+            switch (action) {
+                case userActions.click:
+                    gaIntercept(userActions.click, "ec:addProduct", getInfoForGoogleAnalyticsFromProductInfo(data));
+                    gaIntercept(userActions.click, "ec:setAction", "click", {
+                        list: data.list
+                    });
+                    gaIntercept(userActions.click, "send", "event", gaEventCategories.product, action);
+                    break;
+
+                case userActions.detail:
+                    //gaIntercept(userActions.detail, "ec:addImpression", getInfoForGoogleAnalyticsFromProductInfo(data, true));
+                    gaIntercept(userActions.detail, "ec:addProduct", getInfoForGoogleAnalyticsFromProductInfo(data));
+                    gaIntercept(userActions.detail, "ec:setAction", "detail");
+                    gaIntercept(userActions.detail, "send", "event", gaEventCategories.product, action);
+                    dataForFb = getInfoForFacebookFromProduct(data, data.price, defaultCurrency);
+                    reportToFacebook("ViewContent", dataForFb);
+                    break;
+
+                case userActions.addToCart:
+                    gaIntercept(userActions.addToCart, "ec:addProduct", getInfoForGoogleAnalyticsFromProductInfo(data));
+                    gaIntercept(userActions.addToCart, "ec:setAction", "add", {
+                        list: `${data.list} - ${data.sectionName}`
+                    });
+                    gaIntercept(userActions.addToCart, "send", "event", gaEventCategories.cart, action);
+                    dataForFb = getInfoForFacebookFromProductList([data]);
+                    reportToFacebook("AddToCart", dataForFb);
+                    break;
+
+                case userActions.removeFromCart:
+                    gaIntercept(userActions.removeFromCart, "ec:addProduct", getInfoForGoogleAnalyticsFromProductInfo(data));
+                    gaIntercept(userActions.removeFromCart, "ec:setAction", "remove");
+                    gaIntercept(userActions.removeFromCart, "send", "event", gaEventCategories.cart, action);
+                    break;
+
+                case userActions.checkoutStepRecommendations:
+                    data.forEach(function (product) {
+                        gaIntercept(userActions.checkoutStepRecommendations, "ec:addProduct", getInfoForGoogleAnalyticsFromProductInfo(product));
+                    });
+                    gaIntercept(userActions.checkoutStepRecommendations, "ec:setAction", "checkout", {
+                        "step": 1
+                    });
+                    gaIntercept(userActions.checkoutStepRecommendations, "send", "event", gaEventCategories.checkout, action);
+                    break;
+
+                case userActions.checkoutStepViewBasket:
+                    data.forEach(function (product) {
+                        gaIntercept(userActions.checkoutStepViewBasket, "ec:addProduct", getInfoForGoogleAnalyticsFromProductInfo(product));
+                    });
+                    gaIntercept(userActions.checkoutStepViewBasket, "ec:setAction", "checkout", {
+                        "step": 2
+                    });
+                    gaIntercept(userActions.checkoutStepViewBasket, "send", "event", gaEventCategories.checkout, action);
+                    break;
+
+                case userActions.checkoutStepShipping:
+                    data.forEach(function (product) {
+                        gaIntercept(userActions.checkoutStepShipping, "ec:addProduct", getInfoForGoogleAnalyticsFromProductInfo(product));
+                    });
+                    gaIntercept(userActions.checkoutStepShipping, "ec:setAction", "checkout", {
+                        "step": 3
+                    });
+                    gaIntercept(userActions.checkoutStepShipping, "send", "event", gaEventCategories.checkout, action);
+                    break;
+
+                case userActions.checkoutStepPayment:
+                    data.forEach(function (product) {
+                        gaIntercept(userActions.checkoutStepPayment, "ec:addProduct", getInfoForGoogleAnalyticsFromProductInfo(product));
+                    });
+                    gaIntercept(userActions.checkoutStepPayment, "ec:setAction", "checkout", {
+                        "step": 4
+                    });
+                    gaIntercept(userActions.checkoutStepPayment, "send", "event", gaEventCategories.checkout, action);
+                    break;
+
+                case userActions.checkoutStepReceipt:
+                    try {
+                        data.inventoryInfo.forEach(function (product) {
+                            gaIntercept(userActions.checkoutStepReceipt, "ec:addProduct", getInfoForGoogleAnalyticsFromProductInfo(product));
+                        });
+                        gaIntercept(userActions.checkoutStepReceipt, "ec:setAction", "checkout", {
+                            "step": 5,
+                            "option": data.paymentSource
+                        });
+                        gaIntercept(userActions.checkoutStepReceipt, "send", "event", gaEventCategories.checkout, action);
+
+                    } catch (e) {
+                        globalThis.report.error('Error while processing checkout step receipt', err, {
+                            data: JSON.stringify(data),
+                        })
+                        console.log(e);
+                    }
+                    break;
+
+                case userActions.purchase:
+                    dataForFb = getInfoForFacebookFromProductList(data.products);
+                    dataForFb["value"] = data.orderPrice;
+                    dataForFb["currency"] = defaultCurrency;
+                    reportToFacebook("Purchase", dataForFb);
+
+                    // report to ga
+
+                    if (data.products !== null && data.products !== undefined && Array.isArray(data.products)) {
+                        data.products.forEach(function (product) {
+                            gaIntercept(userActions.purchase, "ec:addProduct", getInfoForGoogleAnalyticsFromProductInfo(product));
+                        });
+
+                        var purchaseData = {
+                            "id": data.orderId,
+                            "affiliation": data.shopCode,
+                            "revenue": data.orderPrice,
+                            "shipping": data.deliveryPrice,
+                        };
+
+                        if (data.coupon !== undefined && data.coupon !== null) {
+                            purchaseData.coupon = data.coupon;
+                        }
+
+                        gaIntercept(userActions.purchase, "ec:setAction", "purchase", purchaseData);
+
+                        gaIntercept(userActions.purchase, "send", "event", gaEventCategories.checkout, action);
+                    }
+
+                    break;
+
+                case userActions.internalPromotionClick:
+
+                    gaIntercept(userActions.internalPromotionClick, "ec:addPromo", {
+                        "id": data.id,
+                        "name": data.name,
+                        "position": data.position
+                    });
+                    gaIntercept(userActions.internalPromotionClick, "ec:setAction", "promo_click");
+                    gaIntercept(userActions.internalPromotionClick, "send", "event", "Internal Promotions", "click", data.name);
+                    break;
+
+                case userActions.impression:
+                    data.forEach(function (product) {
+                        gaIntercept(userActions.impression, "ec:addImpression", getInfoForGoogleAnalyticsFromProductInfo(product, true));
+                    });
+                    gaIntercept(userActions.impression, "send", "event", gaEventCategories.product, action);
+                    break;
+
+                case userActions.completeRegistration:
+                    gaIntercept(userActions.completeRegistration, "send", "event", gaEventCategories.customer, action);
+                    reportToFacebook(action, data);
+                    break;
+
+                default:
+                    reportToFacebook(action, data);
+            }
+        };
+
+
+        var reportUserActionToGtm = function (action, data, sectionTitle = null) {
+            window.dataLayer = window.dataLayer || [];
+            switch (action) {
+                case userActions.click:
+                    window.dataLayer.push({
+                        event: "click",
+                        elementName: data
+                    });
+                    break;
+                case userActions.elementClick:
+                    window.dataLayer.push({
+                        event: "elementClick",
+                        elementName: data,
+                        sectionName: sectionTitle
+                    });
+                    break;
+
+                case userActions.addToCart:
+                    window.dataLayer.push({
+                        event: "eec.add",
+                        ecommerce: data,
+                    });
+                    break;
+
+                case userActions.promotionView:
+                    try {
+                        window.dataLayer.push({
+                            event: "eec.promotionView",
+                            ecommerce: data,
+                        });
+                    } catch (err) {
+                        const { id, name, creative } = data;
+                        globalThis.report.error('Error while reporting promotionView event to gtm', err, {
+                            id,
+                            name,
+                            creative
+                        })
+                    }
+                    break;
+
+                case userActions.promotionClick:
+                    window.dataLayer.push({
+                        event: "eec.promotionClick",
+                        ecommerce: data,
+                    });
+                    break;
+
+                case userActions.checkoutStep:
+                    window.dataLayer.push({
+                        event: "eec.ecommerce",
+                        ecommerce: data,
+                    });
+                    break;
+
+                case userActions.login:
+                    window.dataLayer.push({
+                        event: "eec.login",
+                        login: data,
+                    });
+                    break;
+
+                case userActions.register:
+                    window.dataLayer.push({
+                        event: "register",
+                        register: data
+                    });
+
+
+                case userActions.couponProgramActivation:
+                    window.dataLayer.push({
+                        event: "couponProgramActivation",
+                        couponProgram: data
+                    });
+
+                default:
+                    break;
+            }
+        };
+    </script>
+
+    
+<script>
+    var ga4EventTypes = {
+        viewItemList: "view_item_list",
+        viewItem: "view_item",
+        viewPromotion: "view_promotion",
+        selectPromotion: "select_promotion",
+        addToCart: "add_to_cart",
+        removeFromCart: "remove_from_cart",
+        beginCheckout: "begin_checkout",
+        purchase: "purchase",
+        socialRegisterStart: "social_register_start",
+        socialRegisterEnd: "social_register_end",
+        socialLogin: "social_login",
+        viewCategory: "view_category",
+        clickCategory: "click_category",
+        clickRegistration: "click_registration",
+        clickRegistrationTab: "click_registration_tab"
+    };
+
+    var reportUserActionToGa4 = function(eventType, eCommerceObj) {
+        window.dataLayer = window.dataLayer || []
+
+        window.dataLayer.push({ecommerce: null}); // Clear ecommerce obj as recommended
+        
+        dataLayerObj = {
+            event: eventType,
+            ecommerce: eCommerceObj,
+        };
+
+        window.dataLayer.push(dataLayerObj);
+    };
+</script>
+
+
+    
+
+            <script data-cookieconsent="marketing" type="text/plain">
+            (function(w,d,s,l,i) {
+            w[l]=w[l]||[];
+            w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
+            var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+            j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+            f.parentNode.insertBefore(j,f);
+            })(window, document, 'script', 'dataLayer', 'GTM-M66WQ2N');
+
+            window.dataLayer = window.dataLayer || [];
+            var customerId = "";
+            if (customerId !== null && customerId !== undefined) {
+            window.dataLayer.push({
+            'userID': customerId
+            })
+            }
+        </script>
+
+
+
+    <!-- Start SmartBanner configuration -->
+    <meta name="smartbanner:title" content="BARBORA">
+    <meta name="smartbanner:author" content="Iepērcies ērtāk&lt;br/&gt;lietotnē!">
+    <meta name="smartbanner:icon-apple" content="/Assets/Images/icons/barbora-logo-lv-512.png">
+    <meta name="smartbanner:icon-google" content="/Assets/Images/icons/barbora-logo-lv-512.png">
+    <meta name="smartbanner:button" content="Atvērt">
+    <meta name="smartbanner:button-url-apple"
+        content="https://apps.apple.com/lv/app/barbora-lv/id1339130111">
+    <meta name="smartbanner:button-url-google" content="intent://home#Intent;scheme=barbora;package=lv.barbora;S.browser_fallback_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dlv.barbora;end">
+    <meta name="smartbanner:enabled-platforms" content="android,ios">
+    <meta name="smartbanner:close-label" content="Aizvērt">
+    <meta name="smartbanner:hide-path" content="/">
+    <meta name="smartbanner:hide-ttl" content="604800000">
+    <!-- End SmartBanner configuration -->
+
+
+
+</head>
+
+
+
+<body class="">
+
+    <div id="next-styles-placeholder"></div>
+
+    <script type="text/javascript">
+        // load svg icons, cached by browser
+        var ajax = new XMLHttpRequest();
+        ajax.open("GET", "/Assets/Images/svg-compiled/symbol/svg/sprite.symbol.svg" + "?v=1.42.5", true);
+        ajax.setRequestHeader("Cache-Control", "max-age=" + "2592000");
+        ajax.send();
+        ajax.onload = function () {
+            var div = document.createElement("div");
+            div.style.display = "none";
+            div.innerHTML = ajax.responseText;
+            document.body.insertBefore(div, document.body.childNodes[0]);
+        }
+    </script>
+
+    
+<noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M66WQ2N" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+
+    <div class="b-app" style="visibility: hidden;">
+        <div class="b-app-bg tw-bg-neutral-100">
+            <div style="display:none;" class="b-alert--warning b-ie-warning">
+                Jūs izmantojat novecojušu tīmekļa pārlūkprogrammu. Varēsiet iepirkties ātrāk un ērtāk, ja lejupielādēsiet jaunāko <a href="https://www.google.com/chrome/browser/desktop/index.html"
+                        target="blank">Google Chrome</a> vai <a href="https://www.mozilla.org/lt/firefox/new/" target="_blank">Mozilla
+                        Firefox</a> versiju.
+            </div>
+
+
+
+
+<script type="text/javascript">
+    function sendLoginClickEvent() {
+        var login = {
+            loginType: "email",
+            clicked_login: true
+        };
+        window.reportUserActionToGtm("login", login);
+    }
+</script>
+
+<div class="b-header-mobile ">
+    <div id="b-mobile-sticky-menu" class="b-mobile-sticky-menu">
+        <div id="mobile-newsletter-subscription-placeholder"></div>
+        <div id="mobile-information-banner-placeholder"></div>
+        <ul class="b-top-menu b-top-menu-mobile">
+            <div class="b-top-menu--shop-page-links">
+                <li class="b-top-menu-item b-top-menu-item--container">
+                    <button id="fti-mobile-menu" class="b-top-menu-item-link b-trigger-mobile-menu"></button>
+
+                    <a href="/" class="b-logo--main">
+                        <svg
+    class="b-icon b-logo--eshop-main"
+    
+    style="" 
+>
+    <use xlink:href="#barbora-logo"></use>
+</svg>
+                    </a>
+                </li>
+            </div>
+            <li class="b-top-menu-item b-help-btn--container">
+
+                    <button
+                        class="b-top-menu-item-link b-login-register--button b-login-register--key b-login-register--login"
+                        onclick="sendLoginClickEvent()"><svg
+    class="b-icon"
+    
+    style="" 
+>
+    <use xlink:href="#login"></use>
+</svg></button>
+            </li>
+        </ul>
+
+            <div class="b-search-mobile">
+                <div class="b-search--placeholder"></div>
+            </div>
+    </div>
+</div>
+
+
+            
+
+
+<script type="text/javascript">
+    var sendLoginClickEvent = () => {
+        const login = {
+            loginType: "email/social",
+            clicked_login: true
+        };
+        window.reportUserActionToGtm("login", login);
+    }
+
+    var sendRegisterClickEvent = () => {
+        const register = {
+            registrationType: "email/social",
+            clicked_register: true
+        };
+        window.reportUserActionToGtm("register", register);
+    }
+</script>
+
+        <header class="b-header ">
+            <div id="desktop-newsletter-subscription-placeholder"></div>
+            <div id="desktop-information-banner-placeholder"></div>
+                <div class="b-header-top">
+                <div class="container-fluid">
+                    
+
+
+
+
+    <script type="text/javascript">
+        var sendLoginClickEvent = () => {
+            const login = {
+                loginType: "email/social",
+                clicked_login: true
+		    };
+		    window.reportUserActionToGtm("login", login);
+        }
+
+        var sendRegisterClickEvent = () => {
+            const register = {
+                registrationType: "email/social",
+                clicked_register: true
+            };
+            window.reportUserActionToGtm("register", register);
+        }
+    </script>
+
+    <div class="b-header--links">
+        <div class="b-header--links--items">
+            <div class="b-header-language--placeholder"></div>
+        </div>
+
+        <div class="tw-flex tw-justify-center tw-items-center tw-gap-10">
+                <div id="login-register-buttons-placeholder"></div>
+
+
+
+            <div class="b-help-btn--placeholder"></div>
+        </div>
+
+    </div>
+
+                    <div style="display: flex;">
+                        <div class="b-social-login-google--placeholder"></div>
+                        <div class="b-social-register-google--placeholder"></div>
+                        <div class="b-social-login-fb--placeholder"></div>
+                        <div class="b-social-register-fb--placeholder"></div>
+                    </div>
+                </div>
+            </div>
+                <div class="b-header-bottom">
+                <div class="container-fluid">
+                    <div class="b-header-bottom--wrapper">
+                        <div class="b-header-bottom--block">
+                            <a href="/" class="b-logo--main">
+                                <svg
+    class="b-icon"
+    style='width: 100%; height: 100%; top: -3px;'
+    style="" 
+>
+    <use xlink:href="#barbora-logo"></use>
+</svg>
+                            </a>
+                                <div class="b-search--placeholder"></div>
+                        </div>
+                        <div class="b-header-bottom--side b-header-hidden">
+                            <div class="b-cart-and-delivery-in-header--placeholder"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+
+
+            <div class="container-fluid">
+
+
+                <div
+                    class="b-main-content  ">
+
+
+
+
+
+
+
+    <div id="desktop-menu-placeholder"></div>
+
+
+                    
+
+
+    <ol class="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList" style="padding-left: 0px;">
+
+                <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                    <meta itemprop="position" content="1" />
+                    
+
+
+<a itemprop="item" href="https://barbora.lv/" title="Mājas lapa">
+    <span itemprop="name">
+        Mājas lapa
+    </span>
+</a>
+                </li>
+                <li class="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                    <meta itemprop="position" content="2" />
+                    
+
+
+<a itemprop="item" href="/meklet" title="Meklēt">
+    <span itemprop="name">
+        Meklēt
+    </span>
+</a>
+                </li>
+
+    </ol>
+
+
+                    
+
+    <div class="b-sidebar">
+
+        <div class="b-cart--placeholder"></div>
+
+    </div>
+
+
+                    <div class="b-page-specific-content">
+
+
+
+                        
+
+    <script>
+        async function ResendEmail() {
+            await fetch(`${window.b_urls.home}shared/ResendConfirmationEmail`);
+        }
+    </script>
+
+
+
+                        
+
+
+
+
+<script>
+    window.cshtml = window.cshtml || {}
+    window.cshtml['category-banner-data'] = `[]`
+</script>
+
+    <div class="b-search--banner-wrap"></div>
+
+    <div class="b-search-page--navigation" hidden>
+        <div class="b-search--page-heading-wrap">
+            <h1>Meklēšanas rezultāti "<strong style="color:#E22E39;">piens</strong>"</h1>
+        </div>
+
+        <div class="b-pagination-wrapper b-pagination-wrapper--desktop-top">
+            
+
+
+
+
+    <ul class="pagination">
+
+            <li><a href="/meklet?q=piens">&laquo;</a></li>
+                <li class=active>
+                    <a href="/meklet?q=piens">1</a>
+                </li>
+                <li >
+                    <a href="/meklet?q=piens&amp;page=2">2</a>
+                </li>
+                <li >
+                    <a href="/meklet?q=piens&amp;page=3">3</a>
+                </li>
+                <li >
+                    <a href="/meklet?q=piens&amp;page=4">4</a>
+                </li>
+                <li >
+                    <a href="/meklet?q=piens&amp;page=5">5</a>
+                </li>
+                <li><a href="/meklet?q=piens&amp;page=6">...</a></li>
+            <li><a href="/meklet?q=piens&amp;page=2">&raquo;</a></li>
+
+    </ul>
+
+
+
+
+        </div>
+
+        
+
+<div class="b-filter-order ">
+
+    <div class="row">
+
+        <div class="col-xs-6 col-md-4" style="padding-right:0;">
+                 <button id="fti-filter-toggle" class="b-filter-order--filter-toggle">Filtrs</button>
+        </div>
+
+        <div class="col-xs-6 col-md-3 col-md-push-5">
+                <select class="b-orderby form-control">
+                    <option value="default">Kārtot pēc:</option>
+                        <option value="name" >Alfabētiskā secībā (A-Z)</option>
+                        <option value="nameDesc" >Alfabētiskā secība (Z-A)</option>
+                        <option value="priceAsc" >Cena (pieaugoši)</option>
+                        <option value="priceDesc" >Cena (dilstošā secībā)</option>
+                </select>
+        </div>
+    </div>
+    <div class="clearfix b-filter-order--filter"></div>
+
+</div>
+
+
+
+        <div class="b-search--page-heading-wrap--responsive">
+            <h1>Meklēšanas rezultāti "<strong style="color:#E22E39;">piens</strong>"</h1>
+        </div>
+    </div>
+
+
+
+    <script>
+            window.b_productList = [{"attributes":{"list":[]},"picking_actions":[],"units":[{"id":0,"price":1.19,"retail_price":1.49,"unit":"gab.","min":1.0,"max":8.0,"step":1.0,"defaultValue":1.0}],"is_adult":false,"inFavorites":false,"extra":{"is_sellout":true,"discount":0.0,"buy_x_quantity_for_y_price_promo":null,"buy_x_or_more_promo":null,"maxi_pack_price_promo":null,"is_with_card":true,"extra_loyalty_points":null,"is_new":false,"is_top":false,"is_time":null,"is_today":false,"is_gift_available":false,"is_not_available_for_cnc":false,"is_not_available_for_pup":false},"show_promo_label":true,"show_promo_price":true,"show_maxima_label":false,"inventory_type":1,"show_promo_surrogate":false,"giftsCampaignItems":null,"segment_id":null,"id":"000000000000019001","title":"Piens LIMBAŽU PIENS 2,5% 1L","category_id":"40956cf9-dd22-4337-9b46-2137da7290d2","category_name_full_path":"Piena produkti un olas/Piens/Pasterizēts piens","category_path_url":"piena-produkti-un-olas/piens/pasterizets-piens","root_category_id":"4285f7d7-5d92-4eb2-a85c-4772fed50091","brand_name":"Limbažu piens","brand_id":3,"shopcode":"R600","price":1.19,"retail_price":1.49,"image":"https://cdn.barbora.lv/products/ab96660c-5fe7-42b3-9027-66547593793c_s.png","big_image":"https://cdn.barbora.lv/products/ab96660c-5fe7-42b3-9027-66547593793c_m.png","comparative_unit":"l","comparative_unit_price":1.19,"comparative_unit_price_brutto":1.49,"promotion":{"oldPrice":1.49,"oldComparativeRate":1.49,"percentage":20,"minQuantity":1,"orMore":false,"id":"3138714","type":"LOYALTY_PRICE","loyaltyCardRequired":true,"mixAndMatch":false,"promoVisibility":"VISIBLE"},"promotionGroup":null,"status":"active","creationDate":null,"GiftsCampaignItems":null,"own_inventory":false,"ShowInOffersTo":null,"Url":"piens-limbazu-2-5-proc-1-l","ExternalSuppliers":null,"is_made_in_Eu":false,"is_made_in_Home_Country":false,"is_available_for_donations":false},{"attributes":{"list":[]},"picking_actions":[],"units":[{"id":0,"price":0.69,"retail_price":0.99,"unit":"gab.","min":1.0,"max":8.0,"step":1.0,"defaultValue":1.0}],"is_adult":false,"inFavorites":false,"extra":{"is_sellout":true,"discount":0.0,"buy_x_quantity_for_y_price_promo":null,"buy_x_or_more_promo":null,"maxi_pack_price_promo":null,"is_with_card":true,"extra_loyalty_points":null,"is_new":false,"is_top":false,"is_time":null,"is_today":false,"is_gift_available":false,"is_not_available_for_cnc":false,"is_not_available_for_pup":false},"show_promo_label":true,"show_promo_price":true,"show_maxima_label":false,"inventory_type":1,"show_promo_surrogate":false,"giftsCampaignItems":null,"segment_id":null,"id":"000000000001147252","title":"Piens LIMBAŽU PIENS 2.5% 0.5L","category_id":"40956cf9-dd22-4337-9b46-2137da7290d2","category_name_full_path":"Piena produkti un olas/Piens/Pasterizēts piens","category_path_url":"piena-produkti-un-olas/piens/pasterizets-piens","root_category_id":"4285f7d7-5d92-4eb2-a85c-4772fed50091","brand_name":"Limbažu piens","brand_id":3,"shopcode":"R600","price":0.69,"retail_price":0.99,"image":"https://cdn.barbora.lv/products/9eb8d890-021d-4815-82fb-da1109a36cf2_s.png","big_image":"https://cdn.barbora.lv/products/9eb8d890-021d-4815-82fb-da1109a36cf2_m.png","comparative_unit":"kg","comparative_unit_price":1.38,"comparative_unit_price_brutto":1.98,"promotion":{"oldPrice":0.99,"oldComparativeRate":1.98,"percentage":30,"minQuantity":1,"orMore":false,"id":"3138715","type":"LOYALTY_PRICE","loyaltyCardRequired":true,"mixAndMatch":false,"promoVisibility":"VISIBLE"},"promotionGroup":null,"status":"active","creationDate":null,"GiftsCampaignItems":null,"own_inventory":false,"ShowInOffersTo":null,"Url":"piens-limbazu-piens-2-5-proc-0-5-l","ExternalSuppliers":null,"is_made_in_Eu":false,"is_made_in_Home_Country":false,"is_available_for_donations":false},{"attributes":{"list":[]},"picking_actions":[],"units":[{"id":0,"price":1.29,"unit":"gab.","min":1.0,"max":8.0,"step":1.0,"defaultValue":1.0}],"is_adult":false,"inFavorites":false,"show_promo_label":true,"show_promo_price":true,"show_maxima_label":false,"inventory_type":1,"show_promo_surrogate":false,"giftsCampaignItems":null,"segment_id":null,"id":"000000000001276057","title":"Piens TALSU 2,5% 1L","category_id":"40956cf9-dd22-4337-9b46-2137da7290d2","category_name_full_path":"Piena produkti un olas/Piens/Pasterizēts piens","category_path_url":"piena-produkti-un-olas/piens/pasterizets-piens","root_category_id":"4285f7d7-5d92-4eb2-a85c-4772fed50091","brand_name":"Talsu Piensaimnieks","brand_id":1362,"shopcode":"R600","price":1.29,"image":"https://cdn.barbora.lv/products/174d55e6-8769-4027-8636-5f3ec30c84b3_s.png","big_image":"https://cdn.barbora.lv/products/174d55e6-8769-4027-8636-5f3ec30c84b3_m.png","comparative_unit":"l","comparative_unit_price":1.29,"comparative_unit_price_brutto":1.29,"promotion":null,"promotionGroup":null,"status":"suspended","creationDate":null,"GiftsCampaignItems":null,"own_inventory":false,"ShowInOffersTo":null,"Url":"piens-talsu-2-5-proc-1-l","ExternalSuppliers":null,"is_made_in_Eu":false,"is_made_in_Home_Country":false,"is_available_for_donations":false},{"attributes":{"list":[]},"picking_actions":[],"units":[{"id":0,"price":1.79,"retail_price":2.19,"unit":"gab.","min":1.0,"max":8.0,"step":1.0,"defaultValue":1.0}],"is_adult":false,"inFavorites":false,"extra":{"is_sellout":true,"discount":0.0,"buy_x_quantity_for_y_price_promo":null,"buy_x_or_more_promo":null,"maxi_pack_price_promo":null,"is_with_card":true,"extra_loyalty_points":null,"is_new":false,"is_top":false,"is_time":null,"is_today":false,"is_gift_available":false,"is_not_available_for_cnc":false,"is_not_available_for_pup":false},"show_promo_label":true,"show_promo_price":true,"show_maxima_label":false,"inventory_type":1,"show_promo_surrogate":false,"giftsCampaignItems":null,"segment_id":null,"id":"000000000000117817","title":"Piens Lielais LIMBAŽU PIENS 2.5% 1.5L","category_id":"40956cf9-dd22-4337-9b46-2137da7290d2","category_name_full_path":"Piena produkti un olas/Piens/Pasterizēts piens","category_path_url":"piena-produkti-un-olas/piens/pasterizets-piens","root_category_id":"4285f7d7-5d92-4eb2-a85c-4772fed50091","brand_name":"Limbažu piens","brand_id":3,"shopcode":"R600","price":1.79,"retail_price":2.19,"image":"https://cdn.barbora.lv/products/f203a754-038e-4ace-ade1-4f1f20959eaa_s.png","big_image":"https://cdn.barbora.lv/products/f203a754-038e-4ace-ade1-4f1f20959eaa_m.png","comparative_unit":"l","comparative_unit_price":1.19,"comparative_unit_price_brutto":1.46,"promotion":{"oldPrice":2.19,"oldComparativeRate":1.46,"percentage":18,"minQuantity":1,"orMore":false,"id":"3138712","type":"LOYALTY_PRICE","loyaltyCardRequired":true,"mixAndMatch":false,"promoVisibility":"VISIBLE"},"promotionGroup":null,"status":"active","creationDate":null,"GiftsCampaignItems":null,"own_inventory":false,"ShowInOffersTo":null,"Url":"piens-lielais-limbazu-2-5-proc-1-5-l","ExternalSuppliers":null,"is_made_in_Eu":false,"is_made_in_Home_Country":false,"is_available_for_donations":false},{"attributes":{"list":[]},"picking_actions":[],"units":[{"id":0,"price":1.79,"retail_price":1.99,"unit":"gab.","min":1.0,"max":8.0,"step":1.0,"defaultValue":1.0}],"is_adult":false,"inFavorites":false,"extra":{"is_sellout":true,"discount":0.0,"buy_x_quantity_for_y_price_promo":null,"buy_x_or_more_promo":null,"maxi_pack_price_promo":null,"is_with_card":true,"extra_loyalty_points":null,"is_new":false,"is_top":false,"is_time":null,"is_today":false,"is_gift_available":false,"is_not_available_for_cnc":false,"is_not_available_for_pup":false},"show_promo_label":true,"show_promo_price":true,"show_maxima_label":false,"inventory_type":1,"show_promo_surrogate":false,"giftsCampaignItems":null,"segment_id":null,"id":"000000000000447626","title":"Piens TERE 2,5% 1,5L","category_id":"40956cf9-dd22-4337-9b46-2137da7290d2","category_name_full_path":"Piena produkti un olas/Piens/Pasterizēts piens","category_path_url":"piena-produkti-un-olas/piens/pasterizets-piens","root_category_id":"4285f7d7-5d92-4eb2-a85c-4772fed50091","brand_name":"Tere","brand_id":1376,"shopcode":"R600","price":1.79,"retail_price":1.99,"image":"https://cdn.barbora.lv/products/0a31b967-e362-41e1-8510-7aadd28aa37a_s.png","big_image":"https://cdn.barbora.lv/products/0a31b967-e362-41e1-8510-7aadd28aa37a_m.png","comparative_unit":"l","comparative_unit_price":1.20,"comparative_unit_price_brutto":1.33,"promotion":{"oldPrice":1.99,"oldComparativeRate":1.33,"percentage":10,"minQuantity":1,"orMore":false,"id":"2918607","type":"LOYALTY_PRICE","loyaltyCardRequired":true,"mixAndMatch":false,"promoVisibility":"VISIBLE"},"promotionGroup":null,"status":"active","creationDate":null,"GiftsCampaignItems":null,"own_inventory":false,"ShowInOffersTo":null,"Url":"piens-tere-2-5-proc-1-5-l","ExternalSuppliers":null,"is_made_in_Eu":false,"is_made_in_Home_Country":false,"is_available_for_donations":false},{"attributes":{"list":[]},"picking_actions":[],"units":[{"id":0,"price":2.79,"unit":"gab.","min":1.0,"max":8.0,"step":1.0,"defaultValue":1.0}],"is_adult":false,"inFavorites":false,"show_promo_label":true,"show_promo_price":true,"show_maxima_label":false,"inventory_type":1,"show_promo_surrogate":false,"giftsCampaignItems":null,"segment_id":null,"id":"000000000000889842","title":"Piens ANNELE 2,5% 2L pudelē","category_id":"40956cf9-dd22-4337-9b46-2137da7290d2","category_name_full_path":"Piena produkti un olas/Piens/Pasterizēts piens","category_path_url":"piena-produkti-un-olas/piens/pasterizets-piens","root_category_id":"4285f7d7-5d92-4eb2-a85c-4772fed50091","brand_name":"Annele","brand_id":66,"shopcode":"R600","price":2.79,"image":"https://cdn.barbora.lv/products/aa6ee006-ce76-44f2-bc2b-48ff2c1824bd_s.png","big_image":"https://cdn.barbora.lv/products/aa6ee006-ce76-44f2-bc2b-48ff2c1824bd_m.png","comparative_unit":"l","comparative_unit_price":1.40,"comparative_unit_price_brutto":1.40,"promotion":null,"promotionGroup":null,"status":"active","creationDate":null,"GiftsCampaignItems":null,"own_inventory":false,"ShowInOffersTo":null,"Url":"piens-annele-2-5-proc-2-l-pudele","ExternalSuppliers":null,"is_made_in_Eu":false,"is_made_in_Home_Country":false,"is_available_for_donations":false},{"attributes":{"list":[]},"picking_actions":[],"units":[{"id":0,"price":1.39,"retail_price":1.67,"unit":"gab.","min":1.0,"max":8.0,"step":1.0,"defaultValue":1.0}],"is_adult":false,"inFavorites":false,"extra":{"is_sellout":true,"discount":0.0,"buy_x_quantity_for_y_price_promo":null,"buy_x_or_more_promo":null,"maxi_pack_price_promo":null,"is_with_card":true,"extra_loyalty_points":null,"is_new":false,"is_top":false,"is_time":null,"is_today":false,"is_gift_available":false,"is_not_available_for_cnc":false,"is_not_available_for_pup":false},"show_promo_label":true,"show_promo_price":true,"show_maxima_label":false,"inventory_type":1,"show_promo_surrogate":false,"giftsCampaignItems":null,"segment_id":null,"id":"000000000001138814","title":"Piens ALMA Lauku 3,6-4,2% 1L","category_id":"40956cf9-dd22-4337-9b46-2137da7290d2","category_name_full_path":"Piena produkti un olas/Piens/Pasterizēts piens","category_path_url":"piena-produkti-un-olas/piens/pasterizets-piens","root_category_id":"4285f7d7-5d92-4eb2-a85c-4772fed50091","brand_name":"Alma","brand_id":49,"shopcode":"R600","price":1.39,"retail_price":1.67,"image":"https://cdn.barbora.lv/products/f2ef0779-88a7-45de-86ac-cbe1f82ac5b0_s.png","big_image":"https://cdn.barbora.lv/products/f2ef0779-88a7-45de-86ac-cbe1f82ac5b0_m.png","comparative_unit":"l","comparative_unit_price":1.39,"comparative_unit_price_brutto":1.67,"promotion":{"oldPrice":1.67,"oldComparativeRate":1.67,"percentage":17,"minQuantity":1,"orMore":false,"id":"2911418","type":"LOYALTY_PRICE","loyaltyCardRequired":true,"mixAndMatch":false,"promoVisibility":"VISIBLE"},"promotionGroup":null,"status":"active","creationDate":null,"GiftsCampaignItems":null,"own_inventory":false,"ShowInOffersTo":null,"Url":"piens-alma-lauku-3-6-4-2-proc-1-l","ExternalSuppliers":null,"is_made_in_Eu":false,"is_made_in_Home_Country":false,"is_available_for_donations":false},{"attributes":{"list":[]},"picking_actions":[],"units":[{"id":0,"price":1.95,"unit":"gab.","min":1.0,"max":8.0,"step":1.0,"defaultValue":1.0}],"is_adult":false,"inFavorites":false,"show_promo_label":true,"show_promo_price":true,"show_maxima_label":false,"inventory_type":1,"show_promo_surrogate":false,"giftsCampaignItems":null,"segment_id":null,"id":"000000000000511638","title":"Karsēts piens LAZDONA 4% 1L","category_id":"40956cf9-dd22-4337-9b46-2137da7290d2","category_name_full_path":"Piena produkti un olas/Piens/Pasterizēts piens","category_path_url":"piena-produkti-un-olas/piens/pasterizets-piens","root_category_id":"4285f7d7-5d92-4eb2-a85c-4772fed50091","brand_name":"Lazdona","brand_id":1762,"shopcode":"R600","price":1.95,"image":"https://cdn.barbora.lv/products/80d673b5-0fbc-4d02-8b1d-25f2f35de3ac_s.png","big_image":"https://cdn.barbora.lv/products/80d673b5-0fbc-4d02-8b1d-25f2f35de3ac_m.png","comparative_unit":"l","comparative_unit_price":1.95,"comparative_unit_price_brutto":1.95,"promotion":null,"promotionGroup":null,"status":"active","creationDate":null,"GiftsCampaignItems":null,"own_inventory":false,"ShowInOffersTo":null,"Url":"karsets-piens-lazdona-4-proc-1-l","ExternalSuppliers":null,"is_made_in_Eu":false,"is_made_in_Home_Country":false,"is_available_for_donations":false},{"attributes":{"list":[],"additional":{"sugar_free":false,"e_free":false,"lactose_free":false,"gluten_free":false,"eco":false,"frozen":false,"is_for_vegetarians":false,"mince":false,"thin_slice":false,"disembowel":false,"hamilton_quality":true,"hammer_price":false,"good_offer":false,"lowest_price":false}},"picking_actions":[],"units":[{"id":0,"price":0.95,"unit":"gab.","min":1.0,"max":8.0,"step":1.0,"defaultValue":1.0}],"is_adult":false,"inFavorites":false,"show_promo_label":true,"show_promo_price":true,"show_maxima_label":false,"inventory_type":1,"show_promo_surrogate":false,"giftsCampaignItems":null,"segment_id":null,"id":"000000000001350200","title":"Piens WELL DONE 2,0% 1L","category_id":"40956cf9-dd22-4337-9b46-2137da7290d2","category_name_full_path":"Piena produkti un olas/Piens/Pasterizēts piens","category_path_url":"piena-produkti-un-olas/piens/pasterizets-piens","root_category_id":"4285f7d7-5d92-4eb2-a85c-4772fed50091","brand_name":"Well Done","brand_id":3583,"shopcode":"R600","price":0.95,"image":"https://cdn.barbora.lv/products/9723b543-2de7-4f91-aaef-50986d830aa7_s.png","big_image":"https://cdn.barbora.lv/products/9723b543-2de7-4f91-aaef-50986d830aa7_m.png","comparative_unit":"l","comparative_unit_price":0.95,"comparative_unit_price_brutto":0.95,"promotion":null,"promotionGroup":null,"status":"active","creationDate":null,"GiftsCampaignItems":null,"own_inventory":false,"ShowInOffersTo":null,"Url":"piens-well-done-2-0-proc-1-l","ExternalSuppliers":null,"is_made_in_Eu":false,"is_made_in_Home_Country":false,"is_available_for_donations":false},{"attributes":{"list":[],"additional":{"sugar_free":false,"e_free":false,"lactose_free":false,"gluten_free":false,"eco":false,"frozen":false,"is_for_vegetarians":false,"mince":false,"thin_slice":false,"disembowel":false,"hamilton_quality":true,"hammer_price":false,"good_offer":false,"lowest_price":false}},"picking_actions":[],"units":[{"id":0,"price":0.69,"unit":"gab.","min":1.0,"max":8.0,"step":1.0,"defaultValue":1.0}],"is_adult":false,"inFavorites":false,"show_promo_label":true,"show_promo_price":true,"show_maxima_label":false,"inventory_type":1,"show_promo_surrogate":false,"giftsCampaignItems":null,"segment_id":null,"id":"000000000001378475","title":"Piens WELL DONE 2,5% 0,5L","category_id":"40956cf9-dd22-4337-9b46-2137da7290d2","category_name_full_path":"Piena produkti un olas/Piens/Pasterizēts piens","category_path_url":"piena-produkti-un-olas/piens/pasterizets-piens","root_category_id":"4285f7d7-5d92-4eb2-a85c-4772fed50091","brand_name":"Well Done","brand_id":3583,"shopcode":"R600","price":0.69,"image":"https://cdn.barbora.lv/products/91ab4997-af23-469c-a8de-5d9313df5b67_s.png","big_image":"https://cdn.barbora.lv/products/91ab4997-af23-469c-a8de-5d9313df5b67_m.png","comparative_unit":"l","comparative_unit_price":1.38,"comparative_unit_price_brutto":1.38,"promotion":null,"promotionGroup":null,"status":"active","creationDate":null,"GiftsCampaignItems":null,"own_inventory":false,"ShowInOffersTo":null,"Url":"piens-well-done-2-5-proc-0-5-l-78475","ExternalSuppliers":null,"is_made_in_Eu":false,"is_made_in_Home_Country":false,"is_available_for_donations":false},{"attributes":{"list":[]},"picking_actions":[],"units":[{"id":0,"price":2.19,"unit":"gab.","min":1.0,"max":8.0,"step":1.0,"defaultValue":1.0}],"is_adult":false,"inFavorites":false,"show_promo_label":true,"show_promo_price":true,"show_maxima_label":false,"inventory_type":1,"show_promo_surrogate":false,"giftsCampaignItems":null,"segment_id":null,"id":"000000000001131972","title":"Kazas piens AMALATTEA UHT 500ml","category_id":"dba4a762-f88e-418d-a434-896552b7e779","category_name_full_path":"Piena produkti un olas/Piens/UHT piens","category_path_url":"piena-produkti-un-olas/piens/uht-piens","root_category_id":"4285f7d7-5d92-4eb2-a85c-4772fed50091","brand_name":"Amalattea","brand_id":4616,"shopcode":"R600","price":2.19,"image":"https://cdn.barbora.lv/products/c74dbd47-5fdf-4950-926c-f1776fb27359_s.png","big_image":"https://cdn.barbora.lv/products/c74dbd47-5fdf-4950-926c-f1776fb27359_m.png","comparative_unit":"l","comparative_unit_price":4.38,"comparative_unit_price_brutto":4.38,"promotion":null,"promotionGroup":null,"status":"active","creationDate":null,"GiftsCampaignItems":null,"own_inventory":false,"ShowInOffersTo":null,"Url":"kazas-piens-amalattea-uht-500-ml","ExternalSuppliers":null,"is_made_in_Eu":false,"is_made_in_Home_Country":false,"is_available_for_donations":false},{"attributes":{"list":[]},"picking_actions":[],"units":[{"id":0,"price":2.99,"unit":"gab.","min":1.0,"max":8.0,"step":1.0,"defaultValue":1.0}],"is_adult":false,"inFavorites":false,"show_promo_label":true,"show_promo_price":true,"show_maxima_label":false,"inventory_type":1,"show_promo_surrogate":false,"giftsCampaignItems":null,"segment_id":null,"id":"000000000000543222","title":"Piens ANNELE Lauku 3,5% 2L pudelē","category_id":"40956cf9-dd22-4337-9b46-2137da7290d2","category_name_full_path":"Piena produkti un olas/Piens/Pasterizēts piens","category_path_url":"piena-produkti-un-olas/piens/pasterizets-piens","root_category_id":"4285f7d7-5d92-4eb2-a85c-4772fed50091","brand_name":"Annele","brand_id":66,"shopcode":"R600","price":2.99,"image":"https://cdn.barbora.lv/products/de26bdd5-5646-436a-9bab-85cc48df19d9_s.png","big_image":"https://cdn.barbora.lv/products/de26bdd5-5646-436a-9bab-85cc48df19d9_m.png","comparative_unit":"l","comparative_unit_price":1.50,"comparative_unit_price_brutto":1.50,"promotion":null,"promotionGroup":null,"status":"suspended","creationDate":null,"GiftsCampaignItems":null,"own_inventory":false,"ShowInOffersTo":null,"Url":"piens-annele-lauku-3-5-proc-2-l-pudele","ExternalSuppliers":null,"is_made_in_Eu":false,"is_made_in_Home_Country":false,"is_available_for_donations":false},{"attributes":{"list":[]},"picking_actions":[],"units":[{"id":0,"price":0.75,"unit":"gab.","min":1.0,"max":8.0,"step":1.0,"defaultValue":1.0}],"is_adult":false,"inFavorites":false,"show_promo_label":true,"show_promo_price":true,"show_maxima_label":false,"inventory_type":1,"show_promo_surrogate":false,"giftsCampaignItems":null,"segment_id":null,"id":"000000000000815427","title":"Piens FARM MILK 2% 1l plēvē","category_id":"40956cf9-dd22-4337-9b46-2137da7290d2","category_name_full_path":"Piena produkti un olas/Piens/Pasterizēts piens","category_path_url":"piena-produkti-un-olas/piens/pasterizets-piens","root_category_id":"4285f7d7-5d92-4eb2-a85c-4772fed50091","brand_name":"Farm Milk","brand_id":5,"shopcode":"R600","price":0.75,"image":"https://cdn.barbora.lv/products/5bc0f9f4-115e-4176-b3fb-1aa8e35d029f_s.png","big_image":"https://cdn.barbora.lv/products/5bc0f9f4-115e-4176-b3fb-1aa8e35d029f_m.png","comparative_unit":"l","comparative_unit_price":0.75,"comparative_unit_price_brutto":0.75,"promotion":null,"promotionGroup":null,"status":"active","creationDate":null,"GiftsCampaignItems":null,"own_inventory":false,"ShowInOffersTo":null,"Url":"piens-farm-milk-2-proc-1-l-pleve","ExternalSuppliers":null,"is_made_in_Eu":false,"is_made_in_Home_Country":false,"is_available_for_donations":false},{"attributes":{"list":[]},"picking_actions":[],"units":[{"id":0,"price":0.96,"unit":"gab.","min":1.0,"max":8.0,"step":1.0,"defaultValue":1.0}],"is_adult":false,"inFavorites":false,"show_promo_label":true,"show_promo_price":true,"show_maxima_label":false,"inventory_type":1,"show_promo_surrogate":false,"giftsCampaignItems":null,"segment_id":null,"id":"000000000000891999","title":"Piens FARM MILK 2% UHT 1l","category_id":"dba4a762-f88e-418d-a434-896552b7e779","category_name_full_path":"Piena produkti un olas/Piens/UHT piens","category_path_url":"piena-produkti-un-olas/piens/uht-piens","root_category_id":"4285f7d7-5d92-4eb2-a85c-4772fed50091","brand_name":"Farm Milk","brand_id":5,"shopcode":"R600","price":0.96,"image":"https://cdn.barbora.lv/products/d5fe3b3f-92e8-4193-9d39-edb98cff62d1_s.png","big_image":"https://cdn.barbora.lv/products/d5fe3b3f-92e8-4193-9d39-edb98cff62d1_m.png","comparative_unit":"l","comparative_unit_price":0.96,"comparative_unit_price_brutto":0.96,"promotion":null,"promotionGroup":null,"status":"active","creationDate":null,"GiftsCampaignItems":null,"own_inventory":false,"ShowInOffersTo":null,"Url":"piens-farm-milk-2-proc-uht-1-l","ExternalSuppliers":null,"is_made_in_Eu":false,"is_made_in_Home_Country":false,"is_available_for_donations":true},{"attributes":{"list":[]},"picking_actions":[],"units":[{"id":0,"price":0.99,"unit":"gab.","min":1.0,"max":8.0,"step":1.0,"defaultValue":1.0}],"is_adult":false,"inFavorites":false,"show_promo_label":true,"show_promo_price":true,"show_maxima_label":false,"inventory_type":1,"show_promo_surrogate":false,"giftsCampaignItems":null,"segment_id":null,"id":"000000000000892000","title":"Piens FARM MILK 3.2% UHT 1l","category_id":"dba4a762-f88e-418d-a434-896552b7e779","category_name_full_path":"Piena produkti un olas/Piens/UHT piens","category_path_url":"piena-produkti-un-olas/piens/uht-piens","root_category_id":"4285f7d7-5d92-4eb2-a85c-4772fed50091","brand_name":"Farm Milk","brand_id":5,"shopcode":"R600","price":0.99,"image":"https://cdn.barbora.lv/products/81911207-b510-496a-b732-b8d746f93428_s.png","big_image":"https://cdn.barbora.lv/products/81911207-b510-496a-b732-b8d746f93428_m.png","comparative_unit":"l","comparative_unit_price":0.99,"comparative_unit_price_brutto":0.99,"promotion":null,"promotionGroup":null,"status":"active","creationDate":null,"GiftsCampaignItems":null,"own_inventory":false,"ShowInOffersTo":null,"Url":"piens-farm-milk-3-2-proc-uht-1-l","ExternalSuppliers":null,"is_made_in_Eu":false,"is_made_in_Home_Country":false,"is_available_for_donations":true},{"attributes":{"list":[]},"picking_actions":[],"units":[{"id":0,"price":0.96,"unit":"gab.","min":1.0,"max":8.0,"step":1.0,"defaultValue":1.0}],"is_adult":false,"inFavorites":false,"show_promo_label":true,"show_promo_price":true,"show_maxima_label":false,"inventory_type":1,"show_promo_surrogate":false,"giftsCampaignItems":null,"segment_id":null,"id":"000000000000961803","title":"Piens FARM MILK UHT 0.5% 1l","category_id":"dba4a762-f88e-418d-a434-896552b7e779","category_name_full_path":"Piena produkti un olas/Piens/UHT piens","category_path_url":"piena-produkti-un-olas/piens/uht-piens","root_category_id":"4285f7d7-5d92-4eb2-a85c-4772fed50091","brand_name":"Farm Milk","brand_id":5,"shopcode":"R600","price":0.96,"image":"https://cdn.barbora.lv/products/5762d1ae-d357-43cb-b972-38b6e5d8dab6_s.png","big_image":"https://cdn.barbora.lv/products/5762d1ae-d357-43cb-b972-38b6e5d8dab6_m.png","comparative_unit":"l","comparative_unit_price":0.96,"comparative_unit_price_brutto":0.96,"promotion":null,"promotionGroup":null,"status":"active","creationDate":null,"GiftsCampaignItems":null,"own_inventory":false,"ShowInOffersTo":null,"Url":"piens-farm-milk-0-5-proc-uht-1-l","ExternalSuppliers":null,"is_made_in_Eu":false,"is_made_in_Home_Country":false,"is_available_for_donations":false},{"attributes":{"list":[]},"picking_actions":[],"units":[{"id":0,"price":1.19,"unit":"gab.","min":1.0,"max":8.0,"step":1.0,"defaultValue":1.0}],"is_adult":false,"inFavorites":false,"show_promo_label":true,"show_promo_price":true,"show_maxima_label":false,"inventory_type":1,"show_promo_surrogate":false,"giftsCampaignItems":null,"segment_id":null,"id":"000000000001319015","title":"Piens UHT WELL DONE 2,5% 1L","category_id":"dba4a762-f88e-418d-a434-896552b7e779","category_name_full_path":"Piena produkti un olas/Piens/UHT piens","category_path_url":"piena-produkti-un-olas/piens/uht-piens","root_category_id":"4285f7d7-5d92-4eb2-a85c-4772fed50091","brand_name":"Well Done","brand_id":3583,"shopcode":"R600","price":1.19,"image":"https://cdn.barbora.lv/products/72b9c756-7aa1-4bba-9c1e-8eb2a0905dc0_s.png","big_image":"https://cdn.barbora.lv/products/72b9c756-7aa1-4bba-9c1e-8eb2a0905dc0_m.png","comparative_unit":"l","comparative_unit_price":1.19,"comparative_unit_price_brutto":1.19,"promotion":null,"promotionGroup":null,"status":"active","creationDate":null,"GiftsCampaignItems":null,"own_inventory":false,"ShowInOffersTo":null,"Url":"piens-uht-well-done-2-5-proc-1-l","ExternalSuppliers":null,"is_made_in_Eu":false,"is_made_in_Home_Country":false,"is_available_for_donations":false},{"attributes":{"list":[]},"picking_actions":[],"units":[{"id":0,"price":0.59,"retail_price":0.79,"unit":"gab.","min":1.0,"max":6.0,"step":1.0,"defaultValue":1.0}],"is_adult":false,"inFavorites":false,"extra":{"is_sellout":true,"discount":0.0,"buy_x_quantity_for_y_price_promo":null,"buy_x_or_more_promo":null,"maxi_pack_price_promo":null,"is_with_card":true,"extra_loyalty_points":null,"is_new":false,"is_top":false,"is_time":null,"is_today":false,"is_gift_available":false,"is_not_available_for_cnc":false,"is_not_available_for_pup":false},"show_promo_label":true,"show_promo_price":true,"show_maxima_label":false,"inventory_type":1,"show_promo_surrogate":false,"giftsCampaignItems":null,"segment_id":null,"id":"000000000000915075","title":"Piens RASĒNS karameļu 1,5% 200ml","category_id":"2aa06dc3-7718-4338-b553-7fd554acb9d3","category_name_full_path":"Piena produkti un olas/Piens/Piena un probiotiskie dzērieni","category_path_url":"piena-produkti-un-olas/piens/piena-un-probiotiskie-dzerieni","root_category_id":"4285f7d7-5d92-4eb2-a85c-4772fed50091","brand_name":"Rasēns","brand_id":1170,"shopcode":"R600","price":0.59,"retail_price":0.79,"image":"https://cdn.barbora.lv/products/3948a9f7-70e6-4f88-97ba-70ddebf884db_s.png","big_image":"https://cdn.barbora.lv/products/3948a9f7-70e6-4f88-97ba-70ddebf884db_m.png","comparative_unit":"l","comparative_unit_price":2.95,"comparative_unit_price_brutto":3.95,"promotion":{"oldPrice":0.79,"oldComparativeRate":3.95,"percentage":25,"minQuantity":1,"orMore":false,"id":"3026942","type":"LOYALTY_PRICE","loyaltyCardRequired":true,"mixAndMatch":false,"promoVisibility":"VISIBLE"},"promotionGroup":null,"status":"active","creationDate":null,"GiftsCampaignItems":null,"own_inventory":false,"ShowInOffersTo":null,"Url":"piens-rasens-karamelu-1-5-proc-200-ml","ExternalSuppliers":null,"is_made_in_Eu":false,"is_made_in_Home_Country":false,"is_available_for_donations":false},{"attributes":{"list":[]},"picking_actions":[],"units":[{"id":0,"price":0.59,"retail_price":0.79,"unit":"gab.","min":1.0,"max":6.0,"step":1.0,"defaultValue":1.0}],"is_adult":false,"inFavorites":false,"extra":{"is_sellout":true,"discount":0.0,"buy_x_quantity_for_y_price_promo":null,"buy_x_or_more_promo":null,"maxi_pack_price_promo":null,"is_with_card":true,"extra_loyalty_points":null,"is_new":false,"is_top":false,"is_time":null,"is_today":false,"is_gift_available":false,"is_not_available_for_cnc":false,"is_not_available_for_pup":false},"show_promo_label":true,"show_promo_price":true,"show_maxima_label":false,"inventory_type":1,"show_promo_surrogate":false,"giftsCampaignItems":null,"segment_id":null,"id":"000000000000915076","title":"Piens RASĒNS šokolādes 1,5% 200ml","category_id":"2aa06dc3-7718-4338-b553-7fd554acb9d3","category_name_full_path":"Piena produkti un olas/Piens/Piena un probiotiskie dzērieni","category_path_url":"piena-produkti-un-olas/piens/piena-un-probiotiskie-dzerieni","root_category_id":"4285f7d7-5d92-4eb2-a85c-4772fed50091","brand_name":"Rasēns","brand_id":1170,"shopcode":"R600","price":0.59,"retail_price":0.79,"image":"https://cdn.barbora.lv/products/5611796a-a584-49c5-be82-49226e943b30_s.png","big_image":"https://cdn.barbora.lv/products/5611796a-a584-49c5-be82-49226e943b30_m.png","comparative_unit":"l","comparative_unit_price":2.95,"comparative_unit_price_brutto":3.95,"promotion":{"oldPrice":0.79,"oldComparativeRate":3.95,"percentage":25,"minQuantity":1,"orMore":false,"id":"3026943","type":"LOYALTY_PRICE","loyaltyCardRequired":true,"mixAndMatch":false,"promoVisibility":"VISIBLE"},"promotionGroup":null,"status":"active","creationDate":null,"GiftsCampaignItems":null,"own_inventory":false,"ShowInOffersTo":null,"Url":"piens-rasens-sokolades-1-5-proc-200-ml","ExternalSuppliers":null,"is_made_in_Eu":false,"is_made_in_Home_Country":false,"is_available_for_donations":false},{"attributes":{"list":[]},"picking_actions":[],"units":[{"id":0,"price":0.59,"retail_price":0.79,"unit":"gab.","min":1.0,"max":6.0,"step":1.0,"defaultValue":1.0}],"is_adult":false,"inFavorites":false,"extra":{"is_sellout":true,"discount":0.0,"buy_x_quantity_for_y_price_promo":null,"buy_x_or_more_promo":null,"maxi_pack_price_promo":null,"is_with_card":true,"extra_loyalty_points":null,"is_new":false,"is_top":false,"is_time":null,"is_today":false,"is_gift_available":false,"is_not_available_for_cnc":false,"is_not_available_for_pup":false},"show_promo_label":true,"show_promo_price":true,"show_maxima_label":false,"inventory_type":1,"show_promo_surrogate":false,"giftsCampaignItems":null,"segment_id":null,"id":"000000000000915077","title":"Piens RASĒNS banānu 1,5% 200ml","category_id":"2aa06dc3-7718-4338-b553-7fd554acb9d3","category_name_full_path":"Piena produkti un olas/Piens/Piena un probiotiskie dzērieni","category_path_url":"piena-produkti-un-olas/piens/piena-un-probiotiskie-dzerieni","root_category_id":"4285f7d7-5d92-4eb2-a85c-4772fed50091","brand_name":"Rasēns","brand_id":1170,"shopcode":"R600","price":0.59,"retail_price":0.79,"image":"https://cdn.barbora.lv/products/d73a5569-cee7-4173-a4c9-3e5e758e4f79_s.png","big_image":"https://cdn.barbora.lv/products/d73a5569-cee7-4173-a4c9-3e5e758e4f79_m.png","comparative_unit":"l","comparative_unit_price":2.95,"comparative_unit_price_brutto":3.95,"promotion":{"oldPrice":0.79,"oldComparativeRate":3.95,"percentage":25,"minQuantity":1,"orMore":false,"id":"3026944","type":"LOYALTY_PRICE","loyaltyCardRequired":true,"mixAndMatch":false,"promoVisibility":"VISIBLE"},"promotionGroup":null,"status":"active","creationDate":null,"GiftsCampaignItems":null,"own_inventory":false,"ShowInOffersTo":null,"Url":"piens-rasens-bananu-1-5-proc-200-ml","ExternalSuppliers":null,"is_made_in_Eu":false,"is_made_in_Home_Country":false,"is_available_for_donations":false},{"attributes":{"list":[]},"picking_actions":[],"units":[{"id":0,"price":0.59,"retail_price":0.79,"unit":"gab.","min":1.0,"max":6.0,"step":1.0,"defaultValue":1.0}],"is_adult":false,"inFavorites":false,"extra":{"is_sellout":true,"discount":0.0,"buy_x_quantity_for_y_price_promo":null,"buy_x_or_more_promo":null,"maxi_pack_price_promo":null,"is_with_card":true,"extra_loyalty_points":null,"is_new":false,"is_top":false,"is_time":null,"is_today":false,"is_gift_available":false,"is_not_available_for_cnc":false,"is_not_available_for_pup":false},"show_promo_label":true,"show_promo_price":true,"show_maxima_label":false,"inventory_type":1,"show_promo_surrogate":false,"giftsCampaignItems":null,"segment_id":null,"id":"000000000000915078","title":"Piens RASĒNS zemeņu 1,5% 200ml","category_id":"2aa06dc3-7718-4338-b553-7fd554acb9d3","category_name_full_path":"Piena produkti un olas/Piens/Piena un probiotiskie dzērieni","category_path_url":"piena-produkti-un-olas/piens/piena-un-probiotiskie-dzerieni","root_category_id":"4285f7d7-5d92-4eb2-a85c-4772fed50091","brand_name":"Rasēns","brand_id":1170,"shopcode":"R600","price":0.59,"retail_price":0.79,"image":"https://cdn.barbora.lv/products/0bbad9d9-f321-482e-86bf-2020bc3da85b_s.png","big_image":"https://cdn.barbora.lv/products/0bbad9d9-f321-482e-86bf-2020bc3da85b_m.png","comparative_unit":"l","comparative_unit_price":2.95,"comparative_unit_price_brutto":3.95,"promotion":{"oldPrice":0.79,"oldComparativeRate":3.95,"percentage":25,"minQuantity":1,"orMore":false,"id":"3026945","type":"LOYALTY_PRICE","loyaltyCardRequired":true,"mixAndMatch":false,"promoVisibility":"VISIBLE"},"promotionGroup":null,"status":"active","creationDate":null,"GiftsCampaignItems":null,"own_inventory":false,"ShowInOffersTo":null,"Url":"piens-rasens-zemenu-1-5-proc-200-ml","ExternalSuppliers":null,"is_made_in_Eu":false,"is_made_in_Home_Country":false,"is_available_for_donations":false},{"attributes":{"list":[]},"picking_actions":[],"units":[{"id":0,"price":7.49,"unit":"gab.","min":1.0,"max":10.0,"step":1.0,"defaultValue":1.0}],"is_adult":false,"inFavorites":false,"show_promo_label":true,"show_promo_price":true,"show_maxima_label":false,"inventory_type":1,"show_promo_surrogate":false,"giftsCampaignItems":null,"segment_id":null,"id":"000000000001106643","title":"Vārīts iebiezinātais piens MAGMUM 620g","category_id":"0069a237-d702-4d3e-a598-c9ea6db58287","category_name_full_path":"Piena produkti un olas/Piens/Kondensētais piens","category_path_url":"piena-produkti-un-olas/piens/kondensetais-piens","root_category_id":"4285f7d7-5d92-4eb2-a85c-4772fed50091","brand_name":"Magmum","brand_id":1833,"shopcode":"R600","price":7.49,"image":"https://cdn.barbora.lv/products/edf65c56-40e8-4e24-a750-02c1b2456329_s.png","big_image":"https://cdn.barbora.lv/products/edf65c56-40e8-4e24-a750-02c1b2456329_m.png","comparative_unit":"kg","comparative_unit_price":12.08,"comparative_unit_price_brutto":12.08,"promotion":null,"promotionGroup":null,"status":"active","creationDate":null,"GiftsCampaignItems":null,"own_inventory":false,"ShowInOffersTo":null,"Url":"varits-iebiezinats-piens-magmum-620-g","ExternalSuppliers":null,"is_made_in_Eu":false,"is_made_in_Home_Country":false,"is_available_for_donations":false},{"attributes":{"list":[]},"picking_actions":[],"units":[{"id":0,"price":1.09,"unit":"gab.","min":1.0,"max":8.0,"step":1.0,"defaultValue":1.0}],"is_adult":false,"inFavorites":false,"show_promo_label":true,"show_promo_price":true,"show_maxima_label":false,"inventory_type":1,"show_promo_surrogate":false,"giftsCampaignItems":null,"segment_id":null,"id":"000000000001318567","title":"Piens UHT bez laktozes WELL DONE 1,5% 1L","category_id":"dba4a762-f88e-418d-a434-896552b7e779","category_name_full_path":"Piena produkti un olas/Piens/UHT piens","category_path_url":"piena-produkti-un-olas/piens/uht-piens","root_category_id":"4285f7d7-5d92-4eb2-a85c-4772fed50091","brand_name":"Well Done","brand_id":3583,"shopcode":"R600","price":1.09,"image":"https://cdn.barbora.lv/products/08cf7057-ffe0-466d-a125-41b8552367f9_s.png","big_image":"https://cdn.barbora.lv/products/08cf7057-ffe0-466d-a125-41b8552367f9_m.png","comparative_unit":"l","comparative_unit_price":1.09,"comparative_unit_price_brutto":1.09,"promotion":null,"promotionGroup":null,"status":"active","creationDate":null,"GiftsCampaignItems":null,"own_inventory":false,"ShowInOffersTo":null,"Url":"piens-uht-bez-laktozes-well-done-1-5-proc-1-l","ExternalSuppliers":null,"is_made_in_Eu":false,"is_made_in_Home_Country":false,"is_available_for_donations":false},{"attributes":{"list":[]},"picking_actions":[],"units":[{"id":0,"price":7.49,"unit":"gab.","min":1.0,"max":10.0,"step":1.0,"defaultValue":1.0}],"is_adult":false,"inFavorites":false,"show_promo_label":true,"show_promo_price":true,"show_maxima_label":false,"inventory_type":1,"show_promo_surrogate":false,"giftsCampaignItems":null,"segment_id":null,"id":"000000000001106644","title":"Vārīts iebiezinātais piens MAGMUM karameļu  620g","category_id":"0069a237-d702-4d3e-a598-c9ea6db58287","category_name_full_path":"Piena produkti un olas/Piens/Kondensētais piens","category_path_url":"piena-produkti-un-olas/piens/kondensetais-piens","root_category_id":"4285f7d7-5d92-4eb2-a85c-4772fed50091","brand_name":"Magmum","brand_id":1833,"shopcode":"R600","price":7.49,"image":"https://cdn.barbora.lv/products/36fff02c-694d-4ad6-8d0a-7ecc6e332a70_s.png","big_image":"https://cdn.barbora.lv/products/36fff02c-694d-4ad6-8d0a-7ecc6e332a70_m.png","comparative_unit":"kg","comparative_unit_price":12.08,"comparative_unit_price_brutto":12.08,"promotion":null,"promotionGroup":null,"status":"active","creationDate":null,"GiftsCampaignItems":null,"own_inventory":false,"ShowInOffersTo":null,"Url":"varits-ieb-piens-magmum-kar-620-g","ExternalSuppliers":null,"is_made_in_Eu":false,"is_made_in_Home_Country":false,"is_available_for_donations":false},{"attributes":{"list":[],"additional":{"sugar_free":false,"e_free":true,"lactose_free":false,"gluten_free":true,"eco":false,"frozen":false,"is_for_vegetarians":false,"mince":false,"thin_slice":false,"disembowel":false,"hamilton_quality":false,"hammer_price":false,"good_offer":false,"lowest_price":false}},"picking_actions":[],"units":[{"id":0,"price":2.69,"unit":"gab.","min":1.0,"max":10.0,"step":1.0,"defaultValue":1.0}],"is_adult":false,"inFavorites":false,"show_promo_label":true,"show_promo_price":true,"show_maxima_label":false,"inventory_type":1,"show_promo_surrogate":false,"giftsCampaignItems":null,"segment_id":null,"id":"000000000000038619","title":"Iebiezināts piens ar cukuru EXPORT 397g","category_id":"0069a237-d702-4d3e-a598-c9ea6db58287","category_name_full_path":"Piena produkti un olas/Piens/Kondensētais piens","category_path_url":"piena-produkti-un-olas/piens/kondensetais-piens","root_category_id":"4285f7d7-5d92-4eb2-a85c-4772fed50091","brand_name":"Export","brand_id":1558,"shopcode":"R600","price":2.69,"image":"https://cdn.barbora.lv/products/1b8028de-b8e7-4fbf-8422-12cd4480122b_s.png","big_image":"https://cdn.barbora.lv/products/1b8028de-b8e7-4fbf-8422-12cd4480122b_m.png","comparative_unit":"kg","comparative_unit_price":6.78,"comparative_unit_price_brutto":6.78,"promotion":null,"promotionGroup":null,"status":"active","creationDate":null,"GiftsCampaignItems":null,"own_inventory":false,"ShowInOffersTo":null,"Url":"iebiezinats-piens-ar-cukuru-397-g","ExternalSuppliers":null,"is_made_in_Eu":false,"is_made_in_Home_Country":false,"is_available_for_donations":false},{"attributes":{"list":[]},"picking_actions":[],"units":[{"id":0,"price":1.99,"unit":"gab.","min":1.0,"max":10.0,"step":1.0,"defaultValue":1.0}],"is_adult":false,"inFavorites":false,"show_promo_label":true,"show_promo_price":true,"show_maxima_label":false,"inventory_type":1,"show_promo_surrogate":false,"giftsCampaignItems":null,"segment_id":null,"id":"000000000001331188","title":"Sterilizēts piens bez cukura EXPORT 7.5% 320g","category_id":"0069a237-d702-4d3e-a598-c9ea6db58287","category_name_full_path":"Piena produkti un olas/Piens/Kondensētais piens","category_path_url":"piena-produkti-un-olas/piens/kondensetais-piens","root_category_id":"4285f7d7-5d92-4eb2-a85c-4772fed50091","brand_name":"Export","brand_id":1558,"shopcode":"R600","price":1.99,"image":"https://cdn.barbora.lv/products/382198cd-4567-4bdd-86c3-0d9bf040e396_s.png","big_image":"https://cdn.barbora.lv/products/382198cd-4567-4bdd-86c3-0d9bf040e396_m.png","comparative_unit":"kg","comparative_unit_price":6.22,"comparative_unit_price_brutto":6.22,"promotion":null,"promotionGroup":null,"status":"active","creationDate":null,"GiftsCampaignItems":null,"own_inventory":false,"ShowInOffersTo":null,"Url":"steriliz-piens-bez-cuk-export-7-5-proc-320-g","ExternalSuppliers":null,"is_made_in_Eu":false,"is_made_in_Home_Country":false,"is_available_for_donations":false},{"attributes":{"list":[]},"picking_actions":[],"units":[{"id":0,"price":1.69,"retail_price":2.39,"unit":"gab.","min":1.0,"max":10.0,"step":1.0,"defaultValue":1.0}],"is_adult":false,"inFavorites":false,"extra":{"is_sellout":true,"discount":0.0,"buy_x_quantity_for_y_price_promo":null,"buy_x_or_more_promo":null,"maxi_pack_price_promo":null,"is_with_card":true,"extra_loyalty_points":null,"is_new":false,"is_top":false,"is_time":null,"is_today":false,"is_gift_available":false,"is_not_available_for_cnc":false,"is_not_available_for_pup":false},"show_promo_label":true,"show_promo_price":true,"show_maxima_label":false,"inventory_type":1,"show_promo_surrogate":false,"giftsCampaignItems":null,"segment_id":null,"id":"000000000001344438","title":"Saldināts kondensētais piens WELL DONE 385g","category_id":"0069a237-d702-4d3e-a598-c9ea6db58287","category_name_full_path":"Piena produkti un olas/Piens/Kondensētais piens","category_path_url":"piena-produkti-un-olas/piens/kondensetais-piens","root_category_id":"4285f7d7-5d92-4eb2-a85c-4772fed50091","brand_name":"Well Done","brand_id":3583,"shopcode":"R600","price":1.69,"retail_price":2.39,"image":"https://cdn.barbora.lv/products/a9375eae-3f8b-489e-b115-b1db7909ce4c_s.png","big_image":"https://cdn.barbora.lv/products/a9375eae-3f8b-489e-b115-b1db7909ce4c_m.png","comparative_unit":"kg","comparative_unit_price":4.39,"comparative_unit_price_brutto":6.21,"promotion":{"oldPrice":2.39,"oldComparativeRate":6.21,"percentage":29,"minQuantity":1,"orMore":false,"id":"3199129","type":"LOYALTY_PRICE","loyaltyCardRequired":true,"mixAndMatch":false,"promoVisibility":"VISIBLE"},"promotionGroup":null,"status":"active","creationDate":null,"GiftsCampaignItems":null,"own_inventory":false,"ShowInOffersTo":null,"Url":"sald-kondensetais-piens-well-done-385-g","ExternalSuppliers":null,"is_made_in_Eu":false,"is_made_in_Home_Country":false,"is_available_for_donations":false},{"attributes":{"list":[]},"picking_actions":[],"units":[{"id":0,"price":3.99,"unit":"gab.","min":1.0,"max":10.0,"step":1.0,"defaultValue":1.0}],"is_adult":false,"inFavorites":false,"show_promo_label":true,"show_promo_price":true,"show_maxima_label":false,"inventory_type":1,"show_promo_surrogate":false,"giftsCampaignItems":null,"segment_id":null,"id":"000000000001388735","title":"Iebiezināts piens ar cukuru PREMIUM 400g","category_id":"0069a237-d702-4d3e-a598-c9ea6db58287","category_name_full_path":"Piena produkti un olas/Piens/Kondensētais piens","category_path_url":"piena-produkti-un-olas/piens/kondensetais-piens","root_category_id":"4285f7d7-5d92-4eb2-a85c-4772fed50091","brand_name":"Premium","brand_id":1138,"shopcode":"R600","price":3.99,"image":"https://cdn.barbora.lv/products/fd5afa03-3538-4ed3-b393-0e3b8fdf4f17_s.png","big_image":"https://cdn.barbora.lv/products/fd5afa03-3538-4ed3-b393-0e3b8fdf4f17_m.png","comparative_unit":"kg","comparative_unit_price":9.98,"comparative_unit_price_brutto":9.98,"promotion":null,"promotionGroup":null,"status":"active","creationDate":null,"GiftsCampaignItems":null,"own_inventory":false,"ShowInOffersTo":null,"Url":"iebiezinats-piens-ar-cukuru-premium-400-g","ExternalSuppliers":null,"is_made_in_Eu":false,"is_made_in_Home_Country":false,"is_available_for_donations":false},{"attributes":{"list":[]},"picking_actions":[],"units":[{"id":0,"price":7.99,"unit":"gab.","min":1.0,"max":10.0,"step":1.0,"defaultValue":1.0}],"is_adult":false,"inFavorites":false,"show_promo_label":true,"show_promo_price":true,"show_maxima_label":false,"inventory_type":1,"show_promo_surrogate":false,"giftsCampaignItems":null,"segment_id":null,"id":"000000000001391309","title":"Karamelizēts kondensētais piens WELL DONE 1kg","category_id":"0069a237-d702-4d3e-a598-c9ea6db58287","category_name_full_path":"Piena produkti un olas/Piens/Kondensētais piens","category_path_url":"piena-produkti-un-olas/piens/kondensetais-piens","root_category_id":"4285f7d7-5d92-4eb2-a85c-4772fed50091","brand_name":"Well Done","brand_id":3583,"shopcode":"R600","price":7.99,"image":"https://cdn.barbora.lv/products/6b9c362e-bc57-4c8b-a3e1-f1e255ba444a_s.png","big_image":"https://cdn.barbora.lv/products/6b9c362e-bc57-4c8b-a3e1-f1e255ba444a_m.png","comparative_unit":"kg","comparative_unit_price":7.99,"comparative_unit_price_brutto":7.99,"promotion":null,"promotionGroup":null,"status":"active","creationDate":null,"GiftsCampaignItems":null,"own_inventory":false,"ShowInOffersTo":null,"Url":"karamel-kondensetais-piens-well-done-1-kg","ExternalSuppliers":null,"is_made_in_Eu":false,"is_made_in_Home_Country":false,"is_available_for_donations":false},{"attributes":{"list":[]},"picking_actions":[],"units":[{"id":0,"price":5.99,"unit":"gab.","min":1.0,"max":10.0,"step":1.0,"defaultValue":1.0}],"is_adult":false,"inFavorites":false,"show_promo_label":true,"show_promo_price":true,"show_maxima_label":false,"inventory_type":1,"show_promo_surrogate":false,"giftsCampaignItems":null,"segment_id":null,"id":"000000000001391361","title":"Saldināts kondensētais piens WELL DONE 1kg","category_id":"0069a237-d702-4d3e-a598-c9ea6db58287","category_name_full_path":"Piena produkti un olas/Piens/Kondensētais piens","category_path_url":"piena-produkti-un-olas/piens/kondensetais-piens","root_category_id":"4285f7d7-5d92-4eb2-a85c-4772fed50091","brand_name":"Well Done","brand_id":3583,"shopcode":"R600","price":5.99,"image":"https://cdn.barbora.lv/products/2cb82b84-8c68-4aaf-abd1-394abebcf402_s.png","big_image":"https://cdn.barbora.lv/products/2cb82b84-8c68-4aaf-abd1-394abebcf402_m.png","comparative_unit":"kg","comparative_unit_price":5.99,"comparative_unit_price_brutto":5.99,"promotion":null,"promotionGroup":null,"status":"active","creationDate":null,"GiftsCampaignItems":null,"own_inventory":false,"ShowInOffersTo":null,"Url":"sald-kondensetais-piens-well-done-1-kg","ExternalSuppliers":null,"is_made_in_Eu":false,"is_made_in_Home_Country":false,"is_available_for_donations":false},{"attributes":{"list":[],"additional":{"sugar_free":false,"e_free":true,"lactose_free":false,"gluten_free":true,"eco":false,"frozen":false,"is_for_vegetarians":false,"mince":false,"thin_slice":false,"disembowel":false,"hamilton_quality":false,"hammer_price":false,"good_offer":false,"lowest_price":false}},"picking_actions":[],"units":[{"id":0,"price":3.19,"unit":"gab.","min":1.0,"max":10.0,"step":1.0,"defaultValue":1.0}],"is_adult":false,"inFavorites":false,"show_promo_label":true,"show_promo_price":true,"show_maxima_label":false,"inventory_type":1,"show_promo_surrogate":false,"giftsCampaignItems":null,"segment_id":null,"id":"000000000000789736","title":"Karamelizēts iebiezinātais piens ar cukuru EXPORT 397g","category_id":"0069a237-d702-4d3e-a598-c9ea6db58287","category_name_full_path":"Piena produkti un olas/Piens/Kondensētais piens","category_path_url":"piena-produkti-un-olas/piens/kondensetais-piens","root_category_id":"4285f7d7-5d92-4eb2-a85c-4772fed50091","brand_name":"Export","brand_id":1558,"shopcode":"R600","price":3.19,"image":"https://cdn.barbora.lv/products/416c2613-2145-4f5a-89ec-345238bf30eb_s.png","big_image":"https://cdn.barbora.lv/products/416c2613-2145-4f5a-89ec-345238bf30eb_m.png","comparative_unit":"kg","comparative_unit_price":8.04,"comparative_unit_price_brutto":8.04,"promotion":null,"promotionGroup":null,"status":"active","creationDate":null,"GiftsCampaignItems":null,"own_inventory":false,"ShowInOffersTo":null,"Url":"karamelizets-iebiez-piens-ar-cukuru-397-g","ExternalSuppliers":null,"is_made_in_Eu":false,"is_made_in_Home_Country":false,"is_available_for_donations":false},{"attributes":{"list":[]},"picking_actions":[],"units":[{"id":0,"price":1.85,"unit":"gab.","min":1.0,"max":10.0,"step":1.0,"defaultValue":1.0}],"is_adult":false,"inFavorites":false,"show_promo_label":true,"show_promo_price":true,"show_maxima_label":false,"inventory_type":1,"show_promo_surrogate":false,"giftsCampaignItems":null,"segment_id":null,"id":"000000000001002419","title":"Iebiezinātais piens ar cukuru FARM MILK 385g","category_id":"0069a237-d702-4d3e-a598-c9ea6db58287","category_name_full_path":"Piena produkti un olas/Piens/Kondensētais piens","category_path_url":"piena-produkti-un-olas/piens/kondensetais-piens","root_category_id":"4285f7d7-5d92-4eb2-a85c-4772fed50091","brand_name":"Farm Milk","brand_id":5,"shopcode":"R600","price":1.85,"image":"https://cdn.barbora.lv/products/439bbae3-ba7f-47fb-ade7-c455913caea9_s.png","big_image":"https://cdn.barbora.lv/products/439bbae3-ba7f-47fb-ade7-c455913caea9_m.png","comparative_unit":"kg","comparative_unit_price":4.81,"comparative_unit_price_brutto":4.81,"promotion":null,"promotionGroup":null,"status":"active","creationDate":null,"GiftsCampaignItems":null,"own_inventory":false,"ShowInOffersTo":null,"Url":"iebiez-piens-ar-cukuru-farm-milk-385-g","ExternalSuppliers":null,"is_made_in_Eu":false,"is_made_in_Home_Country":false,"is_available_for_donations":false},{"attributes":{"list":[]},"picking_actions":[],"units":[{"id":0,"price":0.59,"retail_price":0.79,"unit":"gab.","min":1.0,"max":6.0,"step":1.0,"defaultValue":1.0}],"is_adult":false,"inFavorites":false,"extra":{"is_sellout":true,"discount":0.0,"buy_x_quantity_for_y_price_promo":null,"buy_x_or_more_promo":null,"maxi_pack_price_promo":null,"is_with_card":true,"extra_loyalty_points":null,"is_new":false,"is_top":false,"is_time":null,"is_today":false,"is_gift_available":false,"is_not_available_for_cnc":false,"is_not_available_for_pup":false},"show_promo_label":true,"show_promo_price":true,"show_maxima_label":false,"inventory_type":1,"show_promo_surrogate":false,"giftsCampaignItems":null,"segment_id":null,"id":"000000000001382539","title":"Piens RASĒNS zemeņu mazāk cukura 200ml","category_id":"2aa06dc3-7718-4338-b553-7fd554acb9d3","category_name_full_path":"Piena produkti un olas/Piens/Piena un probiotiskie dzērieni","category_path_url":"piena-produkti-un-olas/piens/piena-un-probiotiskie-dzerieni","root_category_id":"4285f7d7-5d92-4eb2-a85c-4772fed50091","brand_name":"Rasēns","brand_id":1170,"shopcode":"R600","price":0.59,"retail_price":0.79,"image":"https://cdn.barbora.lv/products/38c206d7-2fc9-489b-b9dd-9efbe4f61275_s.png","big_image":"https://cdn.barbora.lv/products/38c206d7-2fc9-489b-b9dd-9efbe4f61275_m.png","comparative_unit":"l","comparative_unit_price":2.95,"comparative_unit_price_brutto":3.95,"promotion":{"oldPrice":0.79,"oldComparativeRate":3.95,"percentage":25,"minQuantity":1,"orMore":false,"id":"3138737","type":"LOYALTY_PRICE","loyaltyCardRequired":true,"mixAndMatch":false,"promoVisibility":"VISIBLE"},"promotionGroup":null,"status":"active","creationDate":null,"GiftsCampaignItems":null,"own_inventory":false,"ShowInOffersTo":null,"Url":"piens-rasens-zemenu-mazak-cukura-200-ml","ExternalSuppliers":null,"is_made_in_Eu":false,"is_made_in_Home_Country":false,"is_available_for_donations":false},{"attributes":{"list":[]},"picking_actions":[],"units":[{"id":0,"price":3.19,"unit":"gab.","min":1.0,"max":10.0,"step":1.0,"defaultValue":1.0}],"is_adult":false,"inFavorites":false,"show_promo_label":true,"show_promo_price":true,"show_maxima_label":false,"inventory_type":1,"show_promo_surrogate":false,"giftsCampaignItems":null,"segment_id":null,"id":"000000000001334818","title":"Iebiezinātais piens ar cukuru un kafiju EXPORT 385g","category_id":"0069a237-d702-4d3e-a598-c9ea6db58287","category_name_full_path":"Piena produkti un olas/Piens/Kondensētais piens","category_path_url":"piena-produkti-un-olas/piens/kondensetais-piens","root_category_id":"4285f7d7-5d92-4eb2-a85c-4772fed50091","brand_name":"Export","brand_id":1558,"shopcode":"R600","price":3.19,"image":"https://cdn.barbora.lv/products/e33b3e91-5cc3-48e5-b393-716d56979ae0_s.png","big_image":"https://cdn.barbora.lv/products/e33b3e91-5cc3-48e5-b393-716d56979ae0_m.png","comparative_unit":"kg","comparative_unit_price":8.29,"comparative_unit_price_brutto":8.29,"promotion":null,"promotionGroup":null,"status":"active","creationDate":null,"GiftsCampaignItems":null,"own_inventory":false,"ShowInOffersTo":null,"Url":"ieb-piens-ar-cuk-un-kafiju-export-385-g","ExternalSuppliers":null,"is_made_in_Eu":false,"is_made_in_Home_Country":false,"is_available_for_donations":false},{"attributes":{"list":[]},"picking_actions":[],"units":[{"id":0,"price":3.19,"unit":"gab.","min":1.0,"max":10.0,"step":1.0,"defaultValue":1.0}],"is_adult":false,"inFavorites":false,"show_promo_label":true,"show_promo_price":true,"show_maxima_label":false,"inventory_type":1,"show_promo_surrogate":false,"giftsCampaignItems":null,"segment_id":null,"id":"000000000001347453","title":"Iebiezinātais piens ar cukuru un kakao EXPORT 385g","category_id":"0069a237-d702-4d3e-a598-c9ea6db58287","category_name_full_path":"Piena produkti un olas/Piens/Kondensētais piens","category_path_url":"piena-produkti-un-olas/piens/kondensetais-piens","root_category_id":"4285f7d7-5d92-4eb2-a85c-4772fed50091","brand_name":"Export","brand_id":1558,"shopcode":"R600","price":3.19,"image":"https://cdn.barbora.lv/products/8ec7f9a2-4f04-4dd8-96ea-71a3588da5bc_s.png","big_image":"https://cdn.barbora.lv/products/8ec7f9a2-4f04-4dd8-96ea-71a3588da5bc_m.png","comparative_unit":"kg","comparative_unit_price":8.29,"comparative_unit_price_brutto":8.29,"promotion":null,"promotionGroup":null,"status":"active","creationDate":null,"GiftsCampaignItems":null,"own_inventory":false,"ShowInOffersTo":null,"Url":"ieb-piens-ar-cuk-un-kakao-export-385-g","ExternalSuppliers":null,"is_made_in_Eu":false,"is_made_in_Home_Country":false,"is_available_for_donations":false},{"attributes":{"list":[]},"picking_actions":[],"units":[{"id":0,"price":3.49,"retail_price":4.79,"unit":"gab.","min":1.0,"max":10.0,"step":1.0,"defaultValue":1.0}],"is_adult":false,"inFavorites":false,"extra":{"is_sellout":true,"discount":0.0,"buy_x_quantity_for_y_price_promo":null,"buy_x_or_more_promo":null,"maxi_pack_price_promo":null,"is_with_card":false,"extra_loyalty_points":null,"is_new":false,"is_top":false,"is_time":null,"is_today":false,"is_gift_available":false,"is_not_available_for_cnc":false,"is_not_available_for_pup":false},"show_promo_label":true,"show_promo_price":true,"show_maxima_label":false,"inventory_type":1,"show_promo_surrogate":false,"giftsCampaignItems":null,"segment_id":null,"id":"000000000000030195","title":"Piens-losjons BUBCHEN 200ml","category_id":"5cc172d3-6256-4c7c-afe7-0bde194146d9","category_name_full_path":"Zīdaiņu un bērnu preces/Higiēnas preces bērniem/Ķermeņa kopšanas produkti","category_path_url":"zidainu-un-bernu-preces/higienas-preces-berniem/kermena-kopsanas-produkti","root_category_id":"850717a1-fa2c-4b5f-a8f7-bae8bf068f7e","brand_name":"Bübchen","brand_id":215,"shopcode":"R600","price":3.49,"retail_price":4.79,"image":"https://cdn.barbora.lv/products/1cc7e6fb-55de-4cbb-8356-9d59d3573439_s.png","big_image":"https://cdn.barbora.lv/products/1cc7e6fb-55de-4cbb-8356-9d59d3573439_m.png","comparative_unit":"l","comparative_unit_price":17.45,"comparative_unit_price_brutto":23.95,"promotion":{"oldPrice":4.79,"oldComparativeRate":23.95,"percentage":27,"minQuantity":1,"orMore":false,"id":"3204455","type":"DISCOUNT_PRICE","loyaltyCardRequired":false,"mixAndMatch":false,"promoVisibility":"VISIBLE"},"promotionGroup":null,"status":"active","creationDate":null,"GiftsCampaignItems":null,"own_inventory":false,"ShowInOffersTo":"2026-01-12T00:00:00Z","Url":"piens-losjons-bubchen-200-ml","ExternalSuppliers":null,"is_made_in_Eu":false,"is_made_in_Home_Country":false,"is_available_for_donations":false},{"attributes":{"list":[]},"picking_actions":[],"units":[{"id":0,"price":1.29,"unit":"gab.","min":1.0,"max":10.0,"step":1.0,"defaultValue":1.0}],"is_adult":false,"inFavorites":false,"extra":{"is_sellout":false,"discount":0.0,"buy_x_quantity_for_y_price_promo":null,"buy_x_or_more_promo":null,"maxi_pack_price_promo":null,"is_with_card":false,"extra_loyalty_points":null,"is_new":true,"is_top":false,"is_time":null,"is_today":false,"is_gift_available":false,"is_not_available_for_cnc":false,"is_not_available_for_pup":false},"show_promo_label":true,"show_promo_price":true,"show_maxima_label":false,"inventory_type":1,"show_promo_surrogate":false,"giftsCampaignItems":null,"segment_id":null,"id":"000000000000677434","title":"Piens kaķiem ATHENA 200ml","category_id":"c75805ed-63bc-418a-a5e9-6de47d5abd3d","category_name_full_path":"Viss tīrīšanai un mājdzīvniekiem/Mājdzīvnieku preces/Gardumi kaķiem","category_path_url":"viss-tirisanai-un-majdzivniekiem/majdzivnieku-preces/gardumi-kakiem","root_category_id":"a70ae192-1bd4-435f-a809-b54f530b4415","brand_name":"ATHENA","brand_id":1980,"shopcode":"R600","price":1.29,"image":"https://cdn.barbora.lv/products/d2e52242-c03e-47a3-8717-7ee9563e7104_s.png","big_image":"https://cdn.barbora.lv/products/d2e52242-c03e-47a3-8717-7ee9563e7104_m.png","comparative_unit":"l","comparative_unit_price":6.45,"comparative_unit_price_brutto":6.45,"promotion":null,"promotionGroup":null,"status":"active","creationDate":null,"GiftsCampaignItems":null,"own_inventory":false,"ShowInOffersTo":null,"Url":"piens-kakiem-athena-200-ml","ExternalSuppliers":null,"is_made_in_Eu":false,"is_made_in_Home_Country":false,"is_available_for_donations":false},{"attributes":{"list":[]},"picking_actions":[],"units":[{"id":0,"price":1.29,"retail_price":1.69,"unit":"gab.","min":1.0,"max":10.0,"step":1.0,"defaultValue":1.0}],"is_adult":false,"inFavorites":false,"extra":{"is_sellout":true,"discount":0.0,"buy_x_quantity_for_y_price_promo":null,"buy_x_or_more_promo":null,"maxi_pack_price_promo":null,"is_with_card":true,"extra_loyalty_points":null,"is_new":false,"is_top":false,"is_time":null,"is_today":false,"is_gift_available":false,"is_not_available_for_cnc":false,"is_not_available_for_pup":false},"show_promo_label":true,"show_promo_price":true,"show_maxima_label":false,"inventory_type":1,"show_promo_surrogate":false,"giftsCampaignItems":null,"segment_id":null,"id":"000000000000019003","title":"Kefīrs LIMBAŽU PIENS 2,5% 1kg","category_id":"4f93ccdf-77c9-408d-ad87-20391ae8fe63","category_name_full_path":"Piena produkti un olas/Kefīrs, paniņas un rūgušpiens/Kefīrs un kefīra dzērieni","category_path_url":"piena-produkti-un-olas/kefirs-paninas-un-ruguspiens/kefirs-un-kefira-dzerieni","root_category_id":"4285f7d7-5d92-4eb2-a85c-4772fed50091","brand_name":"Limbažu piens","brand_id":3,"shopcode":"R600","price":1.29,"retail_price":1.69,"image":"https://cdn.barbora.lv/products/e6f16c94-e201-4931-89c6-2c72de150a9d_s.png","big_image":"https://cdn.barbora.lv/products/e6f16c94-e201-4931-89c6-2c72de150a9d_m.png","comparative_unit":"kg","comparative_unit_price":1.29,"comparative_unit_price_brutto":1.69,"promotion":{"oldPrice":1.69,"oldComparativeRate":1.69,"percentage":24,"minQuantity":1,"orMore":false,"id":"3138716","type":"LOYALTY_PRICE","loyaltyCardRequired":true,"mixAndMatch":false,"promoVisibility":"VISIBLE"},"promotionGroup":null,"status":"active","creationDate":null,"GiftsCampaignItems":null,"own_inventory":false,"ShowInOffersTo":null,"Url":"kefirs-limbazu-2-5-proc-1-kg","ExternalSuppliers":null,"is_made_in_Eu":false,"is_made_in_Home_Country":false,"is_available_for_donations":false},{"attributes":{"list":[]},"picking_actions":[],"units":[{"id":0,"price":2.49,"unit":"gab.","min":1.0,"max":10.0,"step":1.0,"defaultValue":1.0}],"is_adult":false,"inFavorites":false,"show_promo_label":true,"show_promo_price":true,"show_maxima_label":false,"inventory_type":1,"show_promo_surrogate":false,"giftsCampaignItems":null,"segment_id":null,"id":"000000000000524186","title":"Kefīrs LIMBAŽU PIENS 2,5% 1,5kg","category_id":"4f93ccdf-77c9-408d-ad87-20391ae8fe63","category_name_full_path":"Piena produkti un olas/Kefīrs, paniņas un rūgušpiens/Kefīrs un kefīra dzērieni","category_path_url":"piena-produkti-un-olas/kefirs-paninas-un-ruguspiens/kefirs-un-kefira-dzerieni","root_category_id":"4285f7d7-5d92-4eb2-a85c-4772fed50091","brand_name":"Limbažu piens","brand_id":3,"shopcode":"R600","price":2.49,"image":"https://cdn.barbora.lv/products/28edec79-c2a4-4dca-abf3-c54fc2614ad7_s.png","big_image":"https://cdn.barbora.lv/products/28edec79-c2a4-4dca-abf3-c54fc2614ad7_m.png","comparative_unit":"kg","comparative_unit_price":1.66,"comparative_unit_price_brutto":1.66,"promotion":null,"promotionGroup":null,"status":"active","creationDate":null,"GiftsCampaignItems":null,"own_inventory":false,"ShowInOffersTo":null,"Url":"kefirs-limbazu-2-5-proc-1-5-kg","ExternalSuppliers":null,"is_made_in_Eu":false,"is_made_in_Home_Country":false,"is_available_for_donations":false},{"attributes":{"list":[]},"picking_actions":[],"units":[{"id":0,"price":2.69,"unit":"gab.","min":1.0,"max":4.0,"step":1.0,"defaultValue":1.0}],"is_adult":false,"inFavorites":false,"show_promo_label":true,"show_promo_price":true,"show_maxima_label":false,"inventory_type":1,"show_promo_surrogate":false,"giftsCampaignItems":null,"segment_id":null,"id":"000000000001192496","title":"Jogurts LIMBAŽU PIENS zemeņu 950g","category_id":"f5b46128-300d-458d-9be6-51815319e0e0","category_name_full_path":"Piena produkti un olas/Jogurti un deserti/Dzeramie jogurti","category_path_url":"piena-produkti-un-olas/jogurti-un-deserti/dzeramie-jogurti","root_category_id":"4285f7d7-5d92-4eb2-a85c-4772fed50091","brand_name":"Limbažu piens","brand_id":3,"shopcode":"R600","price":2.69,"image":"https://cdn.barbora.lv/products/f20ac33b-dcb5-4be1-9c62-c51a9aaff2ee_s.png","big_image":"https://cdn.barbora.lv/products/f20ac33b-dcb5-4be1-9c62-c51a9aaff2ee_m.png","comparative_unit":"kg","comparative_unit_price":2.83,"comparative_unit_price_brutto":2.83,"promotion":null,"promotionGroup":null,"status":"active","creationDate":null,"GiftsCampaignItems":null,"own_inventory":false,"ShowInOffersTo":null,"Url":"jogurts-limbazu-piens-zemenu-950-g","ExternalSuppliers":null,"is_made_in_Eu":false,"is_made_in_Home_Country":false,"is_available_for_donations":false},{"attributes":{"list":[]},"picking_actions":[],"units":[{"id":0,"price":2.69,"unit":"gab.","min":1.0,"max":4.0,"step":1.0,"defaultValue":1.0}],"is_adult":false,"inFavorites":false,"show_promo_label":true,"show_promo_price":true,"show_maxima_label":false,"inventory_type":1,"show_promo_surrogate":false,"giftsCampaignItems":null,"segment_id":null,"id":"000000000001192497","title":"Jogurts LIMBAŽU PIENS melleņu 950g","category_id":"f5b46128-300d-458d-9be6-51815319e0e0","category_name_full_path":"Piena produkti un olas/Jogurti un deserti/Dzeramie jogurti","category_path_url":"piena-produkti-un-olas/jogurti-un-deserti/dzeramie-jogurti","root_category_id":"4285f7d7-5d92-4eb2-a85c-4772fed50091","brand_name":"Limbažu piens","brand_id":3,"shopcode":"R600","price":2.69,"image":"https://cdn.barbora.lv/products/384d021c-7d25-436c-9d4f-5339da03dcf7_s.png","big_image":"https://cdn.barbora.lv/products/384d021c-7d25-436c-9d4f-5339da03dcf7_m.png","comparative_unit":"kg","comparative_unit_price":2.83,"comparative_unit_price_brutto":2.83,"promotion":null,"promotionGroup":null,"status":"active","creationDate":null,"GiftsCampaignItems":null,"own_inventory":false,"ShowInOffersTo":null,"Url":"jogurts-limbazu-piens-mellenu-950-g","ExternalSuppliers":null,"is_made_in_Eu":false,"is_made_in_Home_Country":false,"is_available_for_donations":false},{"attributes":{"list":[],"additional":{"sugar_free":false,"e_free":false,"lactose_free":true,"gluten_free":false,"eco":false,"frozen":false,"is_for_vegetarians":false,"mince":false,"thin_slice":false,"disembowel":false,"hamilton_quality":false,"hammer_price":false,"good_offer":false,"lowest_price":false}},"picking_actions":[],"units":[{"id":0,"price":1.19,"unit":"gab.","min":1.0,"max":8.0,"step":1.0,"defaultValue":1.0}],"is_adult":false,"inFavorites":false,"show_promo_label":true,"show_promo_price":true,"show_maxima_label":false,"inventory_type":1,"show_promo_surrogate":false,"giftsCampaignItems":null,"segment_id":null,"id":"000000000001362065","title":"Piens bez laktozes WELL DONE 2,5% 1L","category_id":"2b268041-aa59-4f40-b6f9-8f8037be62c0","category_name_full_path":"Piena produkti un olas/Bezlaktozes produkti","category_path_url":"piena-produkti-un-olas/bezlaktozes-produkti","root_category_id":"4285f7d7-5d92-4eb2-a85c-4772fed50091","brand_name":"Well Done","brand_id":3583,"shopcode":"R600","price":1.19,"image":"https://cdn.barbora.lv/products/a19a176b-6a0a-4182-ba3d-f71e8d12cf70_s.png","big_image":"https://cdn.barbora.lv/products/a19a176b-6a0a-4182-ba3d-f71e8d12cf70_m.png","comparative_unit":"l","comparative_unit_price":1.19,"comparative_unit_price_brutto":1.19,"promotion":null,"promotionGroup":null,"status":"active","creationDate":null,"GiftsCampaignItems":null,"own_inventory":false,"ShowInOffersTo":null,"Url":"piens-bez-laktozes-well-done-2-5-proc-1-l","ExternalSuppliers":null,"is_made_in_Eu":false,"is_made_in_Home_Country":false,"is_available_for_donations":false},{"attributes":{"list":[]},"picking_actions":[],"units":[{"id":0,"price":2.69,"unit":"gab.","min":1.0,"max":4.0,"step":1.0,"defaultValue":1.0}],"is_adult":false,"inFavorites":false,"show_promo_label":true,"show_promo_price":true,"show_maxima_label":false,"inventory_type":1,"show_promo_surrogate":false,"giftsCampaignItems":null,"segment_id":null,"id":"000000000001192498","title":"Jogurts LIMBAŽU PIENS mango-vaniļas 950g","category_id":"f5b46128-300d-458d-9be6-51815319e0e0","category_name_full_path":"Piena produkti un olas/Jogurti un deserti/Dzeramie jogurti","category_path_url":"piena-produkti-un-olas/jogurti-un-deserti/dzeramie-jogurti","root_category_id":"4285f7d7-5d92-4eb2-a85c-4772fed50091","brand_name":"Limbažu piens","brand_id":3,"shopcode":"R600","price":2.69,"image":"https://cdn.barbora.lv/products/50a7024c-5f6a-4d64-a6af-19c4aa6e42aa_s.png","big_image":"https://cdn.barbora.lv/products/50a7024c-5f6a-4d64-a6af-19c4aa6e42aa_m.png","comparative_unit":"kg","comparative_unit_price":2.83,"comparative_unit_price_brutto":2.83,"promotion":null,"promotionGroup":null,"status":"active","creationDate":null,"GiftsCampaignItems":null,"own_inventory":false,"ShowInOffersTo":null,"Url":"jogurts-limbazu-piens-mango-vanilu-950-g","ExternalSuppliers":null,"is_made_in_Eu":false,"is_made_in_Home_Country":false,"is_available_for_donations":false},{"attributes":{"list":[]},"picking_actions":[],"units":[{"id":0,"price":1.89,"unit":"gab.","min":1.0,"max":10.0,"step":1.0,"defaultValue":1.0}],"is_adult":false,"inFavorites":false,"show_promo_label":true,"show_promo_price":true,"show_maxima_label":false,"inventory_type":1,"show_promo_surrogate":false,"giftsCampaignItems":null,"segment_id":null,"id":"000000000001228562","title":"Krēms BELLE JARDIN kazas piens rokām 125ml","category_id":"16884c39-af98-451f-a407-b3bd7e03b9c5","category_name_full_path":"Kosmētika un higiēna/Roku un kāju kopšanas līdzekļi/Roku kopšanas līdzekļi","category_path_url":"kosmetika-un-higiena/roku-un-kaju-kopsanas-lidzekli/roku-kopsanas-lidzekli","root_category_id":"5ebed6d5-9f7d-4ddf-a5bf-ab5692ae5d54","brand_name":"Belle Jardin","brand_id":148,"shopcode":"R600","price":1.89,"image":"https://cdn.barbora.lv/products/47659432-cff4-4d00-93b3-111f9555f60a_s.png","big_image":"https://cdn.barbora.lv/products/47659432-cff4-4d00-93b3-111f9555f60a_m.png","comparative_unit":"l","comparative_unit_price":15.12,"comparative_unit_price_brutto":15.12,"promotion":null,"promotionGroup":null,"status":"active","creationDate":null,"GiftsCampaignItems":null,"own_inventory":false,"ShowInOffersTo":null,"Url":"krems-belle-jardin-kazas-piens-rok-125-ml","ExternalSuppliers":null,"is_made_in_Eu":false,"is_made_in_Home_Country":false,"is_available_for_donations":false},{"attributes":{"list":[],"additional":{"sugar_free":false,"e_free":false,"lactose_free":true,"gluten_free":false,"eco":false,"frozen":false,"is_for_vegetarians":false,"mince":false,"thin_slice":false,"disembowel":false,"hamilton_quality":false,"hammer_price":false,"good_offer":false,"lowest_price":false}},"picking_actions":[],"units":[{"id":0,"price":1.29,"unit":"gab.","min":1.0,"max":8.0,"step":1.0,"defaultValue":1.0}],"is_adult":false,"inFavorites":false,"show_promo_label":true,"show_promo_price":true,"show_maxima_label":false,"inventory_type":1,"show_promo_surrogate":false,"giftsCampaignItems":null,"segment_id":null,"id":"000000000001318568","title":"Piens UHT bez laktozes WELL DONE 3,2% 1L","category_id":"2b268041-aa59-4f40-b6f9-8f8037be62c0","category_name_full_path":"Piena produkti un olas/Bezlaktozes produkti","category_path_url":"piena-produkti-un-olas/bezlaktozes-produkti","root_category_id":"4285f7d7-5d92-4eb2-a85c-4772fed50091","brand_name":"Well Done","brand_id":3583,"shopcode":"R600","price":1.29,"image":"https://cdn.barbora.lv/products/a88b68e6-0cac-4626-9b05-9838e518e5d8_s.png","big_image":"https://cdn.barbora.lv/products/a88b68e6-0cac-4626-9b05-9838e518e5d8_m.png","comparative_unit":"l","comparative_unit_price":1.29,"comparative_unit_price_brutto":1.29,"promotion":null,"promotionGroup":null,"status":"active","creationDate":null,"GiftsCampaignItems":null,"own_inventory":false,"ShowInOffersTo":null,"Url":"piens-uht-bez-laktozes-well-done-3-2-proc-1-l","ExternalSuppliers":null,"is_made_in_Eu":false,"is_made_in_Home_Country":false,"is_available_for_donations":false},{"attributes":{"list":[]},"picking_actions":[],"units":[{"id":0,"price":2.19,"retail_price":3.69,"unit":"gab.","min":1.0,"max":10.0,"step":1.0,"defaultValue":1.0}],"is_adult":false,"inFavorites":false,"extra":{"is_sellout":true,"discount":0.0,"buy_x_quantity_for_y_price_promo":null,"buy_x_or_more_promo":null,"maxi_pack_price_promo":null,"is_with_card":true,"extra_loyalty_points":null,"is_new":false,"is_top":false,"is_time":null,"is_today":false,"is_gift_available":false,"is_not_available_for_cnc":false,"is_not_available_for_pup":false},"show_promo_label":true,"show_promo_price":true,"show_maxima_label":false,"inventory_type":1,"show_promo_surrogate":false,"giftsCampaignItems":null,"segment_id":null,"id":"000000000001097208","title":"Biezenis KABRITA kazas piens, meža ogas- ābols6+100g","category_id":"a0408083-fffb-4242-847f-0fa2884733c8","category_name_full_path":"Zīdaiņu un bērnu preces/Saldie biezenīši un deserti/Saldie biezenīši no 6 mēn. vecuma","category_path_url":"zidainu-un-bernu-preces/saldie-biezenisi-un-deserti/saldie-biezenisi-no-6-men.-vecuma","root_category_id":"850717a1-fa2c-4b5f-a8f7-bae8bf068f7e","brand_name":"Kabrita","brand_id":705,"shopcode":"R600","price":2.19,"retail_price":3.69,"image":"https://cdn.barbora.lv/products/734fef92-ccfa-48a6-9dbb-e4500de8a89e_s.png","big_image":"https://cdn.barbora.lv/products/734fef92-ccfa-48a6-9dbb-e4500de8a89e_m.png","comparative_unit":"kg","comparative_unit_price":21.9,"comparative_unit_price_brutto":36.9,"promotion":{"oldPrice":3.69,"oldComparativeRate":36.9,"percentage":41,"minQuantity":1,"orMore":false,"id":"3287608","type":"LOYALTY_PRICE","loyaltyCardRequired":true,"mixAndMatch":false,"promoVisibility":"VISIBLE"},"promotionGroup":null,"status":"active","creationDate":null,"GiftsCampaignItems":null,"own_inventory":false,"ShowInOffersTo":null,"Url":"biezen-kabrita-kaz-p-meza-ogas-ab-6-100-g","ExternalSuppliers":null,"is_made_in_Eu":false,"is_made_in_Home_Country":false,"is_available_for_donations":false},{"attributes":{"list":[]},"picking_actions":[],"units":[{"id":0,"price":2.19,"retail_price":3.69,"unit":"gab.","min":1.0,"max":10.0,"step":1.0,"defaultValue":1.0}],"is_adult":false,"inFavorites":false,"extra":{"is_sellout":true,"discount":0.0,"buy_x_quantity_for_y_price_promo":null,"buy_x_or_more_promo":null,"maxi_pack_price_promo":null,"is_with_card":true,"extra_loyalty_points":null,"is_new":false,"is_top":false,"is_time":null,"is_today":false,"is_gift_available":false,"is_not_available_for_cnc":false,"is_not_available_for_pup":false},"show_promo_label":true,"show_promo_price":true,"show_maxima_label":false,"inventory_type":1,"show_promo_surrogate":false,"giftsCampaignItems":null,"segment_id":null,"id":"000000000001097209","title":"Biezenis KABRITA kazas piens, banāns, cepums, ābols 8+100g","category_id":"6e66fb1e-0381-4463-b6b0-e5e5d67d136e","category_name_full_path":"Zīdaiņu un bērnu preces/Saldie biezenīši un deserti/Saldie biezenīši no 8 mēn. vecuma","category_path_url":"zidainu-un-bernu-preces/saldie-biezenisi-un-deserti/saldie-biezenisi-no-8-men.-vecuma","root_category_id":"850717a1-fa2c-4b5f-a8f7-bae8bf068f7e","brand_name":"Kabrita","brand_id":705,"shopcode":"R600","price":2.19,"retail_price":3.69,"image":"https://cdn.barbora.lv/products/788bf469-e2d1-4800-8f62-ae199991a462_s.png","big_image":"https://cdn.barbora.lv/products/788bf469-e2d1-4800-8f62-ae199991a462_m.png","comparative_unit":"kg","comparative_unit_price":21.9,"comparative_unit_price_brutto":36.9,"promotion":{"oldPrice":3.69,"oldComparativeRate":36.9,"percentage":41,"minQuantity":1,"orMore":false,"id":"3287489","type":"LOYALTY_PRICE","loyaltyCardRequired":true,"mixAndMatch":false,"promoVisibility":"VISIBLE"},"promotionGroup":null,"status":"active","creationDate":null,"GiftsCampaignItems":null,"own_inventory":false,"ShowInOffersTo":null,"Url":"biezen-kabrita-kaz-p-ban-cepum-ab-8-100-g","ExternalSuppliers":null,"is_made_in_Eu":false,"is_made_in_Home_Country":false,"is_available_for_donations":false},{"attributes":{"list":[]},"picking_actions":[],"units":[{"id":0,"price":1.69,"unit":"gab.","min":1.0,"max":6.0,"step":1.0,"defaultValue":1.0}],"is_adult":false,"inFavorites":false,"show_promo_label":true,"show_promo_price":true,"show_maxima_label":false,"inventory_type":1,"show_promo_surrogate":false,"giftsCampaignItems":null,"segment_id":null,"id":"000000000000773406","title":"Piena olbaltumvielu dzēriens PIENA SPĒKS 460g","category_id":"2aa06dc3-7718-4338-b553-7fd554acb9d3","category_name_full_path":"Piena produkti un olas/Piens/Piena un probiotiskie dzērieni","category_path_url":"piena-produkti-un-olas/piens/piena-un-probiotiskie-dzerieni","root_category_id":"4285f7d7-5d92-4eb2-a85c-4772fed50091","brand_name":"Piena Spēks","brand_id":1117,"shopcode":"R600","price":1.69,"image":"https://cdn.barbora.lv/products/f7fa360c-a4cb-490f-a38b-e29e369bd9c5_s.png","big_image":"https://cdn.barbora.lv/products/f7fa360c-a4cb-490f-a38b-e29e369bd9c5_m.png","comparative_unit":"kg","comparative_unit_price":3.67,"comparative_unit_price_brutto":3.67,"promotion":null,"promotionGroup":null,"status":"active","creationDate":null,"GiftsCampaignItems":null,"own_inventory":false,"ShowInOffersTo":null,"Url":"piena-sul-olbalt-dzer-piena-speks-460-g","ExternalSuppliers":null,"is_made_in_Eu":false,"is_made_in_Home_Country":false,"is_available_for_donations":false},{"attributes":{"list":[],"additional":{"sugar_free":false,"e_free":false,"lactose_free":true,"gluten_free":false,"eco":false,"frozen":false,"is_for_vegetarians":false,"mince":false,"thin_slice":false,"disembowel":false,"hamilton_quality":false,"hammer_price":false,"good_offer":false,"lowest_price":false}},"picking_actions":[],"units":[{"id":0,"price":1.69,"unit":"gab.","min":1.0,"max":6.0,"step":1.0,"defaultValue":1.0}],"is_adult":false,"inFavorites":false,"show_promo_label":true,"show_promo_price":true,"show_maxima_label":false,"inventory_type":1,"show_promo_surrogate":false,"giftsCampaignItems":null,"segment_id":null,"id":"000000000001316447","title":"Piena olbaltumvielu dzēriens PIENA SPĒKS D3 460g","category_id":"2aa06dc3-7718-4338-b553-7fd554acb9d3","category_name_full_path":"Piena produkti un olas/Piens/Piena un probiotiskie dzērieni","category_path_url":"piena-produkti-un-olas/piens/piena-un-probiotiskie-dzerieni","root_category_id":"4285f7d7-5d92-4eb2-a85c-4772fed50091","brand_name":"Piena Spēks","brand_id":1117,"shopcode":"R600","price":1.69,"image":"https://cdn.barbora.lv/products/d3bed8e9-d1fa-4aa0-9030-f8d258e56221_s.png","big_image":"https://cdn.barbora.lv/products/d3bed8e9-d1fa-4aa0-9030-f8d258e56221_m.png","comparative_unit":"l","comparative_unit_price":3.67,"comparative_unit_price_brutto":3.67,"promotion":null,"promotionGroup":null,"status":"active","creationDate":null,"GiftsCampaignItems":null,"own_inventory":false,"ShowInOffersTo":null,"Url":"sukalu-olbalt-konc-piena-speks-d-3-460-ml","ExternalSuppliers":null,"is_made_in_Eu":false,"is_made_in_Home_Country":false,"is_available_for_donations":false},{"attributes":{"list":[]},"picking_actions":[],"units":[{"id":0,"price":1.69,"unit":"gab.","min":1.0,"max":6.0,"step":1.0,"defaultValue":1.0}],"is_adult":false,"inFavorites":false,"show_promo_label":true,"show_promo_price":true,"show_maxima_label":false,"inventory_type":1,"show_promo_surrogate":false,"giftsCampaignItems":null,"segment_id":null,"id":"000000000000828887","title":"Piena olbaltumvielu dzēriens PIENA SPĒKS zemeņu 460g","category_id":"2aa06dc3-7718-4338-b553-7fd554acb9d3","category_name_full_path":"Piena produkti un olas/Piens/Piena un probiotiskie dzērieni","category_path_url":"piena-produkti-un-olas/piens/piena-un-probiotiskie-dzerieni","root_category_id":"4285f7d7-5d92-4eb2-a85c-4772fed50091","brand_name":"Piena Spēks","brand_id":1117,"shopcode":"R600","price":1.69,"image":"https://cdn.barbora.lv/products/cc591998-f95a-4f95-9b54-6b39be5ade9f_s.png","big_image":"https://cdn.barbora.lv/products/cc591998-f95a-4f95-9b54-6b39be5ade9f_m.png","comparative_unit":"kg","comparative_unit_price":3.67,"comparative_unit_price_brutto":3.67,"promotion":null,"promotionGroup":null,"status":"active","creationDate":null,"GiftsCampaignItems":null,"own_inventory":false,"ShowInOffersTo":null,"Url":"piena-sul-olb-dzer-piena-speks-zem-460-g","ExternalSuppliers":null,"is_made_in_Eu":false,"is_made_in_Home_Country":false,"is_available_for_donations":false},{"attributes":{"list":[]},"picking_actions":[],"units":[{"id":0,"price":1.69,"unit":"gab.","min":1.0,"max":6.0,"step":1.0,"defaultValue":1.0}],"is_adult":false,"inFavorites":false,"show_promo_label":true,"show_promo_price":true,"show_maxima_label":false,"inventory_type":1,"show_promo_surrogate":false,"giftsCampaignItems":null,"segment_id":null,"id":"000000000000909513","title":"Piena olbaltumvielu dzēriens PIENA SPĒKS šokolādes 460g","category_id":"2aa06dc3-7718-4338-b553-7fd554acb9d3","category_name_full_path":"Piena produkti un olas/Piens/Piena un probiotiskie dzērieni","category_path_url":"piena-produkti-un-olas/piens/piena-un-probiotiskie-dzerieni","root_category_id":"4285f7d7-5d92-4eb2-a85c-4772fed50091","brand_name":"Piena Spēks","brand_id":1117,"shopcode":"R600","price":1.69,"image":"https://cdn.barbora.lv/products/509dac62-64de-447e-b995-d1b8dd100c81_s.png","big_image":"https://cdn.barbora.lv/products/509dac62-64de-447e-b995-d1b8dd100c81_m.png","comparative_unit":"kg","comparative_unit_price":3.67,"comparative_unit_price_brutto":3.67,"promotion":null,"promotionGroup":null,"status":"active","creationDate":null,"GiftsCampaignItems":null,"own_inventory":false,"ShowInOffersTo":null,"Url":"piena-sul-olb-dzer-piena-speks-sok-460-g","ExternalSuppliers":null,"is_made_in_Eu":false,"is_made_in_Home_Country":false,"is_available_for_donations":false},{"attributes":{"list":[]},"picking_actions":[],"units":[{"id":0,"price":2.59,"unit":"gab.","min":1.0,"max":20.0,"step":1.0,"defaultValue":1.0}],"is_adult":false,"inFavorites":false,"show_promo_label":true,"show_promo_price":true,"show_maxima_label":false,"inventory_type":1,"show_promo_surrogate":false,"giftsCampaignItems":null,"segment_id":null,"id":"000000000001379872","title":"Piena šokolāde MILKA Alpu piena 90g","category_id":"77df0c27-9eaa-4f1b-9e2c-39c91d4a78df","category_name_full_path":"Bakaleja/Saldumi/Piena šokolāde","category_path_url":"bakaleja/saldumi/piena-sokolade","root_category_id":"acb55842-a24c-44d1-b948-082e2cdb596b","brand_name":"Milka","brand_id":948,"shopcode":"R600","price":2.59,"image":"https://cdn.barbora.lv/products/27aa33e6-0440-487d-a722-004a92b417e1_s.png","big_image":"https://cdn.barbora.lv/products/27aa33e6-0440-487d-a722-004a92b417e1_m.png","comparative_unit":"kg","comparative_unit_price":28.78,"comparative_unit_price_brutto":28.78,"promotion":null,"promotionGroup":null,"status":"active","creationDate":null,"GiftsCampaignItems":null,"own_inventory":false,"ShowInOffersTo":null,"Url":"piena-sokolade-alpine-milk-milka-90-g-79872","ExternalSuppliers":null,"is_made_in_Eu":false,"is_made_in_Home_Country":false,"is_available_for_donations":false}]; 
+    </script>
+    <div id="search-results-placeholder"></div>
+    <div class="b-search-page--navigation b-pagination-wrapper" hidden>
+        
+
+
+
+
+    <ul class="pagination">
+
+            <li><a href="/meklet?q=piens">&laquo;</a></li>
+                <li class=active>
+                    <a href="/meklet?q=piens">1</a>
+                </li>
+                <li >
+                    <a href="/meklet?q=piens&amp;page=2">2</a>
+                </li>
+                <li >
+                    <a href="/meklet?q=piens&amp;page=3">3</a>
+                </li>
+                <li >
+                    <a href="/meklet?q=piens&amp;page=4">4</a>
+                </li>
+                <li >
+                    <a href="/meklet?q=piens&amp;page=5">5</a>
+                </li>
+                <li><a href="/meklet?q=piens&amp;page=6">...</a></li>
+            <li><a href="/meklet?q=piens&amp;page=2">&raquo;</a></li>
+
+    </ul>
+
+
+
+
+    </div>
+
+        <div class="content-block white-bg" style="visibility: hidden">
+            <div class="b-search--suggestions--products-wrap">
+                            </div>
+        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class='tw-pt-8' id="b-footer--placeholder"></div>
+        </div>
+    </div>
+
+    <div class="mobile-side-menu-placeholder"></div>
+
+    <div class="next-reservation-modal-placeholder"></div>
+
+    <div id="modal-placeholder"></div>
+<div id="snackbar-placeholder"></div>
+<div id="sub-modal-placeholder"></div>
+
+
+
+
+
+
+
+
+    <script type="text/javascript">
+        //Check if user uses IE browser
+        var isIE = /MSIE|Trident/.test(window.navigator.userAgent);
+        if (isIE) {
+            document.querySelector(".b-ie-warning").style.display = "block";
+        }
+    </script>
+
+    
+<script type="text/javascript">
+
+    // These functions are used to determine if an error is likely caused by an ad blocker. It works by checking the breadcrumbs of the error. if there is a related network error with a URL that is likely blocked by an ad blocker, it will return true. Adblockers usually block requests to URLs that contain certain keywords like "ads", "tracking", "analytics", etc. adBlockKeywords is a list of common keywords that ad blockers block,- it should be updated as needed if this script will be helpful.
+    function isProbablyBlockedByAdblockNetworkError(error) {
+        const now = Date.now();
+
+        if (!error.breadcrumbs) {
+            return false;
+        }
+
+        for (let i = error.breadcrumbs.length - 1; i >= 0; i--) {
+            const breadcrumb = error.breadcrumbs[i];
+            if (!breadcrumb) continue;
+
+            if (breadcrumb.timestamp && now - breadcrumb.timestamp * 1000 > 5000) {
+                break;
+            }
+
+            if (isProbablyBlockedByAdblockBreadcrumb(breadcrumb)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    function isProbablyBlockedByAdblockBreadcrumb(breadcrumb) {
+        if (
+            breadcrumb.level !== 'error' ||
+            (breadcrumb.category !== 'xhr' && breadcrumb.category !== 'fetch')
+        ) {
+            return false;
+        }
+
+        const url = breadcrumb.data?.url;
+        if (!url) return false;
+
+        return isProbablyBlockedByAdblockUrl(url);
+    }
+
+    function isProbablyBlockedByAdblockUrl(url) {
+        // List of common URL patterns or keywords that ad blockers typically block
+        const adBlockKeywords = [
+            'ads',
+            'adservice',
+            'doubleclick',
+            'tracking',
+            'analytics',
+            'pixel',
+            'track',
+            'tagmanager',
+            'marketing',
+            'metrics',
+            'facebook',
+            'googletagmanager',
+            'banners',
+            'partner',
+            'advertisement',
+            'omnisend',
+            'promo'
+        ];
+
+        for (let keyword of adBlockKeywords) {
+            if (url.includes(keyword)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    function initSentry() {
+        var isDebug = "True".toLowerCase() === "true";
+
+        Sentry.init({
+            dsn: "https://3d9a795ddbdb4c718ada1f46f2f80699@sentry.barbora.lt/83",
+            release: "v1.42.5",
+            environment: "production-lv",
+            logger: "EShop.Client-JavaScript",
+            integrations: [
+                new Sentry.Integrations.CaptureConsole({
+                    levels: ['log', 'error'],
+                })
+            ],
+            ignoreUrls: [],
+            captureUnhandledRejections: false, //ignore UnhandledRejection errors
+            debug: isDebug,
+            ignoreErrors: [
+                'ResizeObserver loop completed with undelivered notifications.',
+                'ResizeObserver loop limit exceeded',
+                'Request failed with status 400 Bad Request for put cart/item?returnCartInfo=true',
+                'Request failed with status 400 Bad Request for post cart/item?returnCartInfo=true',
+                'Request failed with status 400 Bad Request for POST cart/ReserveDeliveryTimeSlot',
+                'Request failed with status 400 Bad Request for put cart/changeDeliveryAddress',
+                'Request failed with status 400 Bad Request for post user/address',
+                'Request failed with status 400 Bad Request for POST cart/submit',
+                'Error: Request failed with status 400 for POST cart(/submit)',
+                'fetchJson network error:',
+                'Request failed with status 400 Bad Request for POST userAuth/login',
+                "Cannot read properties of null (reading 'getItem')",
+                "Request failed with status 400 for POST cart/submit",
+                "Request failed with status 400 Bad Request for POST UserAuth/SocialLogin",
+                "Request failed with status 400 for POST userAuth/login",
+                "Loading chunk",
+                "Request failed with status 400  for POST userAuth/login"
+            ],
+            beforeSend(event) {
+                const agent = window.navigator.userAgent.toLowerCase();
+
+                // Broader check for AdsBot-Google and other Google crawlers
+                if (
+                    agent.includes('adsbot-google') ||
+                    agent.includes('google-read-aloud') ||
+                    agent.includes('googlebot')
+                ) {
+                    return null; // Block event from being sent to Sentry
+                }
+
+                // Check if the responseText contains "time_reservation_needed"
+                if (event.request && event.request.data) {
+                    const requestData = event.request.data;
+
+                    if (typeof requestData === 'string' && requestData.includes('time_reservation_needed')) {
+                        return null;
+                    }
+
+
+                    if (typeof requestData === 'object') {
+                        const responseString = JSON.stringify(requestData);
+                        if (responseString.includes('time_reservation_needed')) {
+                            return null;
+                        }
+                    }
+                }
+
+
+                if (isProbablyBlockedByAdblockNetworkError(event)) return null;
+
+                    // Return null to drop the console event as an Issue 
+                    // (but you'll still have it as a breadcrumb in the session timeline)
+                if (event.logger === 'console') return null;
+
+                return event;
+            }
+        });
+
+    }
+
+    let sentryCaptureConsoleLoadedFlag = false;
+    let sentryBundleLoadedFlag = false;
+
+    function sentryCaptureConsoleLoaded() {
+        sentryCaptureConsoleLoadedFlag = true;
+        initIfBothSentryScriptsReady();
+    }
+
+    function sentryBundleLoaded() {
+        sentryBundleLoadedFlag = true;
+        initIfBothSentryScriptsReady();
+    }
+
+    function initIfBothSentryScriptsReady() {
+        if (sentryCaptureConsoleLoadedFlag && sentryBundleLoadedFlag) {
+            initSentry();
+        }
+    }
+</script>
+<script src="https://browser.sentry-cdn.com/7.16.0/captureconsole.debug.min.js"
+    integrity="sha384-cI0DJfoJYwAWdWGIkWeCZV6ZwhPSN677wmPh2Ntr1JC75rn2aEZCL6xjPp36EE5c" crossorigin="anonymous"
+    onload="sentryCaptureConsoleLoaded()"></script>
+<script src="https://browser.sentry-cdn.com/7.16.0/bundle.min.js"
+    integrity="sha384-70hBom53vQV6XVoqnEzSlfP8AYzEm6CSuti85YyRLtmm/jbx0GryCQ1z5StcQwsz" crossorigin="anonymous"
+    onload="sentryBundleLoaded()"></script>
+
+
+    
+
+
+
+
+<script type="text/javascript">
+    window.b_cart = null;
+</script>
+
+    
+    
+
+        <script type="text/javascript">
+            window.b_filters = [{"id":"country","title":"Izcelsmes valsts","type":null,"values":[{"id":"AM","value":"Armēnija"},{"id":"US","value":"ASV"},{"id":"AU","value":"Austrālija"},{"id":"AT","value":"Austrija"},{"id":"BR","value":"Brazīlija"},{"id":"BG","value":"Bulgārija"},{"id":"CL","value":"Čīle"},{"id":"FR","value":"Francija"},{"id":"EE","value":"Igaunija"},{"id":"IE","value":"Īrija"},{"id":"IT","value":"Itālija"},{"id":"CN","value":"Ķīna"},{"id":"LV","value":"Latvija"},{"id":"LT","value":"Lietuva"},{"id":"NL","value":"Nīderlande"},{"id":"NO","value":"Norvēģija"},{"id":"PL","value":"Polija"},{"id":"PT","value":"Portugāle"},{"id":"RS","value":"Serbija"},{"id":"FI","value":"Somija"},{"id":"ES","value":"Spānija"},{"id":"CH","value":"Šveice"},{"id":"UA","value":"Ukraina"},{"id":"HU","value":"Ungārija"},{"id":"DE","value":"Vācija"},{"id":"Z3","value":"Valsts – nav ziņu"},{"id":"SE","value":"Zviedrija"}]},{"id":"brand","title":"Zīmols","type":null,"values":[{"id":"30","value":"Aha"},{"id":"49","value":"Alma"},{"id":"4616","value":"Amalattea"},{"id":"66","value":"Annele"},{"id":"72","value":"Aptamil"},{"id":"1980","value":"ATHENA"},{"id":"3489","value":"Aurora"},{"id":"1939","value":"Axa"},{"id":"1820","value":"Bahlsen"},{"id":"114","value":"Baltais"},{"id":"129","value":"Barni"},{"id":"148","value":"Belle Jardin"},{"id":"168","value":"Biovela"},{"id":"175","value":"Blockbuster"},{"id":"4295","value":"Blums Power"},{"id":"206","value":"Bref"},{"id":"215","value":"Bübchen"},{"id":"3040","value":"CANARI"},{"id":"2766","value":"CANPOL"},{"id":"2331","value":"CASA CHARLIZE"},{"id":"2610","value":"CĒSU"},{"id":"257","value":"Chavroux"},{"id":"302","value":"Corny"},{"id":"3257","value":"Dance Cake"},{"id":"2439","value":"DE KUYPER"},{"id":"2197","value":"Divus"},{"id":"1628","value":"Dobele"},{"id":"379","value":"Domestos"},{"id":"388","value":"Dr. Oetker"},{"id":"411","value":"Dzintars"},{"id":"1847","value":"El Pastor"},{"id":"3498","value":"ELEMENTS SENSE"},{"id":"444","value":"Euroser"},{"id":"1558","value":"Export"},{"id":"5","value":"Farm Milk"},{"id":"468","value":"Fazer"},{"id":"473","value":"Ferrero Rocher"},{"id":"4165","value":"FOLK&FLORA"},{"id":"2751","value":"FREIXENET"},{"id":"513","value":"Friso"},{"id":"1878","value":"Garnier"},{"id":"545","value":"Geisha"},{"id":"559","value":"GN Ādaži"},{"id":"620","value":"Heinz"},{"id":"1944","value":"Henske"},{"id":"629","value":"Herkuless"},{"id":"4352","value":"Holle"},{"id":"646","value":"Humana"},{"id":"2667","value":"JACOBS CREEK"},{"id":"3007","value":"Joyco"},{"id":"705","value":"Kabrita"},{"id":"711","value":"Kalev"},{"id":"720","value":"Karl Fazer"},{"id":"733","value":"Kinder"},{"id":"1593","value":"Kit Kat"},{"id":"2335","value":"KOSKENKORVA"},{"id":"767","value":"Kupiec"},{"id":"815","value":"Lāči"},{"id":"792","value":"Laima"},{"id":"794","value":"Lakto"},{"id":"2202","value":"LATSWEETS"},{"id":"1762","value":"Lazdona"},{"id":"3","value":"Limbažu piens"},{"id":"839","value":"Lindt"},{"id":"860","value":"Loyd"},{"id":"857","value":"L'OREAL"},{"id":"1833","value":"Magmum"},{"id":"2791","value":"MAMUKO"},{"id":"2966","value":"MANCHEGO"},{"id":"3037","value":"Marabou"},{"id":"907","value":"Mario"},{"id":"3899","value":"Mattel"},{"id":"938","value":"Merci"},{"id":"948","value":"Milka"},{"id":"951","value":"Milupa"},{"id":"3911","value":"Minions"},{"id":"3562","value":"Mio&Rio"},{"id":"4316","value":"Mixa"},{"id":"2375","value":"MOMMESSIN"},{"id":"3682","value":"MOSSA"},{"id":"986","value":"Müller"},{"id":"994","value":"NAN"},{"id":"1017","value":"Nestle"},{"id":"1895","value":"Neutrogena"},{"id":"1025","value":"Nivea"},{"id":"1069","value":"Oreo"},{"id":"4042","value":"Organic shop"},{"id":"1107","value":"Pergale"},{"id":"2997","value":"PĒTERGAILIS"},{"id":"2159","value":"Philips Avent"},{"id":"1117","value":"Piena Spēks"},{"id":"3741","value":"PIER33"},{"id":"1968","value":"PLAY-DOH"},{"id":"1132","value":"Pols"},{"id":"1138","value":"Premium"},{"id":"1151","value":"Pure Chocolate"},{"id":"3953","value":"Quick milk"},{"id":"1171","value":"Rāmkalni"},{"id":"1167","value":"Rankas piens"},{"id":"1170","value":"Rasēns"},{"id":"4633","value":"REESE'S"},{"id":"1197","value":"Ritter Sport"},{"id":"2081","value":"ROQUEFORT"},{"id":"1213","value":"Roshen"},{"id":"1226","value":"Rūdolfs"},{"id":"1227","value":"Rūjiena"},{"id":"1252","value":"Santa Maria"},{"id":"1670","value":"Schär"},{"id":"1262","value":"Schogetten"},{"id":"1270","value":"Selga"},{"id":"3161","value":"Seven Lemon"},{"id":"1770","value":"Skrīveru"},{"id":"1683","value":"Smiltene"},{"id":"4253","value":"Staburadze"},{"id":"1362","value":"Talsu Piensaimnieks"},{"id":"3647","value":"TEISSEIRE"},{"id":"1376","value":"Tere"},{"id":"1396","value":"Toblerone"},{"id":"2811","value":"TOTINO"},{"id":"1418","value":"Tukuma Piens"},{"id":"1421","value":"Turek"},{"id":"1580","value":"TUTTELI"},{"id":"4367","value":"Vega Sotuelamos"},{"id":"3583","value":"Well Done"},{"id":"3157","value":"Westrom"},{"id":"2797","value":"Zelenaya apteka"},{"id":"1511","value":"Zemnieku"},{"id":"1521","value":"Zott"}]}];
+        </script>
+
+        <script type="text/javascript"
+            src="/build/main.concat.js?v=1.42.5"></script>
+
+    
+            <script type="text/javascript">
+                window.reportUserActionToThirdParty("Search");
+            </script>
+        
+    
+    
+    
+    
+    
+
+    
+
+
+<script data-cookieconsent="marketing" type="text/plain">
+    const omnisendAccountID = "5fce32338a48f7337bc171ec";
+    if (omnisendAccountID !== "") {
+        window.omnisend = window.omnisend || [];
+        omnisend.push(["brandID", "5fce32338a48f7337bc171ec"]);
+        omnisend.push(["track", "$pageViewed"]);
+
+        var e = document.createElement("script");
+        e.type = "text/javascript";
+        e.async = true;
+        e.src = "https://omnisnippet1.com/inshop/launcher-v2.js";
+        e.onload = function () {
+            if (window.omnisend && window.omnisend.identifyContact && window.b_user_info && window.b_user_info.loginName && window.b_user_info.isEmailVerified && (window.b_user_info.subscribedToNewsletterEmail || window.b_user_info.subscribedToNewsletterSms)) {
+                window.omnisend.identifyContact({
+                    email: window.b_user_info.loginName,
+                });
+            }
+        };
+        document.getElementsByTagName("script")[0].parentNode.insertBefore(e, document.getElementsByTagName("script")[0]);
+    }
+
+</script>
+
+    
+
+    <script defer src="https://cnstrc.com/js/cust/barbora_oXptfJ.js"></script>
+    <script>
+        window.cnstrc = window.cnstrc || {};
+        window.cnstrc.indexKey = 'key_Ud2GfuuTdK6bx4xS';
+    </script>
+
+</body>
+
+</html>

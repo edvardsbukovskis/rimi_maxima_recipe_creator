@@ -1,65 +1,74 @@
-import Image from "next/image";
+'use client';
+
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { Recipe } from '@/types';
+import { ChefHat, ShoppingBasket, ArrowRight } from 'lucide-react';
 
 export default function Home() {
+  const [recipes, setRecipes] = useState<Recipe[]>([]);
+
+  useEffect(() => {
+    fetch('/api/recipes')
+      .then(res => res.json())
+      .then(data => setRecipes(data));
+  }, []);
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <main className="min-h-screen p-8 md:p-24 bg-gradient-to-br from-background via-background to-secondary/20">
+      <div className="max-w-7xl mx-auto space-y-12">
+        {/* Hero Section */}
+        <section className="text-center space-y-6 pt-12">
+          <div className="inline-flex items-center justify-center p-3 bg-primary/10 rounded-full mb-6 ring-1 ring-primary/20">
+            <ChefHat className="w-8 h-8 text-primary mr-2" />
+            <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-white/70">
+              Recepšu Izmaksu Kalkulators
+            </h1>
+          </div>
+          <h2 className="text-5xl md:text-7xl font-extrabold tracking-tight">
+            Gatavo Gudrāk,<br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-emerald-400">
+              Pērc Lētāk.
+            </span>
+          </h2>
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            Salīdzini sastāvdaļu cenas starp Rimi un Maxima (Barbora) reāllaikā.
+            Izvēlies recepti un ietaupi naudu uzreiz.
           </p>
+        </section>
+
+        {/* Recipe Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pt-12">
+          {recipes.map((recipe) => (
+            <Link key={recipe.id} href={`/recipes/${recipe.id}`} className="group">
+              <div className="glass rounded-3xl overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:ring-2 hover:ring-primary/50 relative">
+                <div className="aspect-[4/3] relative overflow-hidden">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={recipe.image}
+                    alt={recipe.title}
+                    className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-60" />
+                  <div className="absolute bottom-4 left-4 right-4">
+                    <h3 className="text-2xl font-bold text-white mb-1">{recipe.title}</h3>
+                    <p className="text-white/80 text-sm flex items-center">
+                      <span className="bg-white/20 px-2 py-1 rounded backdrop-blur-sm mr-2">{recipe.prepTime}</span>
+                      <span className="bg-white/20 px-2 py-1 rounded backdrop-blur-sm">{recipe.ingredients.length} sastāvdaļas</span>
+                    </p>
+                  </div>
+                </div>
+                <div className="p-6 space-y-4">
+                  <p className="text-muted-foreground line-clamp-2">{recipe.description}</p>
+                  <div className="flex items-center text-primary font-medium group-hover:translate-x-1 transition-transform">
+                    Salīdzināt Cenas <ArrowRight className="w-4 h-4 ml-2" />
+                  </div>
+                </div>
+              </div>
+            </Link>
+          ))}
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+      </div>
+    </main>
   );
 }
