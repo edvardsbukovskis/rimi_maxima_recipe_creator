@@ -19,46 +19,89 @@ type Category = 'meat' | 'dairy' | 'bread' | 'veg' | 'spice' | 'sauce' | 'egg' |
 
 const categorizeIngredient = (query: string): { type: Category; mustNot?: string[] } => {
     const q = query.toLowerCase();
-    if (q.includes('gaļa') || q.includes('malt') || q.includes('bekon') || q.includes('vaigu') || q.includes('šķiņķ')) {
+
+    // MEAT & POULTRY
+    if (q.includes('gaļa') || q.includes('malt') || q.includes('liellop') || q.includes('cūk') || q.includes('vist')) {
         return {
             type: 'meat',
             mustNot: [
                 'maiz', 'bulciņ', 'pica', 'mērc', 'laš', 'ziv', 'tunc', 'uzkod', 'čipsi',
                 'garšviela', 'maisījums', 'piedeva', 'buljons', 'nūdel', 'cepum',
                 'kečup', 'heinz', 'spilva', 'pophouse', 'longchips', 'flint', 'tuc', 'pringles', 'estrella', 'lāči',
-                'kartupel', 'plāksn'
+                'kartupel', 'plāksn', 'konserv', 'gulaša', 'zupa', 'pastēte', 'desa', 'cīsiņ', 'šprotes', 'nūdel'
             ]
         };
     }
-    if (q.includes('siers') || q.includes('piens') || q.includes('krējums') || q.includes('parmez') || q.includes('parmesan')) {
+
+    // BACON & SMOKED MEATS
+    if (q.includes('bekon') || q.includes('vaigu') || q.includes('šķiņķ') || q.includes('kupin')) {
+        return {
+            type: 'meat',
+            mustNot: ['mērc', 'sauce', 'čips', 'uzkod', 'garšviela', 'zupa', 'nūdel', 'maiz', 'bulciņ', 'pica', 'lāči', 'nūdel', 'konserv']
+        };
+    }
+
+    // DAIRY - MILK, CREAM, CHEESE
+    if (q.includes('siers') || q.includes('piens') || q.includes('krējums') || q.includes('parmez') || q.includes('parmesan') || q.includes('sviests')) {
         return {
             type: 'dairy',
             mustNot: [
                 'mērce', 'sauce', 'uzkod', 'čipsi', 'dzērien', 'pica', 'cepum',
-                'desa', 'riekst', 'desiņ', 'cigar', 'jersika', 'roka', 'nūdel'
+                'desa', 'riekst', 'desiņ', 'cigar', 'jersika', 'roka', 'nūdel', 'kausēt', 'smērējam',
+                'garšviela', 'piedeva', 'maiz', 'bulciņ', 'nūdel'
             ]
         };
     }
-    if (q.includes('maiz') || q.includes('bulciņ') || q.includes('don') || q.includes('hamburger') || q.includes('tobis'))
-        return { type: 'bread', mustNot: ['mērc', 'majonēz', 'gaļa', 'kotlet', 'des', 'sier', 'konfekt', 'želej', 'uzkod', 'čips', 'kausēt'] };
-    if (q.includes('sāls') || q.includes('pipar') || q.includes('eļļa') || q.includes('cukurs')) {
-        const mustNot = ['gaļa', 'maiz', 'pica'];
+
+    // BREADS & BUNS
+    if (q.includes('maiz') || q.includes('bulciņ') || q.includes('don') || q.includes('hamburger') || q.includes('tobis') || q.includes('loksnes')) {
+        return {
+            type: 'bread',
+            mustNot: ['mērc', 'majonēz', 'gaļa', 'kotlet', 'des', 'sier', 'konfekt', 'želej', 'uzkod', 'čips', 'kausēt', 'zupa', 'nūdel']
+        };
+    }
+
+    // SPICES, OILS, SUGARS
+    if (q.includes('sāls') || q.includes('pipar') || q.includes('eļļa') || q.includes('cukurs') || q.includes('milti')) {
+        const mustNot = ['gaļa', 'maiz', 'pica', 'zupa', 'nūdel', 'čips', 'uzkod', 'mērce'];
         if (q.includes('cukurs') && !q.includes('vanil')) mustNot.push('vanil');
         if (q.includes('cukurs') && !q.includes('pūder')) mustNot.push('pūdercukurs');
+        if (q.includes('eļļa') && !q.includes('sezam')) mustNot.push('sezam');
+        if (q.includes('eļļa') && !q.includes('olīv')) mustNot.push('olīv');
         return { type: 'spice', mustNot };
     }
-    // Vegetables Category
-    if (q.includes('tomāt') || q.includes('sīpol') || q.includes('ķiplok') || q.includes('salāt'))
-        return { type: 'veg', mustNot: ['konserv', 'gabal', 'mērce', 'pasta', 'plūmju', 'ķiršu', 'smalcin', 'sulā'] };
-    // Sauces & Condiments
-    if (q.includes('sinep') || q.includes('majonēz') || q.includes('kečup') || q.includes('mērce'))
-        return { type: 'sauce', mustNot: ['pulver', 'zupa', 'biešu', 'aukst', 'čips', 'siļķ', 'hering', 'pīrādz', 'bulciņ', 'maiz'] };
-    // Eggs
-    if (q.includes('ola'))
-        return { type: 'egg', mustNot: ['paipal', 'krās', 'uzkod', 'čips'] };
-    // Pasta
-    if (q.includes('spaget') || q.includes('makaron') || q.includes('pasta') || q.includes('frez'))
-        return { type: 'pasta', mustNot: ['piedev', 'zupa', 'mērc', 'sauce', 'garšv'] };
+
+    // VEGETABLES
+    if (q.includes('tomāt') || q.includes('sīpol') || q.includes('ķiplok') || q.includes('salāt') || q.includes('kartupel')) {
+        return {
+            type: 'veg',
+            mustNot: [
+                'konserv', 'gabal', 'mērce', 'pasta', 'plūmju', 'ķiršu', 'smalcin', 'sulā',
+                'adžika', 'lečo', 'kečup', 'čips', 'uzkod', 'maiz', 'bulciņ', 'nūdel'
+            ]
+        };
+    }
+
+    // SAUCES & CONDIMENTS
+    if (q.includes('sinep') || q.includes('majonēz') || q.includes('kečup') || q.includes('mērce')) {
+        return {
+            type: 'sauce',
+            mustNot: ['pulver', 'zupa', 'biešu', 'aukst', 'čips', 'siļķ', 'hering', 'pīrādz', 'bulciņ', 'maiz', 'nūdel']
+        };
+    }
+
+    // EGGS
+    if (q.includes('ola')) {
+        return { type: 'egg', mustNot: ['paipal', 'krās', 'uzkod', 'čips', 'maiz', 'bulciņ', 'nūdel'] };
+    }
+
+    // PASTA
+    if (q.includes('spaget') || q.includes('makaron') || q.includes('pasta') || q.includes('frez') || q.includes('lasagn') || q.includes('loksnes')) {
+        return {
+            type: 'pasta',
+            mustNot: ['piedev', 'zupa', 'mērc', 'sauce', 'garšv', 'salāt', 'konserv', 'maiz', 'bulciņ']
+        };
+    }
 
     return { type: 'other' };
 };
@@ -176,10 +219,10 @@ export const findTopMatches = (products: Product[], query: string, category: { t
             }
         }
 
-        const globalNoise = ['cimdi', 'lateksa', 'gumijas', 'nitrila', 'maiss', 'trauks', 'papīrs', 'konserv', 'sterilizēt'];
+        const globalNoise = ['cimdi', 'lateksa', 'gumijas', 'nitrila', 'maiss', 'trauks', 'papīrs', 'konserv', 'sterilizēt', 'maisiņš', 'folija', 'drāna', 'sūklis'];
         for (const excl of globalNoise) {
             const normExcl = normalizeLatvian(excl);
-            if (normName.includes(normExcl)) score -= 250;
+            if (normName.includes(normExcl)) score -= 300;
         }
 
         let unitPrice = Infinity;
