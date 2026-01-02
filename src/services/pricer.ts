@@ -49,7 +49,7 @@ const categorizeIngredient = (query: string): { type: Category; mustNot?: string
                 'mērce', 'sauce', 'uzkod', 'čipsi', 'dzērien', 'pica', 'cepum',
                 'desa', 'riekst', 'desiņ', 'cigar', 'jersika', 'roka', 'nūdel', 'kausēt', 'smērējam',
                 'garšviela', 'piedeva', 'maiz', 'bulciņ', 'nūdel', 'ķirb', 'popkorns', 'tauku maisījum', 'augu tauk', 'margarīn',
-                'pupiņ', 'cepšanai', 'baget'
+                'pupiņ', 'cepšanai', 'baget', 'pasta', 'kruasān', 'majonēz', 'smēriņ', 'cīsiņ'
             ]
         };
     }
@@ -76,7 +76,8 @@ const categorizeIngredient = (query: string): { type: Category; mustNot?: string
     if (q.includes('tomāt') || q.includes('sīpol') || q.includes('ķiplok') || q.includes('salāt') || q.includes('kartupel')) {
         const mustNot = [
             'konserv', 'gabal', 'mērce', 'pasta', 'plūmju', 'ķiršu', 'smalcin', 'sulā',
-            'adžika', 'lečo', 'kečup', 'čips', 'uzkod', 'maiz', 'bulciņ', 'nūdel', 'baget', 'marināde'
+            'adžika', 'lečo', 'kečup', 'čips', 'uzkod', 'maiz', 'bulciņ', 'nūdel', 'baget', 'marināde',
+            'majonēz', 'grauzdiņ', 'steik', 'zupa', 'sula', 'biezen', 'pankūk', 'buljons', 'desiņ', 'cīsiņ', 'pipar', 'pelmeņ'
         ];
         if (q.includes('ķiplok') && !q.includes('sāl')) mustNot.push('sāls');
         return { type: 'veg', mustNot };
@@ -159,7 +160,8 @@ export const findTopMatches = (products: Product[], query: string, category: { t
 
         if (primaryWord) {
             const primaryStem = primaryWord.substring(0, 4);
-            const hasPrimaryMatch = normName.includes(primaryWord) || (primaryWord.length >= 4 && normName.includes(primaryStem));
+            const normPrimary = normalizeLatvian(primaryWord);
+            const hasPrimaryMatch = normName.includes(normPrimary) || (normPrimary.length >= 4 && normName.includes(primaryStem));
 
             if (!hasPrimaryMatch) {
                 // Allow synonyms for burger nouns (burger/hamburger)
@@ -193,6 +195,17 @@ export const findTopMatches = (products: Product[], query: string, category: { t
         // Minor bonuses for order/prefix - NOT enough to jump buckets (100)
         if (normName.startsWith(primaryWord)) score += 15;
         if (normName.includes(normalizedQuery)) score += 25;
+
+        // PENALTY for "flavored" items (e.g. "ar ķiploku garšu")
+        if (normName.includes(' ar ') && normName.includes(' garsu')) {
+            score -= 100;
+        }
+
+        // PENALTY for composite items where the name has many words but query is simple
+        const nameWords = normName.split(' ').length;
+        if (queryWords.length <= 2 && nameWords >= 5 && !normName.includes(' 1kg') && !normName.includes(' 500g')) {
+            score -= 40;
+        }
 
         // PENALTY for vanilla sugar etc when looking for regular sugar
         if (category.type === 'spice' && normalizedQuery.includes('cukurs') && normName.includes('vanilin')) {
