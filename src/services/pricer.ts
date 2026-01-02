@@ -41,8 +41,12 @@ const categorizeIngredient = (query: string): { type: Category; mustNot?: string
     }
     if (q.includes('maiz') || q.includes('bulciņ') || q.includes('don') || q.includes('hamburger') || q.includes('tobis'))
         return { type: 'bread', mustNot: ['mērc', 'majonēz', 'gaļa', 'kotlet', 'des', 'sier', 'konfekt', 'želej', 'uzkod', 'čips', 'kausēt'] };
-    if (q.includes('sāls') || q.includes('pipar') || q.includes('eļļa') || q.includes('cukurs'))
-        return { type: 'spice', mustNot: ['gaļa', 'maiz', 'pica'] };
+    if (q.includes('sāls') || q.includes('pipar') || q.includes('eļļa') || q.includes('cukurs')) {
+        const mustNot = ['gaļa', 'maiz', 'pica'];
+        if (q.includes('cukurs') && !q.includes('vanil')) mustNot.push('vanil');
+        if (q.includes('cukurs') && !q.includes('pūder')) mustNot.push('pūdercukurs');
+        return { type: 'spice', mustNot };
+    }
     // Vegetables Category
     if (q.includes('tomāt') || q.includes('sīpol') || q.includes('ķiplok') || q.includes('salāt'))
         return { type: 'veg', mustNot: ['konserv', 'gabal', 'mērce', 'pasta', 'plūmju', 'ķiršu', 'smalcin', 'sulā'] };
@@ -144,8 +148,16 @@ export const findTopMatches = (products: Product[], query: string, category: { t
         }
 
         // Minor bonuses for order/prefix - NOT enough to jump buckets (100)
-        if (normName.startsWith(primaryWord)) score += 10;
-        if (normName.includes(normalizedQuery)) score += 20;
+        if (normName.startsWith(primaryWord)) score += 15;
+        if (normName.includes(normalizedQuery)) score += 25;
+
+        // PENALTY for vanilla sugar etc when looking for regular sugar
+        if (category.type === 'spice' && normalizedQuery.includes('cukurs') && normName.includes('vanilin')) {
+            score -= 200;
+        }
+        if (category.type === 'spice' && normalizedQuery.includes('cukurs') && normName.includes('puder')) {
+            score -= 150;
+        }
 
         if (normalizedQuery.includes('burger') && (normName.includes('burger') || normName.includes('hamburger'))) score += 30;
         if (normalizedQuery.includes('malt') && normName.includes('malt')) score += 30;
@@ -188,6 +200,8 @@ export const findTopMatches = (products: Product[], query: string, category: { t
         const bucketA = Math.floor(a.score / 200);
         const bucketB = Math.floor(b.score / 200);
         if (bucketB !== bucketA) return bucketB - bucketA;
+
+        // If scores are tied in the same bucket, prefer the one that is NOT a "flavored" or "specialty" version if query is simple
         return a.unitPrice - b.unitPrice;
     });
 
@@ -202,57 +216,62 @@ export const pricerService = {
             ingredients: {}
         };
 
-        const ingredientPromises = recipe.ingredients.map(async (ingredient) => {
-            let query = ingredient.name;
-            const lowerQuery = query.toLowerCase();
+        const ingredientResults = [];
+        for (const ingredient of recipe.ingredients) {
+            const result = await (async () => {
+                // ... same logic as before but inside the for loop ...
+                let query = ingredient.name;
+                const lowerQuery = query.toLowerCase();
 
-            if ((lowerQuery.includes('maltā') || lowerQuery.includes('malt')) &&
-                (lowerQuery.includes('gaļa') || lowerQuery.includes('gala'))) {
-                query = 'maltā gaļa';
-            }
+                if ((lowerQuery.includes('maltā') || lowerQuery.includes('malt')) &&
+                    (lowerQuery.includes('gaļa') || lowerQuery.includes('gala'))) {
+                    query = 'maltā gaļa';
+                }
 
-            if (lowerQuery.includes('siers') && lowerQuery.includes('rīvēts')) {
-                query = 'siers';
-            }
+                if (lowerQuery.includes('siers') && lowerQuery.includes('rīvēts')) {
+                    query = 'siers';
+                }
 
-            const isBurgerBunIngredient = lowerQuery.includes('burger') && lowerQuery.includes('maiz');
+                const isBurgerBunIngredient = lowerQuery.includes('burger') && lowerQuery.includes('maiz');
 
-            let rimiProducts: Product[] = [];
-            let maximaProducts: Product[] = [];
+                let rimiProducts: Product[] = [];
+                let maximaProducts: Product[] = [];
 
-            if (isBurgerBunIngredient) {
-                const [rimiMain, rimiHamburger, maximaMain, maximaHamburger] = await Promise.all([
-                    rimiService.search(query).catch(() => []),
-                    rimiService.search('hamburger').catch(() => []),
-                    barboraService.search(query).catch(() => []),
-                    barboraService.search('hamburger').catch(() => [])
-                ]);
-                const rimiMap = new Map<string, Product>();
-                [...rimiMain, ...rimiHamburger].forEach(p => rimiMap.set(p.id, p));
-                rimiProducts = Array.from(rimiMap.values());
+                if (isBurgerBunIngredient) {
+                    const [rimiMain, rimiHamburger, maximaMain, maximaHamburger] = await Promise.all([
+                        rimiService.search(query).catch(() => []),
+                        rimiService.search('hamburger').catch(() => []),
+                        barboraService.search(query).catch(() => []),
+                        barboraService.search('hamburger').catch(() => [])
+                    ]);
+                    const rimiMap = new Map<string, Product>();
+                    [...rimiMain, ...rimiHamburger].forEach(p => rimiMap.set(p.id, p));
+                    rimiProducts = Array.from(rimiMap.values());
 
-                const maximaMap = new Map<string, Product>();
-                [...maximaMain, ...maximaHamburger].forEach(p => maximaMap.set(p.id, p));
-                maximaProducts = Array.from(maximaMap.values());
-            } else {
-                [rimiProducts, maximaProducts] = await Promise.all([
-                    rimiService.search(query).catch(() => []),
-                    barboraService.search(query).catch(() => [])
-                ]);
-            }
+                    const maximaMap = new Map<string, Product>();
+                    [...maximaMain, ...maximaHamburger].forEach(p => maximaMap.set(p.id, p));
+                    maximaProducts = Array.from(maximaMap.values());
+                } else {
+                    [rimiProducts, maximaProducts] = await Promise.all([
+                        rimiService.search(query).catch(() => []),
+                        barboraService.search(query).catch(() => [])
+                    ]);
+                }
 
-            const category = categorizeIngredient(query);
-            const rimiMatches = findTopMatches(rimiProducts, query, category);
-            const maximaMatches = findTopMatches(maximaProducts, query, category);
+                const category = categorizeIngredient(query);
+                const rimiMatches = findTopMatches(rimiProducts, query, category);
+                const maximaMatches = findTopMatches(maximaProducts, query, category);
 
-            return {
-                name: ingredient.name,
-                rimi: rimiMatches[0] || null,
-                maxima: maximaMatches[0] || null
-            };
-        });
-
-        const ingredientResults = await Promise.all(ingredientPromises);
+                return {
+                    name: ingredient.name,
+                    rimi: rimiMatches[0] || null,
+                    maxima: maximaMatches[0] || null
+                };
+            })();
+            ingredientResults.push(result);
+            // Small delay to avoid rate limiting
+            await new Promise(resolve => setTimeout(resolve, 300));
+        }
 
         ingredientResults.forEach(item => {
             let bestStore: 'rimi' | 'maxima' | 'tie' | 'none' = 'none';
@@ -274,7 +293,7 @@ export const pricerService = {
     },
 
     streamPrices: async (recipe: Recipe, onProgress: (data: any) => void): Promise<void> => {
-        const ingredientPromises = recipe.ingredients.map(async (ingredient) => {
+        for (const ingredient of recipe.ingredients) {
             let query = ingredient.name;
             const lowerQuery = query.toLowerCase();
 
@@ -336,8 +355,9 @@ export const pricerService = {
                 maximaAlternatives: maximaMatches,
                 bestStore
             });
-        });
 
-        await Promise.all(ingredientPromises);
+            // Small delay between ingredients to avoid rate limiting
+            await new Promise(resolve => setTimeout(resolve, 300));
+        }
     }
 };

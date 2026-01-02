@@ -6,7 +6,29 @@ export const rimiService = {
         try {
             const url = `https://www.rimi.lv/e-veikals/lv/meklesana?query=${encodeURIComponent(query)}`;
             console.log(`[Rimi] Fetching URL: ${url}`);
-            const response = await fetch(url, {
+
+            const fetchWithRetry = async (url: string, options: RequestInit, retries = 2, backoff = 1000): Promise<Response> => {
+                try {
+                    const response = await fetch(url, options);
+                    if (response.status === 429 || response.status >= 500) {
+                        if (retries > 0) {
+                            console.log(`[Rimi] Retrying "${query}" in ${backoff}ms... (${retries} left)`);
+                            await new Promise(resolve => setTimeout(resolve, backoff));
+                            return fetchWithRetry(url, options, retries - 1, backoff * 2);
+                        }
+                    }
+                    return response;
+                } catch (error) {
+                    if (retries > 0) {
+                        console.log(`[Rimi] Error fetching "${query}", retrying... (${retries} left)`);
+                        await new Promise(resolve => setTimeout(resolve, backoff));
+                        return fetchWithRetry(url, options, retries - 1, backoff * 2);
+                    }
+                    throw error;
+                }
+            };
+
+            const response = await fetchWithRetry(url, {
                 headers: {
                     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
                 }
