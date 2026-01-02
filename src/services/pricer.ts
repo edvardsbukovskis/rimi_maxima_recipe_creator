@@ -48,7 +48,7 @@ const categorizeIngredient = (query: string): { type: Category; mustNot?: string
             mustNot: [
                 'mērce', 'sauce', 'uzkod', 'čipsi', 'dzērien', 'pica', 'cepum',
                 'desa', 'riekst', 'desiņ', 'cigar', 'jersika', 'roka', 'nūdel', 'kausēt', 'smērējam',
-                'garšviela', 'piedeva', 'maiz', 'bulciņ', 'nūdel', 'ķirbi', 'popkorns'
+                'garšviela', 'piedeva', 'maiz', 'bulciņ', 'nūdel', 'ķirbi', 'popkorns', 'tauku maisījum', 'augu tauk'
             ]
         };
     }
@@ -75,7 +75,7 @@ const categorizeIngredient = (query: string): { type: Category; mustNot?: string
     if (q.includes('tomāt') || q.includes('sīpol') || q.includes('ķiplok') || q.includes('salāt') || q.includes('kartupel')) {
         const mustNot = [
             'konserv', 'gabal', 'mērce', 'pasta', 'plūmju', 'ķiršu', 'smalcin', 'sulā',
-            'adžika', 'lečo', 'kečup', 'čips', 'uzkod', 'maiz', 'bulciņ', 'nūdel', 'baget'
+            'adžika', 'lečo', 'kečup', 'čips', 'uzkod', 'maiz', 'bulciņ', 'nūdel', 'baget', 'marināde'
         ];
         if (q.includes('ķiplok') && !q.includes('sāl')) mustNot.push('sāls');
         return { type: 'veg', mustNot };
@@ -218,10 +218,15 @@ export const findTopMatches = (products: Product[], query: string, category: { t
             }
         }
 
-        const globalNoise = ['cimdi', 'lateksa', 'gumijas', 'nitrila', 'maiss', 'trauks', 'papīrs', 'konserv', 'sterilizēt', 'maisiņš', 'folija', 'drāna', 'sūklis', 'sautēt', 'gabaliņi mērcē'];
+        const globalNoise = [
+            'cimdi', 'lateksa', 'gumijas', 'nitrila', 'maiss', 'trauks', 'papīrs', 'konserv', 'sterilizēt',
+            'maisiņš', 'folija', 'drāna', 'sūklis', 'sautēt', 'gabaliņi mērcē', 'spiede', 'nazis', 'dēlis',
+            'šķēres', 'trauku', 'mazgāšanas', 'šķīdums', 'tīrīšanas', 'līdzeklis', 'tabletes', 'elektrisk',
+            'akumulators', 'baterija', 'spuldze', 'vads', 'pagarinātājs', 'turētājs'
+        ];
         for (const excl of globalNoise) {
             const normExcl = normalizeLatvian(excl);
-            if (normName.includes(normExcl)) score -= 300;
+            if (normName.includes(normExcl)) score -= 500; // Increased penalty to be definitive
         }
 
         let unitPrice = Infinity;
