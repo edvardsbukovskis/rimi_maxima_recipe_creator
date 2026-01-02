@@ -22,9 +22,9 @@ export const RECIPES: Recipe[] = [
         ingredients: [
             { name: 'Piens 2%', amount: '500ml', amountValue: 500, amountUnit: 'ml' },
             { name: 'Olas', amount: '3 gab', amountValue: 3, amountUnit: 'gab' },
-            { name: 'Kviešu milti 1kg', amount: '200g', amountValue: 200, amountUnit: 'g' },
-            { name: 'Cukurs 1kg', amount: '30g', amountValue: 30, amountUnit: 'g' },
-            { name: 'Rapšu eļļa 1l', amount: '30ml', amountValue: 30, amountUnit: 'ml' },
+            { name: 'Kviešu milti', amount: '200g', amountValue: 200, amountUnit: 'g' },
+            { name: 'Cukurs', amount: '30g', amountValue: 30, amountUnit: 'g' },
+            { name: 'Rapšu eļļa', amount: '30ml', amountValue: 30, amountUnit: 'ml' },
             { name: 'Sāls', amount: '1g', amountValue: 1, amountUnit: 'g' }
         ]
     },
@@ -49,9 +49,9 @@ export const RECIPES: Recipe[] = [
         ingredients: [
             { name: 'Kartupeļi', amount: '1kg', amountValue: 1000, amountUnit: 'g' },
             { name: 'Olas', amount: '1 gab', amountValue: 1, amountUnit: 'gab' },
-            { name: 'Kviešu milti 1kg', amount: '50g', amountValue: 50, amountUnit: 'g' },
+            { name: 'Kviešu milti', amount: '50g', amountValue: 50, amountUnit: 'g' },
             { name: 'Skābais krējums', amount: '200g', amountValue: 200, amountUnit: 'g' },
-            { name: 'Rapšu eļļa 1l', amount: '50ml', amountValue: 50, amountUnit: 'ml' },
+            { name: 'Rapšu eļļa', amount: '50ml', amountValue: 50, amountUnit: 'ml' },
             { name: 'Sāls', amount: '5g', amountValue: 5, amountUnit: 'g' },
             { name: 'Pipari melnie', amount: '1g', amountValue: 1, amountUnit: 'g' }
         ]
@@ -83,10 +83,10 @@ export const RECIPES: Recipe[] = [
             { name: 'Piens 2%', amount: '600ml', amountValue: 600, amountUnit: 'ml' },
             { name: 'Siers', amount: '200g', amountValue: 200, amountUnit: 'g' },
             { name: 'Sviests', amount: '60g', amountValue: 60, amountUnit: 'g' },
-            { name: 'Kviešu milti 1kg', amount: '60g', amountValue: 60, amountUnit: 'g' },
+            { name: 'Kviešu milti', amount: '60g', amountValue: 60, amountUnit: 'g' },
             { name: 'Sīpoli', amount: '150g', amountValue: 150, amountUnit: 'g' },
             { name: 'Ķiploki', amount: '10g', amountValue: 10, amountUnit: 'g' },
-            { name: 'Rapšu eļļa 1l', amount: '30ml', amountValue: 30, amountUnit: 'ml' },
+            { name: 'Rapšu eļļa', amount: '30ml', amountValue: 30, amountUnit: 'ml' },
             { name: 'Sāls', amount: '5g', amountValue: 5, amountUnit: 'g' },
             { name: 'Pipari melnie', amount: '2g', amountValue: 2, amountUnit: 'g' }
         ]
