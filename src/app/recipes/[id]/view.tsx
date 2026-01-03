@@ -10,14 +10,17 @@ import clsx from 'clsx';
 interface IngredientData {
     rimi: Product | null;
     maxima: Product | null;
+    lidl: Product | null;
     rimiAlternatives?: Product[];
     maximaAlternatives?: Product[];
-    bestStore: 'rimi' | 'maxima' | 'tie' | 'none';
+    lidlAlternatives?: Product[];
+    bestStore: 'rimi' | 'maxima' | 'lidl' | 'tie' | 'none';
 }
 
 interface PriceResult {
     totalRimi: number;
     totalMaxima: number;
+    totalLidl: number;
     ingredients: { [name: string]: IngredientData };
 }
 
@@ -38,7 +41,7 @@ function ProductPicker({
     alternatives: Product[];
     selected: Product | null;
     onSelect: (product: Product) => void;
-    store: 'rimi' | 'maxima';
+    store: 'rimi' | 'maxima' | 'lidl';
 }) {
     const [isOpen, setIsOpen] = useState(false);
     const [position, setPosition] = useState({ top: 0, left: 0 });
@@ -93,7 +96,9 @@ function ProductPicker({
                 onClick={handleToggle}
                 className={clsx(
                     "text-[9px] mt-1 px-1.5 py-0.5 rounded flex items-center gap-0.5 transition-colors mx-auto",
-                    store === 'rimi' ? "bg-primary/20 hover:bg-primary/30 text-primary" : "bg-red-500/20 hover:bg-red-500/30 text-red-400"
+                    store === 'rimi' ? "bg-primary/20 hover:bg-primary/30 text-primary" :
+                        store === 'maxima' ? "bg-red-500/20 hover:bg-red-500/30 text-red-400" :
+                            "bg-blue-500/20 hover:bg-blue-500/30 text-blue-400"
                 )}
             >
                 Mainīt <ChevronDown className="w-2.5 h-2.5" />
@@ -131,7 +136,8 @@ function ProductPicker({
                                 </div>
                                 <div className={clsx(
                                     "text-base font-bold flex-shrink-0 text-right",
-                                    store === 'rimi' ? "text-primary" : "text-red-400"
+                                    store === 'rimi' ? "text-primary" :
+                                        store === 'maxima' ? "text-red-400" : "text-blue-400"
                                 )}>
                                     €{product.price.toFixed(2)}
                                     {product.isBulk && <div className="text-[9px] font-normal text-muted-foreground">receptei</div>}
@@ -148,7 +154,7 @@ function ProductPicker({
 
 export default function RecipeDetailView({ recipe }: { recipe: Recipe }) {
     const [priceData, setPriceData] = useState<PriceResult>({
-        totalRimi: 0, totalMaxima: 0, ingredients: {}
+        totalRimi: 0, totalMaxima: 0, totalLidl: 0, ingredients: {}
     });
     const [loading, setLoading] = useState(true);
     const [progress, setProgress] = useState(0);
@@ -157,7 +163,7 @@ export default function RecipeDetailView({ recipe }: { recipe: Recipe }) {
 
     // Track selected product overrides per ingredient per store
     const [selectedProducts, setSelectedProducts] = useState<{
-        [ingredientName: string]: { rimi?: Product; maxima?: Product }
+        [ingredientName: string]: { rimi?: Product; maxima?: Product; lidl?: Product }
     }>({});
 
     // Calculate how many products needed for a given ingredient
@@ -235,7 +241,7 @@ export default function RecipeDetailView({ recipe }: { recipe: Recipe }) {
         setLoading(true);
         setError('');
         setProgress(0);
-        setPriceData({ totalRimi: 0, totalMaxima: 0, ingredients: {} });
+        setPriceData({ totalRimi: 0, totalMaxima: 0, totalLidl: 0, ingredients: {} });
         setSelectedProducts({});
 
         const fetchPrices = async () => {
@@ -265,7 +271,7 @@ export default function RecipeDetailView({ recipe }: { recipe: Recipe }) {
                             const data = JSON.parse(line);
                             setPriceData(prev => {
                                 const newIngredients = { ...prev.ingredients, [data.name]: data };
-                                let rimi = 0, maxima = 0;
+                                let rimi = 0, maxima = 0, lidl = 0;
                                 Object.entries(newIngredients).forEach(([name, ing]: [string, any]) => {
                                     const ingredient = recipe.ingredients.find(i => i.name === name);
                                     if (!ingredient) return;
@@ -278,8 +284,12 @@ export default function RecipeDetailView({ recipe }: { recipe: Recipe }) {
                                         const qty = calculateProductQuantity(ingredient, ing.maxima);
                                         maxima += ing.maxima.price * qty;
                                     }
+                                    if (ing.lidl) {
+                                        const qty = calculateProductQuantity(ingredient, ing.lidl);
+                                        lidl += ing.lidl.price * qty;
+                                    }
                                 });
-                                return { ingredients: newIngredients, totalRimi: rimi, totalMaxima: maxima };
+                                return { ingredients: newIngredients, totalRimi: rimi, totalMaxima: maxima, totalLidl: lidl };
                             });
                             loadedCount++;
                             setProgress((loadedCount / totalCount) * 100);
@@ -307,14 +317,14 @@ export default function RecipeDetailView({ recipe }: { recipe: Recipe }) {
     );
 
     // Get effective product (selected override or default)
-    const getEffectiveProduct = (name: string, store: 'rimi' | 'maxima'): Product | null => {
+    const getEffectiveProduct = (name: string, store: 'rimi' | 'maxima' | 'lidl'): Product | null => {
         const override = selectedProducts[name]?.[store];
         if (override) return override;
         return priceData.ingredients[name]?.[store] || null;
     };
 
     // Get quantity of product needed for ingredient
-    const getIngredientQuantity = (ing: typeof recipe.ingredients[0], store: 'rimi' | 'maxima'): number => {
+    const getIngredientQuantity = (ing: typeof recipe.ingredients[0], store: 'rimi' | 'maxima' | 'lidl'): number => {
         const product = getEffectiveProduct(ing.name, store);
         return calculateProductQuantity(ing, product);
     };
@@ -334,6 +344,13 @@ export default function RecipeDetailView({ recipe }: { recipe: Recipe }) {
                 const product = getEffectiveProduct(i.name, 'maxima');
                 const qty = calculateProductQuantity(i, product);
                 return sum + (product?.price || 0) * qty;
+            }, 0),
+        lidl: recipe.ingredients
+            .filter(i => selectedIngredients.has(i.name))
+            .reduce((sum, i) => {
+                const product = getEffectiveProduct(i.name, 'lidl');
+                const qty = calculateProductQuantity(i, product);
+                return sum + (product?.price || 0) * qty;
             }, 0)
     };
 
@@ -343,7 +360,7 @@ export default function RecipeDetailView({ recipe }: { recipe: Recipe }) {
         setSelectedIngredients(next);
     };
 
-    const selectProduct = (ingredientName: string, store: 'rimi' | 'maxima', product: Product) => {
+    const selectProduct = (ingredientName: string, store: 'rimi' | 'maxima' | 'lidl', product: Product) => {
         setSelectedProducts(prev => ({
             ...prev,
             [ingredientName]: { ...prev[ingredientName], [store]: product }
@@ -473,7 +490,7 @@ export default function RecipeDetailView({ recipe }: { recipe: Recipe }) {
                             </div>
                             <div className="space-y-2 max-w-xs">
                                 <h3 className="text-xl font-medium">Meklējam izdevīgākās cenas...</h3>
-                                <p className="text-muted-foreground text-sm">Salīdzinām Rimi un Barbora (Maxima) piedāvājumus</p>
+                                <p className="text-muted-foreground text-sm">Salīdzinām Rimi, Maxima un Lidl piedāvājumus</p>
                             </div>
                             <div className="w-full max-w-md h-2 bg-white/10 rounded-full overflow-hidden">
                                 <div className="h-full bg-primary transition-all duration-300 ease-out" style={{ width: `${progress}%` }} />
@@ -487,31 +504,45 @@ export default function RecipeDetailView({ recipe }: { recipe: Recipe }) {
                     ) : (
                         <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
                             {/* Total Comparison Cards */}
-                            <div className="grid grid-cols-2 gap-4">
+                            <div className="grid grid-cols-3 gap-3">
                                 <div className={clsx(
-                                    "p-6 rounded-2xl border transition-all duration-300",
-                                    dynamicTotals.rimi < dynamicTotals.maxima
+                                    "p-4 rounded-2xl border transition-all duration-300",
+                                    dynamicTotals.rimi <= dynamicTotals.maxima && dynamicTotals.rimi <= dynamicTotals.lidl && dynamicTotals.rimi > 0
                                         ? "bg-primary/10 border-primary ring-2 ring-primary/20 scale-105"
                                         : "glass border-transparent opacity-80"
                                 )}>
-                                    <h3 className="text-lg font-medium mb-1">Rimi</h3>
-                                    <p className="text-3xl font-bold text-foreground">{formatPrice(dynamicTotals.rimi)}</p>
-                                    {dynamicTotals.rimi < dynamicTotals.maxima &&
-                                        <span className="inline-block mt-2 text-xs font-bold text-primary bg-primary/20 px-2 py-1 rounded-full">
+                                    <h3 className="text-sm font-medium mb-1">Rimi</h3>
+                                    <p className="text-2xl font-bold text-foreground">{formatPrice(dynamicTotals.rimi)}</p>
+                                    {dynamicTotals.rimi <= dynamicTotals.maxima && dynamicTotals.rimi <= dynamicTotals.lidl && dynamicTotals.rimi > 0 &&
+                                        <span className="inline-block mt-2 text-[10px] font-bold text-primary bg-primary/20 px-2 py-0.5 rounded-full">
                                             LABĀKĀ CENA
                                         </span>
                                     }
                                 </div>
                                 <div className={clsx(
-                                    "p-6 rounded-2xl border transition-all duration-300",
-                                    dynamicTotals.maxima < dynamicTotals.rimi
+                                    "p-4 rounded-2xl border transition-all duration-300",
+                                    dynamicTotals.maxima <= dynamicTotals.rimi && dynamicTotals.maxima <= dynamicTotals.lidl && dynamicTotals.maxima > 0
                                         ? "bg-red-500/10 border-red-500 ring-2 ring-red-500/20 scale-105"
                                         : "glass border-transparent opacity-80"
                                 )}>
-                                    <h3 className="text-lg font-medium mb-1">Maxima (Barbora)</h3>
-                                    <p className="text-3xl font-bold text-foreground">{formatPrice(dynamicTotals.maxima)}</p>
-                                    {dynamicTotals.maxima < dynamicTotals.rimi &&
-                                        <span className="inline-block mt-2 text-xs font-bold text-red-400 bg-red-400/20 px-2 py-1 rounded-full">
+                                    <h3 className="text-sm font-medium mb-1">Maxima</h3>
+                                    <p className="text-2xl font-bold text-foreground">{formatPrice(dynamicTotals.maxima)}</p>
+                                    {dynamicTotals.maxima <= dynamicTotals.rimi && dynamicTotals.maxima <= dynamicTotals.lidl && dynamicTotals.maxima > 0 &&
+                                        <span className="inline-block mt-2 text-[10px] font-bold text-red-400 bg-red-400/20 px-2 py-0.5 rounded-full">
+                                            LABĀKĀ CENA
+                                        </span>
+                                    }
+                                </div>
+                                <div className={clsx(
+                                    "p-4 rounded-2xl border transition-all duration-300",
+                                    dynamicTotals.lidl <= dynamicTotals.rimi && dynamicTotals.lidl <= dynamicTotals.maxima && dynamicTotals.lidl > 0
+                                        ? "bg-blue-500/10 border-blue-500 ring-2 ring-blue-500/20 scale-105"
+                                        : "glass border-transparent opacity-80"
+                                )}>
+                                    <h3 className="text-sm font-medium mb-1">Lidl</h3>
+                                    <p className="text-2xl font-bold text-foreground">{formatPrice(dynamicTotals.lidl)}</p>
+                                    {dynamicTotals.lidl <= dynamicTotals.rimi && dynamicTotals.lidl <= dynamicTotals.maxima && dynamicTotals.lidl > 0 &&
+                                        <span className="inline-block mt-2 text-[10px] font-bold text-blue-400 bg-blue-400/20 px-2 py-0.5 rounded-full">
                                             LABĀKĀ CENA
                                         </span>
                                     }
@@ -520,9 +551,12 @@ export default function RecipeDetailView({ recipe }: { recipe: Recipe }) {
 
                             {/* Ingredient Breakdown */}
                             <div className="glass rounded-3xl overflow-hidden">
-                                <div className="p-6 border-b border-white/5 flex justify-between items-center">
-                                    <h3 className="font-semibold">Sastāvdaļu Saraksts</h3>
-                                    <span className="text-xs text-muted-foreground">Spied "Mainīt" lai izvēlētos citu produktu</span>
+                                <div className="p-4 grid grid-cols-12 gap-4 text-[11px] uppercase tracking-wider font-bold text-muted-foreground bg-zinc-900/30 border-b border-white/5">
+                                    <div className="col-span-1"></div>
+                                    <div className="col-span-2">Sastāvdaļa</div>
+                                    <div className="col-span-3 text-center">Rimi</div>
+                                    <div className="col-span-3 text-center">Maxima</div>
+                                    <div className="col-span-3 text-center">Lidl</div>
                                 </div>
                                 <div className="divide-y divide-white/5">
                                     {recipe.ingredients.map((ing) => {
@@ -549,13 +583,13 @@ export default function RecipeDetailView({ recipe }: { recipe: Recipe }) {
                                                         {isSelected && <Check className="w-3 h-3" />}
                                                     </button>
                                                 </div>
-                                                <div className="col-span-3">
+                                                <div className="col-span-2">
                                                     <p className={clsx("font-medium", !isSelected && "line-through decoration-white/30")}>{cleanIngredientName(ing.name)}</p>
                                                     <p className="text-xs text-muted-foreground">{ing.amount}</p>
                                                 </div>
 
                                                 {/* Rimi Price */}
-                                                <div className={clsx("col-span-4 text-center p-2 rounded-lg relative group/item", isSelected && data?.bestStore === 'rimi' && "bg-primary/10 text-primary")}>
+                                                <div className={clsx("col-span-3 text-center p-2 rounded-lg relative group/item", isSelected && data?.bestStore === 'rimi' && "bg-primary/10 text-primary")}>
                                                     {effectiveRimi ? (
                                                         <div className="text-sm">
                                                             <div className={clsx("font-bold flex items-center justify-center gap-1", !isSelected && "line-through text-muted-foreground")}>
@@ -585,7 +619,7 @@ export default function RecipeDetailView({ recipe }: { recipe: Recipe }) {
                                                 </div>
 
                                                 {/* Maxima Price */}
-                                                <div className={clsx("col-span-4 text-center p-2 rounded-lg relative group/item", isSelected && data?.bestStore === 'maxima' && "bg-red-500/10 text-red-500")}>
+                                                <div className={clsx("col-span-3 text-center p-2 rounded-lg relative group/item", isSelected && data?.bestStore === 'maxima' && "bg-red-500/10 text-red-500")}>
                                                     {effectiveMaxima ? (
                                                         <div className="text-sm">
                                                             <div className={clsx("font-bold flex items-center justify-center gap-1", !isSelected && "line-through text-muted-foreground")}>
@@ -613,25 +647,66 @@ export default function RecipeDetailView({ recipe }: { recipe: Recipe }) {
                                                         </div>
                                                     ) : <span className="text-muted-foreground">-</span>}
                                                 </div>
+
+                                                {/* Lidl Price */}
+                                                <div className={clsx("col-span-3 text-center p-2 rounded-lg relative group/item", isSelected && data?.bestStore === 'lidl' && "bg-blue-500/10 text-blue-500")}>
+                                                    {(() => {
+                                                        const effectiveLidl = getEffectiveProduct(ing.name, 'lidl');
+                                                        const lidlQty = calculateProductQuantity(ing, effectiveLidl);
+                                                        return effectiveLidl ? (
+                                                            <div className="text-sm">
+                                                                <div className={clsx("font-bold flex items-center justify-center gap-1", !isSelected && "line-through text-muted-foreground")}>
+                                                                    {formatPrice(effectiveLidl.price * lidlQty)}
+                                                                    {lidlQty > 1 && <span className="text-[9px] bg-blue-500/30 text-blue-400 px-1 rounded">x{lidlQty}</span>}
+                                                                </div>
+                                                                <a href={effectiveLidl.url} target="_blank" rel="noopener noreferrer"
+                                                                    className="text-[10px] opacity-70 hover:opacity-100 hover:underline block mt-1 leading-tight truncate px-1" title={effectiveLidl.name}>
+                                                                    {effectiveLidl.name}
+                                                                </a>
+                                                                <div className="flex items-center justify-center gap-1.5 mt-1">
+                                                                    {effectiveLidl.pricePerUnit && (
+                                                                        <span className="text-[9px] text-muted-foreground">{effectiveLidl.pricePerUnit}</span>
+                                                                    )}
+                                                                    {effectiveLidl.isBulk && (
+                                                                        <span className="text-[8px] px-1 py-0.5 rounded-sm bg-blue-500/20 text-blue-400 uppercase font-bold" title="Cena aprēķināta pēc svara">Sverams</span>
+                                                                    )}
+                                                                </div>
+                                                                <ProductPicker
+                                                                    alternatives={data?.lidlAlternatives || []}
+                                                                    selected={effectiveLidl}
+                                                                    onSelect={(p) => selectProduct(ing.name, 'lidl', p)}
+                                                                    store="lidl"
+                                                                />
+                                                            </div>
+                                                        ) : <span className="text-muted-foreground">-</span>;
+                                                    })()}
+                                                </div>
                                             </div>
                                         );
                                     })}
                                 </div>
                             </div>
 
-                            <div className="grid grid-cols-2 gap-4 pt-4">
+                            <div className="grid grid-cols-3 gap-3 pt-4">
                                 <button className="flex flex-col items-center justify-center py-4 bg-primary text-primary-foreground font-bold rounded-xl shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all">
-                                    <div className="flex items-center mb-1 text-lg">
-                                        <ShoppingBasket className="w-5 h-5 mr-2" /> Pasūtīt Rimi
+                                    <div className="flex items-center mb-1 text-sm md:text-base">
+                                        <ShoppingBasket className="w-4 h-4 mr-2" /> Pasūtīt Rimi
                                     </div>
-                                    <span className="text-sm opacity-90">Kopā: {formatPrice(dynamicTotals.rimi)}</span>
+                                    <span className="text-xs opacity-90">Kopā: {formatPrice(dynamicTotals.rimi)}</span>
                                 </button>
 
                                 <button className="flex flex-col items-center justify-center py-4 bg-red-500 text-white font-bold rounded-xl shadow-lg shadow-red-500/20 hover:scale-[1.02] active:scale-95 transition-all">
-                                    <div className="flex items-center mb-1 text-lg">
-                                        <ShoppingBasket className="w-5 h-5 mr-2" /> Pasūtīt Maxima
+                                    <div className="flex items-center mb-1 text-sm md:text-base">
+                                        <ShoppingBasket className="w-4 h-4 mr-2" /> Pasūtīt Maxima
                                     </div>
-                                    <span className="text-sm opacity-90">Kopā: {formatPrice(dynamicTotals.maxima)}</span>
+                                    <span className="text-xs opacity-90">Kopā: {formatPrice(dynamicTotals.maxima)}</span>
+                                </button>
+
+                                <button className="flex flex-col items-center justify-center py-4 bg-blue-600 text-white font-bold rounded-xl shadow-lg shadow-blue-500/20 hover:scale-[1.02] active:scale-95 transition-all">
+                                    <div className="flex items-center mb-1 text-sm md:text-base">
+                                        <ShoppingBasket className="w-4 h-4 mr-2" /> Apskatīt Lidl
+                                    </div>
+                                    <span className="text-xs opacity-90">Kopā: {formatPrice(dynamicTotals.lidl)}</span>
                                 </button>
                             </div>
                         </div>
