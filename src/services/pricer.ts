@@ -1,18 +1,15 @@
 import { Product, Recipe, getEffectivePrice, parseAmount } from '@/types';
 import { rimiService } from './rimi';
 import { barboraService } from './barbora';
-import { lidlService } from './lidl';
 
 interface PriceResult {
     totalRimi: number;
     totalMaxima: number;
-    totalLidl: number;
     ingredients: {
         [name: string]: {
             rimi: Product | null;
             maxima: Product | null;
-            lidl: Product | null;
-            bestStore: 'rimi' | 'maxima' | 'lidl' | 'tie' | 'none';
+            bestStore: 'rimi' | 'maxima' | 'tie' | 'none';
         };
     };
 }
@@ -305,7 +302,6 @@ export const pricerService = {
         const result: PriceResult = {
             totalRimi: 0,
             totalMaxima: 0,
-            totalLidl: 0,
             ingredients: {}
         };
 
@@ -329,16 +325,13 @@ export const pricerService = {
 
                 let rimiProducts: Product[] = [];
                 let maximaProducts: Product[] = [];
-                let lidlProducts: Product[] = [];
 
                 if (isBurgerBunIngredient) {
-                    const [rimiMain, rimiHamburger, maximaMain, maximaHamburger, lidlMain, lidlHamburger] = await Promise.all([
+                    const [rimiMain, rimiHamburger, maximaMain, maximaHamburger] = await Promise.all([
                         rimiService.search(query).catch(() => []),
                         rimiService.search('hamburger').catch(() => []),
                         barboraService.search(query).catch(() => []),
-                        barboraService.search('hamburger').catch(() => []),
-                        lidlService.search(query).catch(() => []),
-                        lidlService.search('hamburger').catch(() => [])
+                        barboraService.search('hamburger').catch(() => [])
                     ]);
                     const rimiMap = new Map<string, Product>();
                     [...rimiMain, ...rimiHamburger].forEach(p => rimiMap.set(p.id, p));
@@ -347,28 +340,21 @@ export const pricerService = {
                     const maximaMap = new Map<string, Product>();
                     [...maximaMain, ...maximaHamburger].forEach(p => maximaMap.set(p.id, p));
                     maximaProducts = Array.from(maximaMap.values());
-
-                    const lidlMap = new Map<string, Product>();
-                    [...lidlMain, ...lidlHamburger].forEach(p => lidlMap.set(p.id, p));
-                    lidlProducts = Array.from(lidlMap.values());
                 } else {
-                    [rimiProducts, maximaProducts, lidlProducts] = await Promise.all([
+                    [rimiProducts, maximaProducts] = await Promise.all([
                         rimiService.search(query).catch(() => []),
-                        barboraService.search(query).catch(() => []),
-                        lidlService.search(query).catch(() => [])
+                        barboraService.search(query).catch(() => [])
                     ]);
                 }
 
                 const category = categorizeIngredient(query);
                 const rimiMatches = findTopMatches(rimiProducts, query, category);
                 const maximaMatches = findTopMatches(maximaProducts, query, category);
-                const lidlMatches = findTopMatches(lidlProducts, query, category);
 
                 return {
                     name: ingredient.name,
                     rimi: rimiMatches[0] || null,
-                    maxima: maximaMatches[0] || null,
-                    lidl: lidlMatches[0] || null
+                    maxima: maximaMatches[0] || null
                 };
             })();
             ingredientResults.push(result);
@@ -377,21 +363,13 @@ export const pricerService = {
         }
 
         ingredientResults.forEach(item => {
-            let bestStore: 'rimi' | 'maxima' | 'lidl' | 'tie' | 'none' = 'none';
-            const prices = [
-                { store: 'rimi', price: item.rimi?.price || Infinity },
-                { store: 'maxima', price: item.maxima?.price || Infinity },
-                { store: 'lidl', price: item.lidl?.price || Infinity }
-            ].filter(p => p.price !== Infinity);
-
-            if (prices.length > 0) {
-                prices.sort((a, b) => a.price - b.price);
-                if (prices.length > 1 && prices[0].price === prices[1].price) {
-                    bestStore = 'tie';
-                } else {
-                    bestStore = prices[0].store as any;
-                }
-            }
+            let bestStore: 'rimi' | 'maxima' | 'tie' | 'none' = 'none';
+            if (item.rimi && item.maxima) {
+                if (item.rimi.price < item.maxima.price) bestStore = 'rimi';
+                else if (item.maxima.price < item.rimi.price) bestStore = 'maxima';
+                else bestStore = 'tie';
+            } else if (item.rimi) bestStore = 'rimi';
+            else if (item.maxima) bestStore = 'maxima';
 
             const ingredientAmount = parseAmount(recipe.ingredients.find(i => i.name === item.name)?.amount || '1 gab');
 
@@ -401,18 +379,18 @@ export const pricerService = {
                 // Update the product's price for the UI to display the "recipe price"
                 item.rimi.price = parseFloat(scaledPrice.toFixed(2));
             }
-            if (item.lidl) {
-                const scaledPrice = getEffectivePrice(item.lidl, ingredientAmount);
-                result.totalLidl += scaledPrice;
-                item.lidl.price = parseFloat(scaledPrice.toFixed(2));
+            if (item.maxima) {
+                const scaledPrice = getEffectivePrice(item.maxima, ingredientAmount);
+                result.totalMaxima += scaledPrice;
+                // Update the product's price for the UI to display the "recipe price"
+                item.maxima.price = parseFloat(scaledPrice.toFixed(2));
             }
 
-            result.ingredients[item.name] = { rimi: item.rimi, maxima: item.maxima, lidl: item.lidl, bestStore };
+            result.ingredients[item.name] = { rimi: item.rimi, maxima: item.maxima, bestStore };
         });
 
         result.totalRimi = parseFloat(result.totalRimi.toFixed(2));
         result.totalMaxima = parseFloat(result.totalMaxima.toFixed(2));
-        result.totalLidl = parseFloat(result.totalLidl.toFixed(2));
         return result;
     },
 
@@ -434,16 +412,13 @@ export const pricerService = {
 
             let rimiProducts: Product[] = [];
             let maximaProducts: Product[] = [];
-            let lidlProducts: Product[] = [];
 
             if (isBurgerBunIngredient) {
-                const [rimiMain, rimiHamburger, maximaMain, maximaHamburger, lidlMain, lidlHamburger] = await Promise.all([
+                const [rimiMain, rimiHamburger, maximaMain, maximaHamburger] = await Promise.all([
                     rimiService.search(query).catch(() => []),
                     rimiService.search('hamburger').catch(() => []),
                     barboraService.search(query).catch(() => []),
-                    barboraService.search('hamburger').catch(() => []),
-                    lidlService.search(query).catch(() => []),
-                    lidlService.search('hamburger').catch(() => [])
+                    barboraService.search('hamburger').catch(() => [])
                 ]);
                 const rimiMap = new Map<string, Product>();
                 [...rimiMain, ...rimiHamburger].forEach(p => rimiMap.set(p.id, p));
@@ -452,22 +427,16 @@ export const pricerService = {
                 const maximaMap = new Map<string, Product>();
                 [...maximaMain, ...maximaHamburger].forEach(p => maximaMap.set(p.id, p));
                 maximaProducts = Array.from(maximaMap.values());
-
-                const lidlMap = new Map<string, Product>();
-                [...lidlMain, ...lidlHamburger].forEach(p => lidlMap.set(p.id, p));
-                lidlProducts = Array.from(lidlMap.values());
             } else {
-                [rimiProducts, maximaProducts, lidlProducts] = await Promise.all([
+                [rimiProducts, maximaProducts] = await Promise.all([
                     rimiService.search(query).catch(() => []),
-                    barboraService.search(query).catch(() => []),
-                    lidlService.search(query).catch(() => [])
+                    barboraService.search(query).catch(() => [])
                 ]);
             }
 
             const category = categorizeIngredient(query);
             const rimiMatches = findTopMatches(rimiProducts, query, category);
             const maximaMatches = findTopMatches(maximaProducts, query, category);
-            const lidlMatches = findTopMatches(lidlProducts, query, category);
 
             const ingredientAmount = parseAmount(ingredient.amount || '1 gab');
 
@@ -483,40 +452,23 @@ export const pricerService = {
                 p.price = parseFloat(scaled.toFixed(2));
             });
 
-            // Scale all Lidl products (best and alternatives)
-            lidlMatches.forEach(p => {
-                const scaled = getEffectivePrice(p, ingredientAmount);
-                p.price = parseFloat(scaled.toFixed(2));
-            });
-
             const bestRimi = rimiMatches[0] || null;
             const bestMaxima = maximaMatches[0] || null;
-            const bestLidl = lidlMatches[0] || null;
 
-            let bestStore: 'rimi' | 'maxima' | 'lidl' | 'tie' | 'none' = 'none';
-            const prices = [
-                { store: 'rimi', price: bestRimi?.price || Infinity },
-                { store: 'maxima', price: bestMaxima?.price || Infinity },
-                { store: 'lidl', price: bestLidl?.price || Infinity }
-            ].filter(p => p.price !== Infinity);
-
-            if (prices.length > 0) {
-                prices.sort((a, b) => a.price - b.price);
-                if (prices.length > 1 && prices[0].price === prices[1].price) {
-                    bestStore = 'tie';
-                } else {
-                    bestStore = prices[0].store as any;
-                }
-            }
+            let bestStore: 'rimi' | 'maxima' | 'tie' | 'none' = 'none';
+            if (bestRimi && bestMaxima) {
+                if (bestRimi.price < bestMaxima.price) bestStore = 'rimi';
+                else if (bestMaxima.price < bestRimi.price) bestStore = 'maxima';
+                else bestStore = 'tie';
+            } else if (bestRimi) bestStore = 'rimi';
+            else if (bestMaxima) bestStore = 'maxima';
 
             onProgress({
                 name: ingredient.name,
                 rimi: bestRimi,
                 maxima: bestMaxima,
-                lidl: bestLidl,
                 rimiAlternatives: rimiMatches,
                 maximaAlternatives: maximaMatches,
-                lidlAlternatives: lidlMatches,
                 bestStore
             });
 

@@ -2,7 +2,7 @@ export interface Product {
     id: string;
     name: string;
     price: number;
-    store: 'rimi' | 'maxima' | 'lidl';
+    store: 'rimi' | 'maxima';
     url: string;
     image?: string;
     category?: string;
@@ -18,7 +18,6 @@ export interface Ingredient {
     bestMatch?: {
         rimi?: Product;
         maxima?: Product;
-        lidl?: Product;
     };
 }
 
