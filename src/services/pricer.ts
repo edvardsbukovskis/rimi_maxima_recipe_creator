@@ -1,4 +1,4 @@
-import { Product, Recipe } from '@/types';
+import { Product, Recipe, getEffectivePrice, parseAmount } from '@/types';
 import { rimiService } from './rimi';
 import { barboraService } from './barbora';
 
@@ -252,6 +252,16 @@ export const findTopMatches = (products: Product[], query: string, category: { t
         }
         if (unitPrice === Infinity) unitPrice = p.price;
 
+        // Bulk detection: If it's sold by kg (unitPrice is same as price) and doesn't have packaging indicators
+        const isBulkMatch = p.pricePerUnit && (p.pricePerUnit.includes('€/kg') || p.pricePerUnit.includes('€/l')) &&
+            (Math.abs(p.price - unitPrice) < 0.01);
+
+        const hasPackaging = normName.includes('paka') || normName.includes('mais') || normName.includes('toti') || normName.includes('kaste');
+
+        if (isBulkMatch && !hasPackaging) {
+            p.isBulk = true;
+        }
+
         return { product: p, score, unitPrice };
     }).filter((s): s is { product: Product; score: number; unitPrice: number } => s !== null);
 
@@ -346,8 +356,15 @@ export const pricerService = {
             else if (item.maxima) bestStore = 'maxima';
 
             result.ingredients[item.name] = { rimi: item.rimi, maxima: item.maxima, bestStore };
-            if (item.rimi) result.totalRimi += item.rimi.price;
-            if (item.maxima) result.totalMaxima += item.maxima.price;
+
+            const ingredientAmount = parseAmount(recipe.ingredients.find(i => i.name === item.name)?.amount || '1 gab');
+
+            if (item.rimi) {
+                result.totalRimi += getEffectivePrice(item.rimi, ingredientAmount);
+            }
+            if (item.maxima) {
+                result.totalMaxima += getEffectivePrice(item.maxima, ingredientAmount);
+            }
         });
 
         result.totalRimi = parseFloat(result.totalRimi.toFixed(2));

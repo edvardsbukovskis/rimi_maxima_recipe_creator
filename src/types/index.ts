@@ -7,6 +7,7 @@ export interface Product {
     image?: string;
     category?: string;
     pricePerUnit?: string; // e.g., "1.50 €/l"
+    isBulk?: boolean; // True if product is sold by weight (kg/l) and not pre-packed
 }
 
 export interface Ingredient {
@@ -122,6 +123,29 @@ export const parseProductSize = (product: Product, preferredUnit?: string): { va
 
     // Default: assume 1 unit
     return { value: 1, unit: 'gab' };
+};
+
+/**
+ * Calculates the price for the specific volume needed.
+ * If product is 'bulk' (like loose onions or garlic by kg), it returns price * (neededAmount / 1kg)
+ * If product is 'packed' (like 1kg bag of flour), it returns full price.
+ */
+export const getEffectivePrice = (product: Product, neededAmount: { value: number, unit: string }): number => {
+    if (!product.isBulk) return product.price;
+
+    const normNeeded = normalizeAmount(neededAmount.value, neededAmount.unit);
+
+    // For weight-based bulk items (kg)
+    if (normNeeded.unit === 'g') {
+        return (product.price * normNeeded.value) / 1000;
+    }
+
+    // For volume-based bulk items (l) - less common but possible
+    if (normNeeded.unit === 'ml') {
+        return (product.price * normNeeded.value) / 1000;
+    }
+
+    return product.price;
 };
 
 // Normalize units to base (ml, g, gab)
