@@ -119,16 +119,22 @@ function ProductPicker({
                                 )}
                             >
                                 <div className="flex-1 min-w-0">
-                                    <div className="text-sm font-medium leading-tight">{product.name}</div>
+                                    <div className="text-sm font-medium leading-tight flex items-center gap-2">
+                                        {product.name}
+                                        {product.isBulk && (
+                                            <span className="text-[8px] px-1 py-0.5 rounded-sm bg-zinc-800 text-muted-foreground uppercase tracking-widest font-bold">Sverams</span>
+                                        )}
+                                    </div>
                                     {product.pricePerUnit && (
                                         <div className="text-xs text-muted-foreground mt-0.5">{product.pricePerUnit}</div>
                                     )}
                                 </div>
                                 <div className={clsx(
-                                    "text-base font-bold flex-shrink-0",
+                                    "text-base font-bold flex-shrink-0 text-right",
                                     store === 'rimi' ? "text-primary" : "text-red-400"
                                 )}>
                                     €{product.price.toFixed(2)}
+                                    {product.isBulk && <div className="text-[9px] font-normal text-muted-foreground">receptei</div>}
                                 </div>
                             </button>
                         ))}
@@ -546,7 +552,7 @@ export default function RecipeDetailView({ recipe }: { recipe: Recipe }) {
                                                 </div>
 
                                                 {/* Rimi Price */}
-                                                <div className={clsx("col-span-4 text-center p-2 rounded-lg", isSelected && data?.bestStore === 'rimi' && "bg-primary/10 text-primary")}>
+                                                <div className={clsx("col-span-4 text-center p-2 rounded-lg relative group/item", isSelected && data?.bestStore === 'rimi' && "bg-primary/10 text-primary")}>
                                                     {effectiveRimi ? (
                                                         <div className="text-sm">
                                                             <div className={clsx("font-bold flex items-center justify-center gap-1", !isSelected && "line-through text-muted-foreground")}>
@@ -554,12 +560,17 @@ export default function RecipeDetailView({ recipe }: { recipe: Recipe }) {
                                                                 {rimiQty > 1 && <span className="text-[9px] bg-primary/30 text-primary px-1 rounded">x{rimiQty}</span>}
                                                             </div>
                                                             <a href={effectiveRimi.url} target="_blank" rel="noopener noreferrer"
-                                                                className="text-[10px] opacity-70 hover:opacity-100 hover:underline block mt-1 leading-tight" title={effectiveRimi.name}>
+                                                                className="text-[10px] opacity-70 hover:opacity-100 hover:underline block mt-1 leading-tight truncate px-1" title={effectiveRimi.name}>
                                                                 {effectiveRimi.name}
                                                             </a>
-                                                            {effectiveRimi.pricePerUnit && (
-                                                                <span className="text-[9px] text-muted-foreground block mt-0.5">{effectiveRimi.pricePerUnit}</span>
-                                                            )}
+                                                            <div className="flex items-center justify-center gap-1.5 mt-1">
+                                                                {effectiveRimi.pricePerUnit && (
+                                                                    <span className="text-[9px] text-muted-foreground">{effectiveRimi.pricePerUnit}</span>
+                                                                )}
+                                                                {effectiveRimi.isBulk && (
+                                                                    <span className="text-[8px] px-1 py-0.5 rounded-sm bg-primary/20 text-primary uppercase font-bold" title="Cena aprēķināta pēc svara">Sverams</span>
+                                                                )}
+                                                            </div>
                                                             <ProductPicker
                                                                 alternatives={data?.rimiAlternatives || []}
                                                                 selected={effectiveRimi}
@@ -571,7 +582,7 @@ export default function RecipeDetailView({ recipe }: { recipe: Recipe }) {
                                                 </div>
 
                                                 {/* Maxima Price */}
-                                                <div className={clsx("col-span-4 text-center p-2 rounded-lg", isSelected && data?.bestStore === 'maxima' && "bg-red-500/10 text-red-500")}>
+                                                <div className={clsx("col-span-4 text-center p-2 rounded-lg relative group/item", isSelected && data?.bestStore === 'maxima' && "bg-red-500/10 text-red-500")}>
                                                     {effectiveMaxima ? (
                                                         <div className="text-sm">
                                                             <div className={clsx("font-bold flex items-center justify-center gap-1", !isSelected && "line-through text-muted-foreground")}>
@@ -579,12 +590,17 @@ export default function RecipeDetailView({ recipe }: { recipe: Recipe }) {
                                                                 {maximaQty > 1 && <span className="text-[9px] bg-red-500/30 text-red-400 px-1 rounded">x{maximaQty}</span>}
                                                             </div>
                                                             <a href={effectiveMaxima.url} target="_blank" rel="noopener noreferrer"
-                                                                className="text-[10px] opacity-70 hover:opacity-100 hover:underline block mt-1 leading-tight" title={effectiveMaxima.name}>
+                                                                className="text-[10px] opacity-70 hover:opacity-100 hover:underline block mt-1 leading-tight truncate px-1" title={effectiveMaxima.name}>
                                                                 {effectiveMaxima.name}
                                                             </a>
-                                                            {effectiveMaxima.pricePerUnit && (
-                                                                <span className="text-[9px] text-muted-foreground block mt-0.5">{effectiveMaxima.pricePerUnit}</span>
-                                                            )}
+                                                            <div className="flex items-center justify-center gap-1.5 mt-1">
+                                                                {effectiveMaxima.pricePerUnit && (
+                                                                    <span className="text-[9px] text-muted-foreground">{effectiveMaxima.pricePerUnit}</span>
+                                                                )}
+                                                                {effectiveMaxima.isBulk && (
+                                                                    <span className="text-[8px] px-1 py-0.5 rounded-sm bg-red-500/20 text-red-400 uppercase font-bold" title="Cena aprēķināta pēc svara">Sverams</span>
+                                                                )}
+                                                            </div>
                                                             <ProductPicker
                                                                 alternatives={data?.maximaAlternatives || []}
                                                                 selected={effectiveMaxima}

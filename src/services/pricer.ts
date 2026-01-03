@@ -74,12 +74,14 @@ const categorizeIngredient = (query: string): { type: Category; mustNot?: string
 
     // VEGETABLES
     if (q.includes('tomāt') || q.includes('sīpol') || q.includes('ķiplok') || q.includes('salāt') || q.includes('kartupel') ||
-        q.includes('tomat') || q.includes('sipol') || q.includes('kiplok') || q.includes('salat') || q.includes('kartupel')) {
+        q.includes('burkān') || q.includes('kāpost') || q.includes('gurķ') || q.includes('paprik') ||
+        q.includes('tomat') || q.includes('sipol') || q.includes('kiplok') || q.includes('salat') || q.includes('kartupel') ||
+        q.includes('burkan') || q.includes('kapost') || q.includes('gurk')) {
         const mustNot = [
             'konserv', 'gabal', 'mērce', 'pasta', 'plūmju', 'ķiršu', 'smalcin', 'sulā',
             'adžika', 'lečo', 'kečup', 'čips', 'uzkod', 'maiz', 'bulciņ', 'nūdel', 'baget', 'marināde',
             'majonēz', 'grauzdiņ', 'steik', 'zupa', 'sula', 'biezen', 'pankūk', 'buljons', 'desiņ', 'cīsiņ', 'pipar', 'pelmeņ',
-            'daiviņ', 'strēmelīt'
+            'daiviņ', 'strēmelīt', 'maisījums', 'saldēt'
         ];
         if ((q.includes('ķiplok') || q.includes('kiplok')) && !(q.includes('sāl') || q.includes('sal'))) mustNot.push('sāls');
         return { type: 'veg', mustNot };
@@ -424,6 +426,20 @@ export const pricerService = {
             const category = categorizeIngredient(query);
             const rimiMatches = findTopMatches(rimiProducts, query, category);
             const maximaMatches = findTopMatches(maximaProducts, query, category);
+
+            const ingredientAmount = parseAmount(ingredient.amount || '1 gab');
+
+            // Scale all Rimi products (best and alternatives)
+            rimiMatches.forEach(p => {
+                const scaled = getEffectivePrice(p, ingredientAmount);
+                p.price = parseFloat(scaled.toFixed(2));
+            });
+
+            // Scale all Maxima products (best and alternatives)
+            maximaMatches.forEach(p => {
+                const scaled = getEffectivePrice(p, ingredientAmount);
+                p.price = parseFloat(scaled.toFixed(2));
+            });
 
             const bestRimi = rimiMatches[0] || null;
             const bestMaxima = maximaMatches[0] || null;
