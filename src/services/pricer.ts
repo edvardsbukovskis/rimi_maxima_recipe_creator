@@ -259,11 +259,18 @@ export const findTopMatches = (products: Product[], query: string, category: { t
         // Bulk detection: If it's sold by kg (unitPrice is same as price) or has "kg" in title
         const isBulkMatch = p.pricePerUnit && (p.pricePerUnit.includes('€/kg') || p.pricePerUnit.includes('€/l')) &&
             (Math.abs(p.price - unitPrice) < 0.05); // slightly more lenient epsilon
-
         const isKgInTitle = normName.endsWith(' kg') || normName.includes(' kg ') || normName.includes(', kg');
-        const hasPackaging = normName.includes('paka') || normName.includes('mais') || normName.includes('toti') || normName.includes('kaste');
+        const hasPackaging = normName.includes('paka') || normName.includes('mais') || normName.includes('toti') || normName.includes('kaste') ||
+            normName.includes('pudele') || normName.includes('pacina') || normName.includes('trauka') || normName.includes('tiklin');
 
-        if ((isBulkMatch || isKgInTitle) && !hasPackaging) {
+        // Staples and packaged condiments are never sold "loose"
+        const isStaple = normName.includes('cukurs') || normName.includes('ella') || normName.includes('milti') ||
+            normName.includes('piens') || normName.includes('krejums') || normName.includes('sviests') ||
+            normName.includes('sals') || normName.includes('pipar') || normName.includes('maiz') ||
+            normName.includes('kecup') || normName.includes('sinep') || normName.includes('majonez') ||
+            normName.includes('merce');
+
+        if ((isBulkMatch || isKgInTitle) && !hasPackaging && !isStaple && category.type === 'veg') {
             p.isBulk = true;
         }
 
