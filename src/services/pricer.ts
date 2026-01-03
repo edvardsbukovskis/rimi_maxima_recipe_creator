@@ -73,14 +73,15 @@ const categorizeIngredient = (query: string): { type: Category; mustNot?: string
     }
 
     // VEGETABLES
-    if (q.includes('tomāt') || q.includes('sīpol') || q.includes('ķiplok') || q.includes('salāt') || q.includes('kartupel')) {
+    if (q.includes('tomāt') || q.includes('sīpol') || q.includes('ķiplok') || q.includes('salāt') || q.includes('kartupel') ||
+        q.includes('tomat') || q.includes('sipol') || q.includes('kiplok') || q.includes('salat') || q.includes('kartupel')) {
         const mustNot = [
             'konserv', 'gabal', 'mērce', 'pasta', 'plūmju', 'ķiršu', 'smalcin', 'sulā',
             'adžika', 'lečo', 'kečup', 'čips', 'uzkod', 'maiz', 'bulciņ', 'nūdel', 'baget', 'marināde',
             'majonēz', 'grauzdiņ', 'steik', 'zupa', 'sula', 'biezen', 'pankūk', 'buljons', 'desiņ', 'cīsiņ', 'pipar', 'pelmeņ',
             'daiviņ', 'strēmelīt'
         ];
-        if (q.includes('ķiplok') && !q.includes('sāl')) mustNot.push('sāls');
+        if ((q.includes('ķiplok') || q.includes('kiplok')) && !(q.includes('sāl') || q.includes('sal'))) mustNot.push('sāls');
         return { type: 'veg', mustNot };
     }
 
@@ -247,18 +248,20 @@ export const findTopMatches = (products: Product[], query: string, category: { t
 
         let unitPrice = Infinity;
         if (p.pricePerUnit) {
-            const match = p.pricePerUnit.match(/(\d+[.,]\d+)/);
-            if (match) unitPrice = parseFloat(match[1].replace(',', '.'));
+            // Updated regex to handle integers like "1 €/kg" or decimals "0.69 €/kg"
+            const match = p.pricePerUnit.replace(',', '.').match(/(\d+(?:\.\d+)?)/);
+            if (match) unitPrice = parseFloat(match[1]);
         }
         if (unitPrice === Infinity) unitPrice = p.price;
 
-        // Bulk detection: If it's sold by kg (unitPrice is same as price) and doesn't have packaging indicators
+        // Bulk detection: If it's sold by kg (unitPrice is same as price) or has "kg" in title
         const isBulkMatch = p.pricePerUnit && (p.pricePerUnit.includes('€/kg') || p.pricePerUnit.includes('€/l')) &&
-            (Math.abs(p.price - unitPrice) < 0.01);
+            (Math.abs(p.price - unitPrice) < 0.05); // slightly more lenient epsilon
 
+        const isKgInTitle = normName.endsWith(' kg') || normName.includes(' kg ') || normName.includes(', kg');
         const hasPackaging = normName.includes('paka') || normName.includes('mais') || normName.includes('toti') || normName.includes('kaste');
 
-        if (isBulkMatch && !hasPackaging) {
+        if ((isBulkMatch || isKgInTitle) && !hasPackaging) {
             p.isBulk = true;
         }
 
@@ -355,16 +358,22 @@ export const pricerService = {
             } else if (item.rimi) bestStore = 'rimi';
             else if (item.maxima) bestStore = 'maxima';
 
-            result.ingredients[item.name] = { rimi: item.rimi, maxima: item.maxima, bestStore };
-
             const ingredientAmount = parseAmount(recipe.ingredients.find(i => i.name === item.name)?.amount || '1 gab');
 
             if (item.rimi) {
-                result.totalRimi += getEffectivePrice(item.rimi, ingredientAmount);
+                const scaledPrice = getEffectivePrice(item.rimi, ingredientAmount);
+                result.totalRimi += scaledPrice;
+                // Update the product's price for the UI to display the "recipe price"
+                item.rimi.price = parseFloat(scaledPrice.toFixed(2));
             }
             if (item.maxima) {
-                result.totalMaxima += getEffectivePrice(item.maxima, ingredientAmount);
+                const scaledPrice = getEffectivePrice(item.maxima, ingredientAmount);
+                result.totalMaxima += scaledPrice;
+                // Update the product's price for the UI to display the "recipe price"
+                item.maxima.price = parseFloat(scaledPrice.toFixed(2));
             }
+
+            result.ingredients[item.name] = { rimi: item.rimi, maxima: item.maxima, bestStore };
         });
 
         result.totalRimi = parseFloat(result.totalRimi.toFixed(2));
