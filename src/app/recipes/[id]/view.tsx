@@ -164,6 +164,9 @@ export default function RecipeDetailView({ recipe }: { recipe: Recipe }) {
     const calculateProductQuantity = (ing: { amountValue?: number; amountUnit?: string }, product: Product | null): number => {
         if (!product || !ing.amountValue || !ing.amountUnit) return 1;
 
+        // Bulk items are already scaled to the recipe's requirement by the backend/service
+        if (product.isBulk) return 1;
+
         // Skip calculation for unmeasurable units
         if (['šķipsniņa', 'tējk', 'ēd.k'].includes(ing.amountUnit.toLowerCase())) return 1;
 
