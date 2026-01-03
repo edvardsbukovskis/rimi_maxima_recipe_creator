@@ -261,7 +261,8 @@ export const findTopMatches = (products: Product[], query: string, category: { t
             (Math.abs(p.price - unitPrice) < 0.05); // slightly more lenient epsilon
         const isKgInTitle = normName.endsWith(' kg') || normName.includes(' kg ') || normName.includes(', kg');
         const hasPackaging = normName.includes('paka') || normName.includes('mais') || normName.includes('toti') || normName.includes('kaste') ||
-            normName.includes('pudele') || normName.includes('pacina') || normName.includes('trauka') || normName.includes('tiklin');
+            normName.includes('pudele') || normName.includes('pacina') || normName.includes('trauka') || normName.includes('tiklin') ||
+            normName.includes('fasets') || normName.includes('iepakojum') || normName.includes('paplate') || normName.includes('karba');
 
         // Staples and packaged condiments are never sold "loose"
         const isStaple = normName.includes('cukurs') || normName.includes('ella') || normName.includes('milti') ||
@@ -270,7 +271,9 @@ export const findTopMatches = (products: Product[], query: string, category: { t
             normName.includes('kecup') || normName.includes('sinep') || normName.includes('majonez') ||
             normName.includes('merce');
 
-        if ((isBulkMatch || isKgInTitle) && !hasPackaging && !isStaple && category.type === 'veg') {
+        const isBulkAbleCategory = category.type === 'veg' || category.type === 'meat';
+
+        if ((isBulkMatch || isKgInTitle) && !hasPackaging && !isStaple && isBulkAbleCategory) {
             p.isBulk = true;
         }
 
